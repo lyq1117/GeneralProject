@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>登录</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/bootstrap/dist/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/Ionicons/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/css/AdminLTE.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/plugins/iCheck/square/blue.css">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+</head>
+<!-- <body class="hold-transition login-page">
+	<form action="">
+		用户名：<input type="text" id="login_username" name="username"/>
+		密码：<input type="password" id="login_pwd" name="pwd"/>
+		<input type="button" id="login_btn" value="登录"/>
+	</form>
+</body> -->
+<style>
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+</style>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>通用工程</b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+
+      <div class="form-group has-feedback">
+        <input type="text" id="login_username" value="admin" class="form-control" placeholder="用户名">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" value="123456" id="login_pwd" class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> 记住我
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <input type="button" id="login_btn" class="btn btn-primary btn-block btn-flat" value="登录">
+        </div>
+        <!-- /.col -->
+      </div>
+
+    <div class="social-auth-links text-center">
+      <p>- OR -</p>
+    </div>
+    <!-- /.social-auth-links -->
+
+    <a href="#">忘记密码?</a><br>
+    <a href="register.html" class="text-center">通知管理员</a>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script type="text/javascript" src="/GeneralProject/statics/AdminLTE/js/jquery.min.js" charset="UTF-8"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="/GeneralProject/statics/AdminLTE/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="/GeneralProject/statics/AdminLTE/js/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+</body>
+
+<script type="text/javascript" src="/GeneralProject/statics/js/login.js" charset="UTF-8"></script>
+</html>

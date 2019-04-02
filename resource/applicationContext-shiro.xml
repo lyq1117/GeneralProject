@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    				    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroRealm"></property>
+		<property name="cacheManager" ref="cacheManager"></property>
+		<property name="rememberMeManager.cookie.maxAge" value="300"></property><!-- 单位是秒 -->
+		
+	
+		
+	</bean>
+	
+    <!-- echcache的配置 -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcach-shiro.xml"/>
+    </bean>
+   
+	<!-- realm -->
+	<bean id="shiroRealm" class="cn.kgc.realm.MyRealm">
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5"></property>
+				<property name="hashIterations" value="1024"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!--配置了生命周期的后置处理器，作用是调用IOC容器中的shiro bean的生命周期方法-->
+	 <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+	
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="loginUrl" value="/page/login.html"></property>
+		<property name="successUrl" value="/main"></property>
+		<property name="unauthorizedUrl" value="/page/unauthorized"></property>
+		<property name="securityManager" ref="securityManager"></property>
+		<!-- 配置规则 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/ = anon
+				/statics/** = anon
+				/page/login.do = anon
+				/login.html = anon
+				/login = anon
+				/logout = logout
+				/main = user
+				/** = authc
+			</value>
+		</property>
+		
+	</bean>
+</beans>

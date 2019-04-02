@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+   
+    
+    <mvc:annotation-driven>
+        <!-- 配置消息转换器 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    
+    <!-- 扫描controller -->
+    <context:component-scan base-package="cn.kgc.controller"/>
+    
+    <!-- 配置视图解析器,这个视图解析器用于解析jsp文件的 -->
+    <!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/user/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean> -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/page/"></property>
+        <property name="suffix" value=".html"></property>
+    </bean>
+    
+    <!-- 配置多视图解析器 -->
+    <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorParameter" value="true"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="html" value="text/html;charset=utf-8" />
+                <entry key="json" value="application/json;charset=utf-8"/>
+                <entry key="xml" value="application/xml;charset=utf-8"/>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 访问静态资源 -->
+    <mvc:resources location="/statics/" mapping="/statics/**"></mvc:resources>
+    <mvc:resources location="/page/" mapping="/page/**"></mvc:resources>
+    
+    
+    <!-- 配置拦截器 -->
+    <!-- <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/page/*"/>
+            <mvc:exclude-mapping path="/page/login.html"/>
+            <mvc:exclude-mapping path="/page/login.do"/>
+            <bean class="cn.kgc.interceptor.SysInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors> -->
+    
+    <!-- 全局异常处理 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!-- error是异常的逻辑视图 -->
+                <prop key="cn.kgc.exception.UserControllerException">error</prop>
+            </props>
+        </property>
+    </bean>
+
+    
+    <!-- 配置MultipartResolver，用于文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5000000"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+</beans>
+
