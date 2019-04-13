@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+  	html{
+  		height:100%;
+  	}
+  	body{
+  		height:100%;
+  	}
+  </style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>通用工程任务管理系统</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../statics/AdminLTE/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../statics/AdminLTE/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../statics/AdminLTE/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../statics/AdminLTE/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../statics/AdminLTE/css/skins/skin-blue.min.css">
-  <link rel="stylesheet" href="../statics/AdminLTE/css/skins/skin-green-light.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/css/skins/skin-green-light.min.css">
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/bootstrap/dist/js/bootstrap-table.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/bootstrap-daterangepicker/daterangepicker.css">
-
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/plugins/iCheck/all.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/GeneralProject/statics/AdminLTE/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
   <!-- Google Font -->
 <!--   <link rel="stylesheet"
@@ -43,7 +57,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-green-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -82,7 +96,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="../statics/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="/GeneralProject/statics/image/head1.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -168,14 +182,14 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../statics/image/head1.jpg" class="user-image" alt="User Image">
+              <img id="index_user_img" src="../statics/image/head1.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs" id="index_user_tip">用户名</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img id="index_user_img_big" src="/GeneralProject/statics/image/head1.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -234,12 +248,10 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="javascript:void(0)" id="index_myProject"><i class="glyphicon glyphicon-briefcase"></i>我的项目</a></li>
             <li><a href="javascript:void(0)" id="index_myTask"><i class="fa fa-comments"></i>我的任务</a></li>
-            <li><a href="javascript:void(0)">我参与的任务</a></li>
-            <li><a href="javascript:void(0)">任务日历</a></li>
-            <li><a href="javascript:void(0)">统计分析</a></li>
-            <li><a href="javascript:void(0)" id="index_gante">甘特图</a></li>
-            <li><a href="javascript:void(0)" id="index_myProject">我的项目</a></li>
+            <li><a href="javascript:void(0)"><i class="glyphicon glyphicon-edit"></i>统计分析</a></li>
+            <li><a href="javascript:void(0)" id="index_gante"><i class="glyphicon glyphicon-align-left"></i>甘特图</a></li>
           </ul>
         </li>
         
@@ -309,24 +321,23 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <!-- <h4 id="index_header_tip">
-        Page Header
-        <small>Optional description</small>
-      </h4> -->
+    <!-- <section id="index_main_header" class="content-header" style="background:white;">
+      <h4 id="index_header_tip" class="box-title">
+      <i class="fa fa-clone"></i>
+        ssss
+      </h4>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+      	<h4>我的项目</h4>
       </ol>
-    </section>
+      
+    </section> -->
 
     <!-- Main content -->
-    <section id="index_main_content" class="content container-fluid">
-			
+    <section id="index_main_content" style="height:500px;padding:0px;" class="content">
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+        
     </section>
     <!-- /.content -->
   </div>
@@ -418,18 +429,37 @@ desired effect
   <div class="control-sidebar-bg"></div>
 </div>
 
-<script src="../statics/AdminLTE/js/jquery.min.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/js/jquery.min.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/jquery-ui/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../statics/AdminLTE/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../statics/AdminLTE/js/adminlte.min.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/js/adminlte.min.js"></script>
 <!-- bootstrapTable -->
 <script src="/GeneralProject/statics/AdminLTE/bootstrap/dist/js/bootstrap-table.min.js"></script>
 <script src="/GeneralProject/statics/AdminLTE/bootstrap/dist/js/bootstrap-table-zh-CN.min.js"></script>
-
-<script type="text/javascript" src="../statics/js/index.js" charset="UTF-8"></script>
 <!-- date-range-picker -->
 <script src="/GeneralProject/statics/AdminLTE/moment/min/moment.min.js"></script>
 <script src="/GeneralProject/statics/AdminLTE/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="/GeneralProject/statics/AdminLTE/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- Slimscroll -->
+<script src="/GeneralProject/statics/AdminLTE/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="/GeneralProject/statics/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<!-- DataTables -->
+<script src="/GeneralProject/statics/AdminLTE/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<!-- FastClick -->
+<script src="/GeneralProject/statics/AdminLTE/fastclick/lib/fastclick.js"></script>
+<!-- fullCalendar -->
+<script src="/GeneralProject/statics/AdminLTE/moment/moment.js"></script>
+<script src="/GeneralProject/statics/AdminLTE/fullcalendar/dist/fullcalendar.min.js"></script>
+
+<!-- 自己写的js -->
+<script type="text/javascript" src="/GeneralProject/statics/js/index.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/GeneralProject/statics/js/test.js" charset="UTF-8"></script>
+
 </body>
 </html>

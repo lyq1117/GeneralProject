@@ -198,17 +198,10 @@ $(function(){
 	}
 	//左边表格添加15行
 	for(var i=0; i<11; i++){
-		var rowContent = '<td></td><td></td><td><button type="button" class="btn btn-box-tool my_gante_date_range_add" data-widget="collapse"><i class="fa fa-plus"></i><div class="input-group my_gante_date_range" style="display:none;"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="text" autoUpdateInput="false" class="form-control pull-right my_gante_reservation"></div></td>';
+		var rowContent = '<td></td><td></td><td><div class="input-group my_gante_date_range"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="text" autoUpdateInput="false" class="form-control pull-right my_gante_reservation"></div></td>';
 		$('#my_gante_table_left_body').append('<tr>'+rowContent+'</tr>');
 	}
 	
-	console.dir($('.my_gante_date_range'));
-	for(var i=0; i<$('.my_gante_date_range').length; i++){
-		$($('.my_gante_date_range_add')[i]).bind('click', function(){
-			$(this)[0].style.display = 'none';
-			console.dir($(this).next().next());
-		});
-	}
 	
 	//如果左右表格都有行数据，再添加鼠标的经过事件
 	if($('#my_gante_table_left_body > tr').length!=0 &&
@@ -242,10 +235,13 @@ $(function(){
 	}
 	
 	
-	//Date range picker
+	//Date range picker的设置
 	$.each($('.my_gante_reservation'), function(i, n){
 		$(n).daterangepicker({
 			dateLimit: {days: 300},
+			autoUpdateInput: false,//false:设置默认值为空,但是带来一个问题:
+								   //点击确定日期不显示,所以改了daterangepicker.js
+								   //的源代码1406行添加了autoUpdateInput=true
 			locale:{
 				format: 'YYYY.MM.DD',//设置显示格式
 				applyLabel: '确定',

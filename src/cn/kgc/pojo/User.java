@@ -8,11 +8,12 @@ public class User {
 	private String icon;//头像地址
 	private String tel;//联系电话
 	private int status;//状态 0-可用 1-禁用
+	private Dept dept;//所属部门
 	
 	public User() {
 	}
 
-	public User(String username, String pwd, String name, String icon, String tel, int status) {
+	public User(String username, String pwd, String name, String icon, String tel, int status, Dept dept) {
 		super();
 		this.username = username;
 		this.pwd = pwd;
@@ -20,6 +21,7 @@ public class User {
 		this.icon = icon;
 		this.tel = tel;
 		this.status = status;
+		this.dept = dept;
 	}
 
 	public String getUsername() {
@@ -70,5 +72,11 @@ public class User {
 		this.status = status;
 	}
 
+	public Dept getDept() {
+		return dept;
+	}
 
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.BlockMapper">
+    
+    <resultMap type="Block" id="blockList">
+        <result property="id" column="bid"/>
+        <result property="description" column="bdescription"/>
+        <result property="createTime" column="bcreateTime"/>
+        <result property="duration" column="bduration"/>
+        <result property="status" column="bstatus"/>
+        <result property="projectId" column="bprojectId"/>
+        <association property="leader" javaType="User">
+            <result property="username" column="uusername"/>
+            <result property="pwd" column="upwd"/>
+            <result property="name" column="uname"/>
+            <result property="icon" column="uicon"/>
+            <result property="tel" column="utel"/>
+            <result property="status" column="ustatus"/>
+        </association>
+    </resultMap>
+    
+    <select id="getByProjectId" parameterType="int" resultMap="blockList">
+        SELECT b.id bid, b.description bdescription, b.create_time bcreateTime, b.duration 
+        	   bduration, b.status bstatus, b.project_id bprojectId,
+        	   u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel utel,
+        	   u.status ustatus
+        FROM block b, project p, user u
+        WHERE b.project_id = #{projectId}
+        AND b.leader_id = u.username
+        AND b.project_id = p.id
+    </select>
+    
+    <select id="getByBlockId" parameterType="int" resultType="User">
+        SELECT u.*
+        FROM block b, user u, user_block ub
+        WHERE b.id = #{blockId}
+        AND b.id = ub.block_id
+        AND u.username = ub.user_id
+    </select>
+    
+    <update id="updateLeaderId">
+        UPDATE block
+        SET leader_id = #{0}
+        WHERE id = #{1}
+    </update>
+    
+    <select id="getById" parameterType="int" resultMap="blockList">
+        SELECT b.id bid, b.description bdescription, b.create_time bcreateTime, b.duration 
+        	   bduration, b.status bstatus, b.project_id bprojectId,
+        	   u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel utel,
+        	   u.status ustatus
+        FROM block b, user u
+        WHERE b.leader_id = u.username
+        AND b.id = #{blockId}
+    </select>
+    
+    <update id="update" parameterType="Block">
+        UPDATE block
+        SET description = #{description},
+        	create_time = #{createTime},
+        	duration = #{duration},
+        	status = #{status}
+        WHERE id = #{id}
+    </update>
+    
+    <insert id="add" parameterType="Block">
+        INSERT INTO block(
+        				  id,
+        				  leader_id,
+        				  description,
+        				  create_time, 
+        				  duration,
+        				  status,
+        				  project_id)
+        VALUES(
+        		#{id},
+                #{leader.username},
+        		#{description},
+        		#{createTime},
+        		#{duration},
+        		#{status},
+        		#{projectId}
+        	   )
+    </insert>
+    
+    <select id="getIncrement" resultType="int">
+        SELECT MAX(id)
+        FROM block
+    </select>
+	    
+</mapper>

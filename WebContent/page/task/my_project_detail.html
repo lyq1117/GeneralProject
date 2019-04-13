@@ -1,0 +1,151 @@
+<meta charset="UTF-8">
+<section class="content" style="padding:0px;">
+      <!-- <div class="row">
+      	<div class="col-mid-12">
+      		<div class="box">
+      			<div class="box-header with-border">
+      				<h3>工程信息</h3>
+      			</div>
+      			<div class="box-body">
+      				dsfwjeiop
+      			</div>
+      		</div>
+      	</div>
+      </div> -->
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+          
+	          	<div class="box-header with-border">
+	              <h3 class="box-title">工程信息</h3>
+	              <div class="pull-right">
+	              	<a id="my_project_detail_save" href="#" style="color:#00a65a">
+		              	<i class="fa fa-check"></i>
+	              	</a>
+	              </div>
+	            </div>
+	            <div class="box-body">
+           			
+           			<div class="row">
+			            <div class="col-md-4">
+			              <div class="form-group">
+			                <label>工程名称</label>
+			                <input type="hidden" id="my_project_detail_id"/>
+			                <input id="my_project_detail_projectName" type="text" class="form-control" id="exampleInputEmail1" placeholder="工程名称">
+			              </div>
+			              <!-- /.form-group -->
+			              <div class="form-group">
+			                <label>工程描述</label>
+			                <input id="my_project_detail_projectDescription" type="text" class="form-control" id="exampleInputEmail1" placeholder="工程描述">
+			              </div>
+			            </div>
+			            <div class="col-md-4">
+			              <div class="form-group">
+			                <label>创建时间</label>
+			                <div class="input-group date">
+			                  <div class="input-group-addon">
+			                    <i class="fa fa-calendar"></i>
+			                  </div>
+			                  <input type="text" disabled="disabled" class="form-control pull-right" id="my_project_detail_createTime" placeholder="创建时间">
+			                </div>
+			              </div>
+			              <div class="form-group">
+			                <label>工期</label>
+			                <input type="text" class="form-control" id="my_project_detail_duration" placeholder="工期">
+			              </div>
+			            </div>
+			            <div class="col-md-4">
+			              <div class="form-group">
+			                <label>状态</label>
+			                <select class="form-control select2" id="my_project_detail_status" style="width: 100%;">
+			                  <option selected="selected" value="0">执行中</option>
+			                  <option value="1">非正常结束</option>
+			                  <option value="2">正常结束</option>
+			                </select>
+			              </div>
+			              <div class="form-group">
+			                <label>项目经理</label>
+			                <input type="text" class="form-control" id="my_project_detail_leader" disabled="disabled" placeholder="项目经理">
+			              </div>
+			            </div>
+			          </div>
+           			
+           			
+	            </div>
+          
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+          
+	          	<div class="box-header with-border">
+	              <h3 class="box-title">工程成员</h3>
+	              <div class="pull-right">
+	              	<a id="my_project_detail_addMember" href="#" style="color:#00a65a">
+		              	<i class="fa fa-plus"></i>
+	              	</a>
+	              </div>
+	            </div>
+	            <div class="box-body" style="height:300px;">
+	              <table id="my_project_detail_membersTable"  data-toggle="table" class="table">
+	              	<thead>
+		                <tr>
+		                  <th data-field="username" style="width: 100px">用户名</th>
+		                  <th data-field="name">真实姓名</th>
+		                  <th data-field="deptName">部门 </th>
+		                  <th data-field="tel">联系电话</th>
+		                  <th data-field="option">操作</th>
+		                </tr>
+	              	</thead>
+	                <tbody>
+		                <tr id="my_project_detail_nullTip">
+		                	<td colspan="5">当前工程没有成员，请添加</td>
+		                </tr>
+	                </tbody>
+	              </table>
+	            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<!-- 添加工程成员的弹出窗口 -->
+<div class="modal fade" id="my_project_detail_addMember_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:20%;">
+		<div class="modal-content" style="height:400px;">
+		
+			<div class="modal-header" style="height:50px;">
+				通讯录
+			</div>
+			<div class="modal-body" style="padding:0px;">
+			
+		            <div class="tab-content" style="height:350px;overflow-y: scroll;">
+            		  <ul id="my_project_detail_addMember_window_ul" class="nav nav-stacked">
+		                <!-- <li><a href="#" style="color:gray">&nbsp;XXX<span class="pull-left badge bg-green">12</span></a></li>
+		                <li><a href="#" style="color:gray">&nbsp;XXX<span class="pull-left badge bg-green">12</span></a></li>
+		                <li><a href="#" style="color:gray">&nbsp;XXX<span class="pull-left badge bg-green">12</span></a></li>
+		                <li><a href="#" style="color:gray">&nbsp;XXX<span class="pull-left badge bg-green">12</span></a></li> -->
+		              </ul>
+		            </div>
+				
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	//日期控件初始化
+	$('.date').datepicker({
+		'format' : 'yyyy-mm-dd'
+	});
+});
+</script>
+<script type="text/javascript" src="/GeneralProject/statics/js/my_project_detail.js" charset="UTF-8"></script>
+

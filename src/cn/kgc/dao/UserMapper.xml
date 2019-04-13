@@ -4,8 +4,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.kgc.dao.UserMapper">
     
-    <select id="getByUsername" parameterType="String" resultType="User">
-        SELECT * FROM user WHERE username= #{username};
+    <resultMap type="User" id="getUser">
+        <result property="username" column="username"/>
+        <result property="pwd" column="pwd"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="tel" column="tel"/>
+        <result property="status" column="status"/>
+        <association property="dept" javaType="Dept">
+            <result property="id" column="did"/>
+            <result property="name" column="dname"/>
+            <result property="leader_id" column="dleaderid"/>
+            <result property="location" column="dlocation"/>
+            <result property="status" column="dstatus"/>
+        </association>
+    </resultMap>
+    
+    <select id="getByUsername" parameterType="String" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+        FROM user u, dept d
+        WHERE username = #{username}
+        AND u.dept_id = d.id
+    </select>
+    
+    <select id="getNotInProject" parameterType="int" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+        FROM user u, dept d
+        WHERE u.dept_id = d.id
+        AND  u.username NOT IN(
+        						SELECT user_id
+        						FROM user_project
+        						WHERE project_id = #{projectId}
+        						)
+    </select>
+    
+    <select id="getOfBlock" parameterType="int" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+        FROM user u, dept d, user_block ub
+        WHERE ub.block_id = #{blockId}
+        AND ub.user_id = u.username
+        AND u.dept_id = d.id
+    </select>
+    
+    <select id="getNotInBlockInProject" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+       	FROM user u, dept d
+        WHERE u.dept_id = d.id
+       	AND u.username NOT IN(
+       							SELECT user_id
+       							FROM user_block
+       							WHERE block_id = #{0}
+       						  )
+       	AND u.username IN(
+       						SELECT user_id
+       						FROM user_project
+       						WHERE project_id = #{1}
+       	                  )
     </select>
     
 </mapper>

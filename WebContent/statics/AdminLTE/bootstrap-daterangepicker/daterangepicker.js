@@ -1403,6 +1403,7 @@
         },
 
         clickApply: function(e) {
+        	this.autoUpdateInput=true;
             this.hide();
             this.element.trigger('apply.daterangepicker', this);
         },

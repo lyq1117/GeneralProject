@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.UserBlockMapper">
+    
+    <insert id="add" parameterType="UserBlock">
+        INSERT INTO user_block(user_id, block_id) VALUES(#{userId}, #{blockId})
+    </insert>
+    
+    <delete id="delete" parameterType="UserBlock">
+        DELETE FROM user_block
+        WHERE user_id = #{userId}
+        AND block_id = #{blockId}
+    </delete>
+    
+    <select id="getByUserId" parameterType="String" resultType="UserBlock">
+        SELECT user_id userId, block_id blockId
+        FROM user_block
+        WHERE user_id = #{userId}
+    </select>
+    
+</mapper>

@@ -14,6 +14,7 @@
 	height:40px;
 }
 #my_gante_table_right{
+	border-radius: 5px;
 	width:800px;
 	background:white;
 }
@@ -25,7 +26,7 @@
 #my_gante_table_right tbody tr td{
 	height:40px;
 	width:40px;
-	border-left: solid 1px rgb(212,212,212);
+	border-left: solid 1px rgb(247,247,247);
 }
 .gante_block{
 	background:#00c0ef;

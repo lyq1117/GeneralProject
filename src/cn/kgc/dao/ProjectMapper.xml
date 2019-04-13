@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.ProjectMapper">
+    
+    <resultMap type="Project" id="projectList">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+        <result property="duration" column="duration"/>
+        <result property="status" column="status"/>
+        <association property="user" javaType="User">
+            <id property="username" column="u_username"/>
+	        <result property="pwd" column="u_pwd"/>
+	        <result property="name" column="u_name"/>
+	        <result property="icon" column="u_icon"/>
+	        <result property="tel" column="u_tel"/>
+	        <result property="status" column="u_status"/>
+        </association>
+    </resultMap>
+    
+    <select id="getListByLeaderId" parameterType="String" resultMap="projectList">
+        SELECT p.id id, p.name name, p.description description, p.create_time create_time,
+        	   p.duration duration, u.username u_username, u.pwd u_pwd, u.name
+        	   u_name, u.icon u_icon, u.tel u_tel, u.status u_status, p.status status
+        FROM project p, user u
+        WHERE p.leader_id = u.username
+        AND p.leader_id= #{leaderId}
+    </select>
+    
+    <insert id="add" parameterType="Project">
+        INSERT INTO project(id,
+        					name,
+        					create_time,
+        					duration,
+        					leader_id,
+        					status)
+        VALUE(#{id},
+        	  #{name},
+        	  #{createTime},
+        	  #{duration},
+        	  #{user.username},
+        	  #{status})
+    </insert>
+    
+    <select id="getIncrement" resultType="int">
+        SELECT max(id) as id 
+        FROM project
+    </select>
+    
+    <resultMap type="Project" id="project">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+        <result property="duration" column="duration"/>
+        <result property="status" column="status"/>
+        <association property="user" javaType="User">
+            <result property="username" column="uusername"/>
+            <result property="pwd" column="upwd"/>
+            <result property="name" column="uname"/>
+            <result property="icon" column="uicon"/>
+            <result property="tel" column="utel"/>
+            <result property="status" column="ustatus"/>
+        </association>
+    </resultMap>
+    
+    <select id="getById" parameterType="int" resultMap="project">
+        SELECT p.*, u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel
+        	   utel, u.status ustatus
+        FROM project p, user u
+        WHERE p.id = #{projectId}
+    </select>
+    
+    <update id="update" parameterType="Project">
+        UPDATE project
+        SET name = #{name},
+        	description = #{description},
+        	create_time = #{createTime},
+        	duration = #{duration},
+        	status = #{status}
+        WHERE id = #{id}
+    </update>
+    
+</mapper>

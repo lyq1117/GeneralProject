@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.UserProjectMapper">
+    
+    <insert id="add" parameterType="UserProject">
+        INSERT INTO user_project(user_id, project_id)
+        VALUES(#{userId},#{projectId})
+    </insert>
+    
+    <select id="getByProjectId" parameterType="int" resultType="UserProject">
+        SELECT user_id userId, project_id projectId
+        FROM user_project
+        WHERE project_id = #{projectId}
+    </select>
+    
+    <delete id="delete" parameterType="UserProject">
+        DELETE FROM user_project
+        WHERE user_id = #{userId}
+        AND project_id = #{projectId}
+    </delete>
+    
+</mapper>
