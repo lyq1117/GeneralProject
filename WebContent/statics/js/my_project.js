@@ -363,61 +363,108 @@ $(function(){
 	
 	
 	//加载工程附件
-	$.ajax({
-		url:'task/getMyProjectList.do',
-		async: false,
-		type:'POST',
-		dataType:'json',
-		success: function(result){
-			$.each(result, function(i, n){
-				//alert(JSON.stringify(n));
-				var project = JSON.parse(n.project);
-				var html = '';
-				html += '<div class="col-md-6"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">' + project.name + '</h3><div class="pull-right"><form action="file/fileUpload.do" name="my_project_fileUpload_form_' + project.id + '" id="my_project_fileUpload_form_' + project.id + '" method="POST" enctype="multipart/form-data"><input type="file" name="my_project_uploadFile" projectId="'+project.id+'" class="my_project_uploadFile" multiple="multiple"><input type="hidden" name="projectId" value="'+project.id+'"/></form></div></div><div class="box-body" style="height:150px;overflow-y: scroll;"><ul class="products-list product-list-in-box" id="my_project_fileList_' + project.id + '">';
-				//发送ajax获取项目的附件文件集合
-				$.ajax({
-					url:'file/getProjectFiles.do',
-					data:{'projectId' : project.id},
-					async: false,
-					dataType:'json',
-					success:function(result){
-						//alert(JSON.stringify(result));
-						if(result.result == 'false'){
-							html += '</ul></div></div></div>';
+	function loadProjectFiles(){
+		$.ajax({
+			url:'task/getMyProjectList.do',
+			async: false,
+			type:'POST',
+			dataType:'json',
+			success: function(result){
+				$('#my_project_projectFile').html('');
+				$.each(result, function(i, n){
+					//alert(JSON.stringify(n));
+					var project = JSON.parse(n.project);
+					var html = '';
+					html += '<div class="col-md-6"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">' + project.name + '</h3><div class="pull-right"><form action="file/fileUpload.do" name="my_project_fileUpload_form_' + project.id + '" id="my_project_fileUpload_form_' + project.id + '" method="POST" enctype="multipart/form-data"><input type="file" value="添加附件" name="my_project_uploadFile" projectId="'+project.id+'" class="my_project_uploadFile" multiple="multiple"><input type="hidden" name="projectId" value="'+project.id+'"/></form></div></div><div class="box-body" style="height:150px;overflow-y: scroll;"><ul class="products-list product-list-in-box" id="my_project_fileList_' + project.id + '">';
+					//发送ajax获取项目的附件文件集合
+					$.ajax({
+						url:'file/getProjectFiles.do',
+						data:{'projectId' : project.id},
+						async: false,
+						dataType:'json',
+						success:function(result){
+							//alert(JSON.stringify(result));
+							if(result.result == 'false'){
+								html += '</ul></div></div></div>';
+							}
+							else{
+								$.each(result, function(ii,nn){
+									//alert(nn.name);
+									html += '<li class="item"><div class="product-img"><img src="/GeneralProject/statics/image/file.jpg" alt="Product Image"></div><div class="product-info"><a href="file/fileDownload.do?projectId=' + project.id + '&fileName=' + nn.name + '" class="product-title">' + nn.name + '</a><a href="javascript:void(0);" class="my_project_file_delete" name="'+project.id+'&'+nn.name+'"><span class="label label-danger pull-right">x</span></a></div></li>';
+								});
+								html += '</ul></div></div></div>';
+							}
+							
+							
 						}
-						else{
-							$.each(result, function(ii,nn){
-								//alert(nn.name);
-								html += '<li class="item"><div class="product-img"><img src="/GeneralProject/statics/image/file.jpg" alt="Product Image"></div><div class="product-info"><a href="file/fileDownload.do?projectId=' + project.id + '&fileName=' + nn.name + '" class="product-title">' + nn.name + '</a><span class="label label-danger pull-right">x</span></div></li>';
-							});
-							html += '</ul></div></div></div>';
-						}
-						
-						
-					}
+					});
+					//$('#my_project_projectFile').html('');
+					$('#my_project_projectFile').append(html);
 				});
-				$('#my_project_projectFile').append(html);
 				
-			});
-			
-			//监听文件选择框
-			$('.my_project_uploadFile').bind('change', function(){
-				//alert('选择文件' + $(this).attr('name'));
-				//$('#my_project_fileUpload_form_' + $(this).attr('projectId')).submit();
-				var formData = new FormData($('#my_project_fileUpload_form_' + $(this).attr('projectId'))[0]);
-				$.ajax({
-					url:'file/fileUpload.do',
-					type:'POST',
-					data : formData,
-					dataType:'json',
-					processData: false,
-					contentType: false,
-					success: function(result){
-						alert(result.result);
-					}
-				});
-			});
-		}
+				
+			}
+		});
+	}
+	//调用加载工程附件方法
+	loadProjectFiles();
+	
+	
+	//监听文件选择框
+	$('.my_project_uploadFile').bind('change', function(){
+		//alert('选择文件' + $(this).attr('name'));
+		//$('#my_project_fileUpload_form_' + $(this).attr('projectId')).submit();
+		var formData = new FormData($('#my_project_fileUpload_form_' + $(this).attr('projectId'))[0]);
+		$.ajax({
+			url:'file/fileUpload.do',
+			type:'POST',
+			data : formData,
+			dataType:'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+				//alert(result.result);
+				if(result.result == 'true'){
+					alert('添加附件成功');
+					//重新加载我的项目界面并且，激活附件tab pane
+					$("#index_main_content").load("/GeneralProject/page/task/my_project.html", function(){
+						$('#my_project_tabUl_fj').click();
+					});
+				}
+				else{
+					alert('添加附件失败');
+					//loadProjectFiles();
+				}
+			}
+		});
+	});
+	
+	//删除文件(附件)按钮
+	$('.my_project_file_delete').bind('click', function(){
+		var arr = $(this).attr('name').split('&');
+		var projectId = arr[0];
+		var fileName = arr[1];
+		$.ajax({
+			url:'file/deleteFile.do',
+			type:'POST',
+			data:{'projectId' : projectId,
+				  'fileName' : fileName},
+			dataType:'json',
+			success:function(result){
+				//alert(JSON.stringify(result));
+				if(result.result == 'true'){
+					alert('删除附件成功');
+					//重新加载我的项目界面并且，激活附件tab pane
+					$('#index_main_content').load("/GeneralProject/page/task/my_project.html", function(){
+						$('#my_project_tabUl_fj').click();
+					});
+				}
+				else{
+					alert('删除附件失败');
+					//loadProjectFiles();
+				}
+			}
+		});
 	});
 	
 	

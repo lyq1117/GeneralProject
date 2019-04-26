@@ -41,6 +41,14 @@ public class FileController {
 	@Resource
 	ServletContext context;
 	
+	/**
+	 * 上传项目(工程)文件(附件)
+	 * @param file
+	 * @param request
+	 * @param projectId
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/fileUpload.do", method = RequestMethod.POST)
     public String fileUpload(@RequestParam("my_project_uploadFile") MultipartFile[] file, 
@@ -90,6 +98,15 @@ public class FileController {
  
     }
 	
+	/**
+	 * 下载项目(工程)文件(附件)
+	 * @param request
+	 * @param response
+	 * @param fileName
+	 * @param projectId
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value="/fileDownload.do")
 	public String fileDownload(HttpServletRequest request,
@@ -124,6 +141,12 @@ public class FileController {
 		return null;
 	}
 	
+	/**
+	 * 获取项目(工程)的文件(附件)集合
+	 * @param projectId
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getProjectFiles.do")
 	public String getProjectFiles(@RequestParam int projectId,
@@ -144,6 +167,34 @@ public class FileController {
         	list.add(map);
         }
 		return JSONArray.toJSONString(list);
+	}
+	
+	/**
+	 * 根据项目id和文件(附件)名删除附件
+	 * @param projectId
+	 * @param fileName
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/deleteFile.do")
+	public String deleteFile(@RequestParam int projectId,
+			                 @RequestParam String fileName,
+			                 HttpServletRequest request) {
+		String path = request.getServletContext().getRealPath("") + "upload" +
+			                 File.separator + "project_file" + File.separator + 
+			                 projectId + File.separator + fileName;
+		File file = new File(path);
+		System.out.println("path----------:" + path);
+		Map<String, String> map = new HashMap<>();
+		if(file.exists() && file.isFile()) {
+			file.delete();
+			map.put("result", "true");
+		}
+		else {
+			map.put("result", "false");
+		}
+		return JSON.toJSONString(map);
 	}
 
 	

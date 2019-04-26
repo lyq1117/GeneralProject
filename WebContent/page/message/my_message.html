@@ -1,0 +1,66 @@
+<meta charset="UTF-8">
+
+<input type="button" id="toLucy" value="toLucy-李春"/>
+
+<input type="button" id="toPeter" value="toPeter-林冲"/>
+
+<script>
+
+$(function(){
+	
+	$.ajax({
+		url:'message/getSocketPath.do',
+		type:'POST',
+		dataType:'json',
+		success:function(result){
+			
+			var socketPath = result.socketPath;
+			alert(socketPath);
+			alert("ws://"+socketPath+"/ws");
+			var webSocket = new WebSocket("ws://"+socketPath+"/ws");
+			webSocket.onopen = function(event){
+			    console.log("连接成功");
+			    console.log(event);
+			};
+			webSocket.onerror = function(event){
+			    console.log("连接失败");
+			    console.log(event);
+			};
+			webSocket.onclose = function(event){
+			    console.log("Socket连接断开");
+			    console.log(event);
+			};
+			webSocket.onmessage = function(event){
+			    //接受来自服务器的消息
+			    //...
+			    var data = JSON.parse(event.data);
+			    alert(data.messageText);
+			} 
+			
+			$('#toLucy').bind('click', function(){
+				var data = {};//新建data对象，并规定属性名与相应的值
+	            data['fromId'] = 'peter';
+	            data['fromName'] = '林冲';
+	            data['toId'] = 'lucy';
+	            data['messageText'] = 'peter send to lucy';
+	            webSocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
+				
+			});
+			
+			$('#toPeter').bind('click', function(){
+				var data = {};//新建data对象，并规定属性名与相应的值
+	            data['fromId'] = 'lucy';
+	            data['fromName'] = '李春';
+	            data['toId'] = 'peter';
+	            data['messageText'] = 'lucy send to peter';
+	            webSocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
+				
+			});
+			
+		}
+	});
+	
+	
+});
+
+</script>

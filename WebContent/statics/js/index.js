@@ -25,8 +25,12 @@ $(function(){
 	//加载项目界面
 	$("#index_myProject").bind("click",function(){
 		$("#index_main_content").load("/GeneralProject/page/task/my_project.html");
-		$('#index_header_tip').html('<i class="fa fa-suitcase"></i>&nbsp;我的项目');
-		$('#index_main_header').hide();
+		//$('#index_header_tip').html('<i class="fa fa-suitcase"></i>&nbsp;我的项目');
+		//$('#index_main_header').hide();
+	});
+	
+	$('#index_myMessage').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/message/my_message.html");
 	});
 	
 });	
