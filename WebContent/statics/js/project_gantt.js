@@ -199,13 +199,13 @@ $(function(){
 						$.each(month.days, function(iii, day){
 							var date = new Date(year.name + '-' + month.name + '-' + day);
 							if(year.name==now.getFullYear()){
-								if(date>=createTime && date<endTime)
+								if(date>=createTime && date<=endTime)
 									rowContent += '<td><div class="gante_block"></div></td>';
 								else
 									rowContent += '<td><div></div></td>';
 							}
 							else{
-								if(date>=createTime && date<endTime)
+								if(date>=createTime && date<=endTime)
 									rowContent += '<td><div style="display:none;" class="gante_block"></div></td>';
 								else
 									rowContent += '<td style="display:none;"><div></div></td>';

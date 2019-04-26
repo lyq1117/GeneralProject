@@ -431,6 +431,10 @@ public class TaskController {
 		return JSON.toJSONString(map);
 	}
 
+	/**
+	 * 获取当前用户的任务集合
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getBlocksOfUser.do")
 	public String getBlocksOfUser() {
