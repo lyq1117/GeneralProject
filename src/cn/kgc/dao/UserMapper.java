@@ -36,5 +36,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	public List<User> getNotInBlockInProject(int blockId, int projectId);
+	
+	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	public List<User> getAll();
 
 }

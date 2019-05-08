@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/my_project_detail.css"/>
 <section class="content" style="padding:0px;">
       <!-- <div class="row">
       	<div class="col-mid-12">
@@ -78,7 +79,391 @@
         </div>
       </div>
       
+      <!-- 项目进度、任务周报、工时统计 导航栏 -->
+      <div class="row" style="margin-bottom: 15px;">
+      	  <div class="col-md-12">
+      	  	  <div style="width:100%; height:50px; background:white; border-radius: 3px;">
+      	  	  	<div class="row">
+      	  	  		<div class="col-md-4">
+      	  	  		</div>
+      	  	  		<div class="col-md-4" style="padding:15px;">
+      	  	  			<div class="col-md-4">
+      	  	  				<a href="javascript:void(0)" id="my_project_detail_progress" 
+      	  	  								class="navigation_bar_active">
+      	  	  					项目进度
+      	  	  				</a>
+      	  	  			</div>
+      	  	  			<div class="col-md-4">
+      	  	  				<a href="javascript:void(0)" id="my_project_detail_weekly" class="navigation_bar">
+      	  	  					任务周报
+      	  	  				</a>
+      	  	  			</div>
+      	  	  			<div class="col-md-4">
+      	  	  				<a href="javascript:void(0)" id="my_project_detail_notice" class="navigation_bar">
+      	  	  					项目公告
+      	  	  				</a>
+      	  	  			</div>
+      	  	  		</div>
+      	  	  		<div class="col-md-4">
+      	  	  		</div>
+      	  	  	</div>
+      	  	  </div>
+      	  </div>
+      </div>
       
+      <!-- 项目进度面板 -->
+      <div id="my_project_detail_progress_panel">
+      	  
+      	 <!-- 项目任务统计 -->
+		 <div class="row" style="margin-bottom: 15px;">
+		 	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “项目任务统计”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  项目任务统计
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <!-- 统计 -->
+		 	  	  	  <div class="row" style="margin-top: 15px;">
+		 	  	  	  	  <!-- 图 -->
+		 	  	  	  	  <div class="col-md-6" style="border-right: solid 1px rgb(231,231,231);">
+		 	  	  	  	  	  <div class="col-md-6" style="text-align: center;">
+				                <input id="my_project_detail_completePercentage" readonly="readonly" type="text" class="knob" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" value="1" data-width="120" data-height="120" data-fgColor="#00c0ef">
+				                <div class="knob-label">
+				                	<span style="border:solid 1px #00c0ef; 
+				                			color:#00c0ef;border-radius: 3px;">
+				                		完成度
+				                	</span>
+				                </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  	  
+		 	  	  	  	  	  <div class="col-md-6" style="text-align: center;">
+				                <input id="my_project_detail_delayPercentage" readonly="readonly" type="text" class="knob" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" value="30" data-width="120" data-height="120" data-fgColor="#f56954">
+				                <div class="knob-label">
+				               		<span style="border:solid 1px #f56954; 
+				                			color:#f56954;border-radius: 3px;">
+				               			延迟率
+				               		</span>
+				                </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  </div>
+		 	  	  	  	  
+		 	  	  	  	  <!-- 个数统计 -->
+		 	  	  	  	  <div class="col-md-6">
+		 	  	  	  	  	  
+		 	  	  	  	  	  <!-- 待完成 -->
+		 	  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+		 	  	  	  	  	  	  <div class="row">
+		 	  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">待完成</span>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  	  <div class="row" style="height:100px;">
+		 	  	  	  	  	  	  	  <h1 id="my_project_detail_notCompleteCount" style="color:rgb(110,110,110)">9</h1>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  	  <!-- 延期 -->
+		 	  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+		 	  	  	  	  	  	  <div class="row">
+		 	  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">延期</span>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  	  <div class="row" style="height:100px;">
+		 	  	  	  	  	  	  	  <h1 id="my_project_detail_delayCount" style="color:#f56954">0</h1>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  	  <!-- 已完成 -->
+		 	  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+		 	  	  	  	  	  	  <div class="row">
+		 	  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">已完成</span>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  	  <div class="row" style="height:100px;">
+		 	  	  	  	  	  	  	  <h1 id="my_project_detail_completeCount" style="color:#00a65a">1</h1>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  	  <!-- 任务总数 -->
+		 	  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+		 	  	  	  	  	  	  <div class="row">
+		 	  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">任务总数</span>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  	  <div class="row" style="height:100px;">
+		 	  	  	  	  	  	  	  <h1 id="my_project_detail_totalCount" style="color:rgb(110,110,110)">10</h1>
+		 	  	  	  	  	  	  </div>
+		 	  	  	  	  	  </div>
+		 	  	  	  	  	  
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  </div>
+		 	  </div>
+		 </div>
+		 
+      	 <div class="row" style="margin-bottom: 15px;">
+			 <!-- 项目燃尽图 -->
+      	 	<div class="col-md-6">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  		<div class="row">
+			 	  	  	  	  <div class="col-md-12">
+			 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+			 	  	  	  	  	  	  项目燃尽图
+			 	  	  	  	  	  </span>
+			 	  	  	  	  </div>
+			 	  	  	</div>
+			 	  	  	
+			 	  	  	<div class="row">
+		 	  	  			  <div class="col-md-12">
+		 	  	  			  	  
+		 	  	  			  	  <div class="chart" id="my_project_detail_line-chart" style="height: 300px;"></div>
+		 	  	  			  	  
+		 	  	  			  </div>
+		 	  	  		</div>	
+		 	  	  				 
+		 	  	  				 
+		 	  	  </div>
+		 	</div>
+		 	
+		 	<!-- 新增任务和完成任务 -->
+		 	<div class="col-md-6">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  		<div class="row">
+			 	  	  	  	  <div class="col-md-12">
+			 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+			 	  	  	  	  	  	  已完成任务和未完成任务
+			 	  	  	  	  	  </span>
+			 	  	  	  	  </div>
+			 	  	  	</div>
+		 	  	  		<div class="row">
+		 	  	  			<div class="col-md-12">
+		 	  	  				<div class="chart" id="my_project_detail_sales-chart" style="height: 300px; position: relative;"></div>
+		 	  	  			</div>
+		 	  	  		</div>
+		 	  	  </div>
+		 	</div>
+      	 </div>
+      	  
+      </div>
+      
+      <!-- 任务周报面板 -->
+      <div id="my_project_detail_weekly_panel" style="display:none;">
+      	  <div class="row" style="margin-bottom: 15px;">
+      	  	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “项目任务统计”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  任务周报
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <!-- 延期任务、已完成任务、新增任务 -->
+		 	  	  	  <div class="row" style="margin-top: 15px;">
+		 	  	  	  	  <!-- 延期任务 -->
+		 	  	  	  	  <div class="col-md-4">
+						          <!-- small box -->
+						          <div class="small-box bg-red">
+						            <div class="inner">
+						              <h3 id="my_project_detail_weekly_delayBlocksCount">65</h3>
+						
+						              <p>延期任务</p>
+						            </div>
+						            <div class="icon">
+						              <i class="fa fa-clock-o"></i>
+						            </div>
+						            <span class="small-box-footer" style="height:20px;"></span>
+						          </div>
+		 	  	  	  	  </div>
+		 	  	  	  	  
+		 	  	  	  	  <!-- 已完成任务 -->
+		 	  	  	  	  <div class="col-md-4">
+					          <!-- small box -->
+					          <div class="small-box bg-green">
+					            <div class="inner">
+					              <h3 id="my_project_detail_weekly_completeBlocksCount">53</h3>
+					
+					              <p>完成任务</p>
+					            </div>
+					            <div class="icon">
+					              <i class="fa fa-check-square-o"></i>
+					            </div>
+					            <span class="small-box-footer" style="height:20px;"></span>
+					          </div>
+					      </div>
+					      
+					      <!-- 新增任务 -->
+					      <div class="col-md-4">
+					          <!-- small box -->
+					          <div class="small-box bg-yellow">
+					            <div class="inner">
+					              <h3 id="my_project_detail_weekly_newBlocksCount">44</h3>
+					
+					              <p>新增任务</p>
+					            </div>
+					            <div class="icon">
+					              <i class="fa fa-plus-circle"></i>
+					            </div>
+					            <span class="small-box-footer" style="height:20px;"></span>
+					          </div>
+					      </div>
+		 	  	  	  	  
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  </div>
+		 	  </div>
+      	  </div>
+      	  
+      	  <!-- 新增任务列表 -->
+      	  <div class="row" style="margin-bottom: 15px;">
+     	  	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “新增任务列表”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  新增任务列表
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <div class="row" style="margin-top: 15px;padding:15px;">
+		 	  	  	  	  <ul class="todo-list" id="my_project_detail_weekly_newToDoList">
+		 	  	  	  	  	  <!-- <li>
+				                  <span class="handle">
+				                        <i class="fa fa-rocket"></i>
+				                  </span>
+				                  <span class="text">Design a nice theme</span>
+				                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+				              </li> -->
+		 	  	  	  	  </ul>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  
+		 	  	   </div>
+		 	  	</div>
+      	  </div>
+      	  
+      	  <!-- 本周完成的任务列表 -->
+      	  <div class="row" style="margin-bottom: 15px;">
+     	  	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “本周完成的任务列表”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  本周完成的任务列表
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <div class="row" style="margin-top: 15px;padding:15px;">
+		 	  	  	  	  <ul class="todo-list" id="my_project_detail_weekly_completeToDoList">
+		 	  	  	  	  	  <!-- <li>
+				                  <span class="handle">
+				                        <i class="fa fa-rocket"></i>
+				                  </span>
+				                  <span class="text">Design a nice theme</span>
+				                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+				              </li> -->
+		 	  	  	  	  </ul>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  
+		 	  	   </div>
+		 	  	</div>
+      	  </div>
+      	  
+      	  <!-- 延期任务的列表 -->
+      	  <div class="row" style="margin-bottom: 15px;">
+     	  	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “延期任务列表”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  延期任务列表
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <div class="row" style="margin-top: 15px;padding:15px;">
+		 	  	  	  	  <ul class="todo-list" id="my_project_detail_weekly_delayToDoList">
+		 	  	  	  	  	  <!-- <li>
+				                  <span class="handle">
+				                        <i class="fa fa-rocket"></i>
+				                  </span>
+				                  <span class="text">Design a nice theme</span>
+				                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+				              </li> -->
+		 	  	  	  	  </ul>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  
+		 	  	   </div>
+		 	  	</div>
+      	  </div>
+      	  
+      </div>
+      
+       <!-- 项目公告面板 -->
+      <div id="my_project_detail_notice_panel" style="display:none;">
+      	  
+      	 <!-- 项目公告 -->
+		 <div class="row" style="margin-bottom: 15px;">
+		 	  <div class="col-md-12">
+		 	  	  <div style="width:100%; background:white;
+		 	  	  				 border-radius: 3px; padding:15px;">
+		 	  	  	  <!-- “项目公告”标题 -->
+		 	  	  	  <div class="row">
+		 	  	  	  	  <div class="col-md-12">
+		 	  	  	  	  	  <span class="my_project_detail_statistic_title">
+		 	  	  	  	  	  	  项目公告
+		 	  	  	  	  	  </span>
+		 	  	  	  	  </div>
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  <!-- 公告列表 -->
+		 	  	  	  <div class="row" style="padding:15px;" id="my_project_detail_notice_panel_list">
+		 	  	  	  	  <!-- 公告 -->
+		 	  	  	  	  <!-- <div class="col-md-12">
+		 	  	  	  	  	  <ul class="timeline">
+		 	  	  	  	  	  	  <li class="time-label">
+					                  <span class="bg-red">
+					                    	<i class="fa fa-bullhorn"></i>标题
+					                  </span>
+					              </li>
+					              <li>
+						              <i class="fa fa-comments bg-yellow"></i>
+						
+						              <div class="timeline-item">
+						                <span class="time"><i class="fa fa-clock-o"></i> 2019-05-08</span>
+						                <h3 class="timeline-header"><a href="#">林冲</a> peter</h3>
+						                <div class="timeline-body">
+						                  	公告内容
+						                </div>
+						              </div>
+						          </li>
+		 	  	  	  	  	  </ul>
+		 	  	  	  	  </div> -->
+		 	  	  	  </div>
+		 	  	  	  
+		 	  	  	  
+		 	  	  </div>
+		 	  </div>
+		 </div>
+      	  
+      </div>
+     
+      
+      <!-- 工程成员窗口 -->
       <div class="row">
         <div class="col-md-12">
           <div class="box">
@@ -145,7 +530,68 @@ $(function(){
 	$('.date').datepicker({
 		'format' : 'yyyy-mm-dd'
 	});
+	
+	
+	/* jQueryKnob */
+    $(".knob").knob({
+      /*change : function (value) {
+       //console.log("change : " + value);
+       },
+       release : function (value) {
+       console.log("release : " + value);
+       },
+       cancel : function () {
+       console.log("cancel : " + this.value);
+       },*/
+      draw: function () {
+
+        // "tron" case
+        if (this.$.data('skin') == 'tron') {
+
+          var a = this.angle(this.cv)  // Angle
+              , sa = this.startAngle          // Previous start angle
+              , sat = this.startAngle         // Start angle
+              , ea                            // Previous end angle
+              , eat = sat + a                 // End angle
+              , r = true;
+
+          this.g.lineWidth = this.lineWidth;
+
+          this.o.cursor
+          && (sat = eat - 0.3)
+          && (eat = eat + 0.3);
+
+          if (this.o.displayPrevious) {
+            ea = this.startAngle + this.angle(this.value);
+            this.o.cursor
+            && (sa = ea - 0.3)
+            && (ea = ea + 0.3);
+            this.g.beginPath();
+            this.g.strokeStyle = this.previousColor;
+            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+            this.g.stroke();
+          }
+
+          this.g.beginPath();
+          this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+          this.g.stroke();
+
+          this.g.lineWidth = 2;
+          this.g.beginPath();
+          this.g.strokeStyle = this.o.fgColor;
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+          this.g.stroke();
+
+          return false;
+        }
+      }
+    });
+    /* END JQUERY KNOB */
+    
+    
 });
 </script>
 <script type="text/javascript" src="/GeneralProject/statics/js/my_project_detail.js" charset="UTF-8"></script>
+
 

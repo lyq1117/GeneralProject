@@ -1,66 +1,99 @@
 <meta charset="UTF-8">
 
-<input type="button" id="toLucy" value="toLucy-李春"/>
-
-<input type="button" id="toPeter" value="toPeter-林冲"/>
-
-<script>
-
-$(function(){
+<style>
+/*  未上线用户头像为黑白 */
+.gray { 
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    
+    filter: grayscale(100%);
 	
-	$.ajax({
-		url:'message/getSocketPath.do',
-		type:'POST',
-		dataType:'json',
-		success:function(result){
-			
-			var socketPath = result.socketPath;
-			alert(socketPath);
-			alert("ws://"+socketPath+"/ws");
-			var webSocket = new WebSocket("ws://"+socketPath+"/ws");
-			webSocket.onopen = function(event){
-			    console.log("连接成功");
-			    console.log(event);
-			};
-			webSocket.onerror = function(event){
-			    console.log("连接失败");
-			    console.log(event);
-			};
-			webSocket.onclose = function(event){
-			    console.log("Socket连接断开");
-			    console.log(event);
-			};
-			webSocket.onmessage = function(event){
-			    //接受来自服务器的消息
-			    //...
-			    var data = JSON.parse(event.data);
-			    alert(data.messageText);
-			} 
-			
-			$('#toLucy').bind('click', function(){
-				var data = {};//新建data对象，并规定属性名与相应的值
-	            data['fromId'] = 'peter';
-	            data['fromName'] = '林冲';
-	            data['toId'] = 'lucy';
-	            data['messageText'] = 'peter send to lucy';
-	            webSocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
-				
-			});
-			
-			$('#toPeter').bind('click', function(){
-				var data = {};//新建data对象，并规定属性名与相应的值
-	            data['fromId'] = 'lucy';
-	            data['fromName'] = '李春';
-	            data['toId'] = 'peter';
-	            data['messageText'] = 'lucy send to peter';
-	            webSocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
-				
-			});
-			
-		}
-	});
-	
-	
-});
+    filter: gray;
+}
+</style>
 
-</script>
+<!-- <input type="button" id="toLucy" value="toLucy-李春"/>
+
+<input type="button" id="toPeter" value="toPeter-林冲"/> -->
+
+<div class="row" style="height:100%;">
+	<!-- 在线联系人列表 -->
+	<div class="col-md-4" style="height:100%;">
+		<div class="box" style="height:100%;">
+          <div class="box-header with-border" style="height:10%;">
+            <h3 class="box-title">在线联系人</h3>
+
+          </div>
+          <div class="box-body no-padding" style="height:90%;overflow-y: scroll;">
+            <ul class="users-list clearfix" id="my_message_online_users_ul">
+            
+               <!-- <li>
+                 <img src="/GeneralProject/statics/image/head3.jpg" alt="User Image">
+                 <a class="users-list-name" href="#">Alexander Pierce</a>
+                 <span class="users-list-date">Today</span>
+               </li> -->
+               
+               
+             </ul>
+          </div>
+        </div>
+	</div>
+	
+	<!-- 聊天窗口 -->
+	<div class="col-md-8" style="height:100%;">
+	
+          <div class="box  direct-chat direct-chat-primary" style="height:100%;">
+            <div class="box-header with-border" style="height:10%;">
+              <i class="fa fa-wechat" style="color:#3c8dbc;"></i>
+              <h3 class="box-title" id="my_message_chat_title">选择左侧在线联系人聊天</h3>
+
+              <div class="box-tools pull-right">
+                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body" style="height:80%;">
+              <div class="direct-chat-messages" id="my_message_chat_chatPanel" >
+              
+                <!-- <div class="direct-chat-msg">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                    <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                  </div>
+                  <img class="direct-chat-img" src="/GeneralProject/statics/image/head3.jpg" alt="Message User Image">
+                  <div class="direct-chat-text">
+                    Is this template really for free? That's unbelievable!
+                  </div>
+                </div>
+
+                <div class="direct-chat-msg right">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                  </div>
+                  <img class="direct-chat-img" src="/GeneralProject/statics/image/head4.jpg" alt="Message User Image">
+                  <div class="direct-chat-text">
+                    You better believe it!
+                  </div>
+                </div> -->
+                
+              </div>
+
+            </div>
+            
+            <div class="box-footer" style="height:10%;">
+                <div class="input-group">
+                  <input type="text" name="message" id="my_message_chat_sendContent" placeholder="输入内容 ..." class="form-control">
+                      <span class="input-group-btn">
+                        <button type="submit" id="my_message_chat_send" class="btn btn-primary btn-flat">Send</button>
+                      </span>
+                </div>
+            </div>
+          </div>
+	</div>
+	
+</div>
+
+<script type="text/javascript" src="/GeneralProject/statics/js/my_message.js" charset="UTF-8"></script>

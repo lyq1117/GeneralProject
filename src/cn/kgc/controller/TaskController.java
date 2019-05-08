@@ -1,6 +1,9 @@
 package cn.kgc.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.kgc.pojo.Block;
 import cn.kgc.pojo.Project;
@@ -113,7 +118,10 @@ public class TaskController {
 	@RequestMapping(value="/addProject.do")
 	public String addProject(@RequestParam String projectName,
 							 @RequestParam String createTime,
-							 @RequestParam int duration) {
+							 @RequestParam int duration,
+							 @RequestParam String location,
+							 @RequestParam double lng,
+							 @RequestParam double lat) {
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
 		Project project = new Project();
@@ -124,6 +132,11 @@ public class TaskController {
 		project.setDuration(duration);
 		project.setUser(user);
 		project.setStatus(0);
+		project.setLocation(location);
+		project.setLng(lng);
+		project.setLat(lat);
+		
+		System.out.println("----**------" + location + "-" + lng + "-" + lat);
 		
 		int result = projectService.addProject(project);
 		
@@ -447,6 +460,73 @@ public class TaskController {
 			blocks.add(block);
 		}
 		return JSONArray.toJSONString(blocks);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getAllProjects.do")
+	public String getAllProjects() {
+		
+		List<Project> projects = projectService.getAllProjects();
+		//初始化带有工程小块的工程List
+		List<Map<String, String>> list = new ArrayList<>();
+		for (Project project : projects) {
+			Map<String, String> map = new HashMap();
+			System.out.println("pro .... id ...----" + project.getId());
+			List<Block> blocks = blockService.getBlocksByProjectId(project.getId());
+			map.put("project", JSON.toJSONString(project));
+			map.put("blocks", JSONArray.toJSONString(blocks));
+			list.add(map);
+		}
+		Object object = JSONArray.toJSON(list);
+		return object.toString();
+	}
+	
+	/**
+	 * 获取一周的任务剩余数
+	 * @param mondayDate 一周的 周一的日期
+	 * @param projectId 工程id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getBlocksRemainOfWeek.do", method=RequestMethod.POST)
+	public String getBlocksRemainOfWeek(@RequestParam String mondayDate,
+										@RequestParam int projectId) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date mondayDateD = null;
+		try {
+			mondayDateD = sdf.parse(mondayDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		//获取一周中每天剩余任务数
+		List<Map<String, String>> list = blockService.getBlocksRemainOfWeek(mondayDateD, projectId);
+		return JSONArray.toJSONString(list);
+	}
+	
+	/**
+	 * 获取工程(项目)中已完成、未完成、延期工程分别数目
+	 * @param projectId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getCompleteOrNotCountBlocksOfProject.do", method=RequestMethod.POST)
+	public String getCompleteOrNotCountOfProject(@RequestParam int projectId) {
+		List<Map<String, String>> list = blockService.getCompleteOrNotCountBlocksOfProject(projectId);
+		return JSONArray.toJSONString(list);
+	}
+	
+	/**
+	 * 获取任务周报(本周完成的任务、本周延迟的任务、本周新增的任务)
+	 * @param mondayDate
+	 * @param projectId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getWeeklyBlocks.do", method=RequestMethod.POST)
+	public String getWeeklyBlocks(@RequestParam String mondayDate,
+								  @RequestParam int projectId) {
+		Map<String, List<Block>> map = blockService.getWeeklyBlocks(DateUtil.getDate(mondayDate), projectId);
+		return JSON.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
 	}
 	
 }

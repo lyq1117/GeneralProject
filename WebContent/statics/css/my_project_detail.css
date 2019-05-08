@@ -1,0 +1,16 @@
+.navigation_bar_active{
+	font-weight: bold;
+	color: #3c8dbc;
+	border-bottom: solid;
+}
+.navigation_bar{
+	color: rgb(143,143,143);
+}
+.navigation_bar:hover{
+	color: rgb(143,143,143);
+}
+.my_project_detail_statistic_title{
+	border-left: solid #3c8dbc;
+    padding-left: 10px;
+    color: rgb(120,120,120);
+}

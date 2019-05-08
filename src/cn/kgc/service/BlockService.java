@@ -1,6 +1,8 @@
 package cn.kgc.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cn.kgc.pojo.Block;
 import cn.kgc.pojo.User;
@@ -53,5 +55,27 @@ public interface BlockService {
 	 * @return
 	 */
 	public int getIncrement();
-
+	
+	/**
+	 * 获取一周中每天的剩余任务数
+	 * @param mondayDate
+	 * @param projectId
+	 * @return
+	 */
+	public List<Map<String, String>> getBlocksRemainOfWeek(Date mondayDate, int projectId);
+	
+	/**
+	 * 获取工程(项目)中已完成、未完成、延期工程分别数目
+	 * @param projectId
+	 * @return
+	 */
+	public List<Map<String, String>> getCompleteOrNotCountBlocksOfProject(int projectId);
+	
+	/**
+	 * 获取任务周报(本周延期任务、本周完成任务、本周新增任务)
+	 * @param mondayDate
+	 * @param projectId
+	 * @return
+	 */
+	public  Map<String, List<Block>> getWeeklyBlocks(Date mondayDate, int projectId);
 }

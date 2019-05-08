@@ -63,4 +63,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return members;
 	}
 
+	@Override
+	public List<Project> getAllProjects() {
+		return projectMapper.getAll();
+	}
+
 }

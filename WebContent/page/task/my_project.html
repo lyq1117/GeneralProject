@@ -7,6 +7,7 @@
              <li ><a href="#my_project_file" id="my_project_tabUl_fj" data-toggle="tab">附件</a></li>
              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
            </ul>
+           
            <div class="tab-content" style="_height:530px;min-height:530px;background:rgb(243,243,243);">
              <div class="tab-pane active" id="my_project_view">
              
@@ -26,15 +27,46 @@
 					            <div class="info-box-content">
 					              <input type="text" class="form-control input-sm" placeholder="工程名" id="my_project_view_new_project_name">
 					              <span class="info-box-text" style="color:rgb(253,203,53);"><a href="#" id="my_project_view_new_create_time"><i class="fa fa-clock-o"></i></a></span>
-					              <a href="#">
+					              <!-- <a href="#">
 						              <span data-toggle="tooltip" id="my_project_view_new_name" class="badge bg-red">s</span>
-					              </a>
+					              </a> -->
+					              <input type="text" readonly="readonly" class="form-control input-sm" placeholder="点击选择地点" id="my_project_view_new_project_location">
+					              
+					              <!-- 地点选择框开始 -->
+									<div class="box" id="my_project_view_new_project_locationWin" 
+												style="position:fixed;display:none;width:400px;
+												height:150px;
+												z-index: 10">
+										<div class="box-body" style="height:100%;">
+										 	<div class="col-md-6" style="height:100%;">
+										 		<div class="form-group" style="height:100%;">
+											      <select multiple class="form-control"
+											      	id="my_project_view_new_project_locationWin_province" style="height:100%;">
+											         <!-- <option>option 1</option> -->
+											        
+											      </select>
+											    </div>
+										 	</div>
+										 	<div class="col-md-6" style="height:100%;">
+										 		<div class="form-group" style="height:100%;">
+											      <select multiple class="form-control" 
+											      	id="my_project_view_new_project_locationWin_city" style="height:100%;">
+											         <!-- <option>option 1</option> -->
+											        
+											      </select>
+											    </div>
+										 	</div>
+										</div>
+									</div>
+								  <!-- 地点选择框结束 -->
+														              
 					            </div>
 					         </div>
 					         <button type="button" id="my_project_view_new_confirm_btn" class="btn btn-block btn-default">确定</button>
 				         </div>
 				       </div>
 				     </div>
+             	
              	</div>
              	
              </div>

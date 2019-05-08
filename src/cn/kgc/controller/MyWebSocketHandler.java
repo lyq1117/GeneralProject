@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,10 +42,12 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		Map<String, Object> mm = webSocketSession.getHandshakeAttributes();
         if (userSocketSessionMap.get(uid) == null) {
             userSocketSessionMap.put(uid, webSocketSession);
+            //建立连接时，添加用户
             users.add(uid);
             System.out.println(users.size() + "-------------------------");
-            sendAll();
         }
+        //广播
+        sendAll();
 	}
 
 	//发送信息前的处理
@@ -77,6 +80,10 @@ public class MyWebSocketHandler implements WebSocketHandler {
             if(entry.getValue().getHandshakeAttributes().get("uid")==webSocketSession.getHandshakeAttributes().get("uid")){
                 userSocketSessionMap.remove(webSocketSession.getHandshakeAttributes().get("uid"));
                 System.out.println("WebSocket in staticMap:" + webSocketSession.getHandshakeAttributes().get("uid") + "removed");
+                //连接关闭后移除用户
+                users.remove(webSocketSession.getHandshakeAttributes().get("uid"));
+                //广播
+                sendAll();
             }
         }
 	}
@@ -100,18 +107,26 @@ public class MyWebSocketHandler implements WebSocketHandler {
         }
     }
     
+    /**
+     * 广播
+     * @throws IOException
+     */
     public void sendAll() throws IOException {
     	for (String userName : users) {
     		WebSocketSession session = userSocketSessionMap.get(userName);
     		if (session != null && session.isOpen()) {
-    			String content = "";
+    			//在线用户容器
+    			List<Map<String, String>> list = new ArrayList<>();
     			for (String u : users) {
-    				content += u + "--";
+    				Map<String, String> map = new HashMap<>();
+    				map.put("username", u);
+    				list.add(map);
 				}
     			Message msg = new Message();
     			Timestamp now = new Timestamp(System.currentTimeMillis());
+    			msg.setMessageId(0);//广播 在线用户集合
     	        msg.setMessageDate(now);
-    	        msg.setMessageText("在线人数:" + users.size() + " 分别:" + content);
+    	        msg.setMessageText(JSONArray.toJSONString(list));
     	        msg.setToId(userName);
     			TextMessage tm = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg));
                 session.sendMessage(tm);

@@ -33,5 +33,11 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> getMembersNotInBlockInProject(int blockId, int projectId);
+	
+	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	public List<User> getUsers();
 
 }

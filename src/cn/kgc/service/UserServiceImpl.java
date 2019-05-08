@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getMembersNotInBlockInProject(int blockId, int projectId) {
 		return userMapper.getNotInBlockInProject(blockId, projectId);
 	}
+
+	@Override
+	public List<User> getUsers() {
+		return userMapper.getAll();
+	}
 	
 	
 

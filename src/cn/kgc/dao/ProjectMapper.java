@@ -41,4 +41,10 @@ public interface ProjectMapper {
 	 */
 	public int update(Project project);
 	
+	/**
+	 * 获取所有工程集合
+	 * @return
+	 */
+	public List<Project> getAll();
+	
 }

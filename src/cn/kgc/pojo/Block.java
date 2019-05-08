@@ -9,22 +9,26 @@ public class Block {
 	private String description;//工程小块描述
 	private Date createTime;//开始时间
 	private int duration;//工期(单位：天)
+	private int realDuration;//实际工期(单位：天)
 	private int status;//状态(0-创建 1-执行中 2-非正常结束 3-正常结束)
 	private int projectId;//所属工程编号
 	
 	public Block() {
 	}
 
-	public Block(int id, User leader, String description, Date createTime, int duration, int status, int projectId) {
-		super();
+
+	public Block(int id, User leader, String description, Date createTime, int duration, int realDuration, int status,
+			int projectId) {
 		this.id = id;
 		this.leader = leader;
 		this.description = description;
 		this.createTime = createTime;
 		this.duration = duration;
+		this.realDuration = realDuration;
 		this.status = status;
 		this.projectId = projectId;
 	}
+
 
 	public int getId() {
 		return id;
@@ -80,6 +84,14 @@ public class Block {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
+	}
+
+	public int getRealDuration() {
+		return realDuration;
+	}
+
+	public void setRealDuration(int realDuration) {
+		this.realDuration = realDuration;
 	}
 
 }

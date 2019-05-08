@@ -10,7 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="description" column="description"/>
         <result property="createTime" column="create_time"/>
         <result property="duration" column="duration"/>
+        <result property="realDuration" column="real_duration"/>
         <result property="status" column="status"/>
+        <result property="location" column="location" />
+        <result property="lng" column="lng"/>
+        <result property="lat" column="lat"/>
         <association property="user" javaType="User">
             <id property="username" column="u_username"/>
 	        <result property="pwd" column="u_pwd"/>
@@ -23,8 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getListByLeaderId" parameterType="String" resultMap="projectList">
         SELECT p.id id, p.name name, p.description description, p.create_time create_time,
-        	   p.duration duration, u.username u_username, u.pwd u_pwd, u.name
-        	   u_name, u.icon u_icon, u.tel u_tel, u.status u_status, p.status status
+        	   p.duration duration, p.real_duration real_duration, u.username u_username, u.pwd u_pwd, u.name
+        	   u_name, u.icon u_icon, u.tel u_tel, u.status u_status, p.status status, 
+        	   p.location location, p.lng lng, p.lat lat
         FROM project p, user u
         WHERE p.leader_id = u.username
         AND p.leader_id= #{leaderId}
@@ -36,13 +41,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         					create_time,
         					duration,
         					leader_id,
-        					status)
+        					status,
+        					location,
+        					lng,
+        					lat)
         VALUE(#{id},
         	  #{name},
         	  #{createTime},
         	  #{duration},
         	  #{user.username},
-        	  #{status})
+        	  #{status},
+        	  #{location},
+        	  #{lng},
+        	  #{lat})
     </insert>
     
     <select id="getIncrement" resultType="int">
@@ -56,7 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="description" column="description"/>
         <result property="createTime" column="create_time"/>
         <result property="duration" column="duration"/>
+        <result property="realDuration" column="real_duration"/>
         <result property="status" column="status"/>
+        <result property="location" column="location"/>
+        <result property="lng" column="lng"/>
+        <result property="lat" column="lat"/>
         <association property="user" javaType="User">
             <result property="username" column="uusername"/>
             <result property="pwd" column="upwd"/>
@@ -83,5 +98,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	status = #{status}
         WHERE id = #{id}
     </update>
+    
+    <select id="getAll" resultMap="projectList">
+        SELECT p.id id, p.name name, p.description description, p.create_time create_time,
+        	   p.duration duration, p.real_duration real_duration, u.username u_username, u.pwd u_pwd, u.name
+        	   u_name, u.icon u_icon, u.tel u_tel, u.status u_status, p.status status, 
+        	   p.location location, p.lng lng, p.lat lat
+        FROM project p, user u
+        WHERE p.leader_id = u.username
+    </select>
     
 </mapper>

@@ -47,5 +47,11 @@ public interface ProjectService {
 	 * @return
 	 */
 	public List<User> getMembersOfProject(int projectId);
+	
+	/**
+	 * 获取所有工程集合
+	 * @return
+	 */
+	public List<Project> getAllProjects();
 
 }

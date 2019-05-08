@@ -66,4 +66,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        	                  )
     </select>
     
+    <select id="getAll" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+       	FROM user u, dept d
+       	WHERE u.dept_id = d.id
+    </select>
+    
 </mapper>

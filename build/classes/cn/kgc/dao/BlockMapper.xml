@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="description" column="bdescription"/>
         <result property="createTime" column="bcreateTime"/>
         <result property="duration" column="bduration"/>
+        <result property="realDuration" column="brealDuration"/>
         <result property="status" column="bstatus"/>
         <result property="projectId" column="bprojectId"/>
         <association property="leader" javaType="User">
@@ -23,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getByProjectId" parameterType="int" resultMap="blockList">
         SELECT b.id bid, b.description bdescription, b.create_time bcreateTime, b.duration 
-        	   bduration, b.status bstatus, b.project_id bprojectId,
+        	   bduration, b.real_duration brealDuration, b.status bstatus, b.project_id bprojectId,
         	   u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel utel,
         	   u.status ustatus
         FROM block b, project p, user u
@@ -48,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getById" parameterType="int" resultMap="blockList">
         SELECT b.id bid, b.description bdescription, b.create_time bcreateTime, b.duration 
-        	   bduration, b.status bstatus, b.project_id bprojectId,
+        	   bduration, b.real_duration brealDuration, b.status bstatus, b.project_id bprojectId,
         	   u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel utel,
         	   u.status ustatus
         FROM block b, user u
