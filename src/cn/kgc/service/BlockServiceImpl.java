@@ -230,4 +230,46 @@ public class BlockServiceImpl implements BlockService {
 		return map;
 	}
 
+	@Override
+	public Map<String, List<Block>> getEnterpriseBlockWeekly(Date mondayDate) {
+		
+		List<Block> blocks = blockMapper.getAll();
+		
+		//一天的毫秒数
+		long millSecondOfDay = 24*60*60*1000;
+		//本周天的日期
+		Date sundayDate = new Date(mondayDate.getTime() + millSecondOfDay*6);
+		
+		Date todayDate = new Date();
+		
+		List<Block> delayBlocks = new ArrayList<>();//本周企业延期任务集合
+		List<Block> completeBlocks = new ArrayList<>();//本周企业完成任务结合
+		List<Block> newBlocks = new ArrayList<>();//本周企业新增任务集合
+		
+		for (Block block : blocks) {
+			//计算预计结束时间
+			Date endTime = getEndDate(block.getCreateTime(), block.getDuration());
+			//状态0(即执行中)且预计结束时间在本周一之前的，都是本周的延期任务
+			if(block.getStatus() == 0 && endTime.getTime() < mondayDate.getTime()) 
+				delayBlocks.add(block);
+			//状态2(正常结束、完成)
+			if(block.getStatus() == 2) {
+				Date realEndTime = getEndDate(block.getCreateTime(), block.getRealDuration());
+				if(realEndTime.getTime() >= mondayDate.getTime()
+						&& realEndTime.getTime() <= sundayDate.getTime())
+					completeBlocks.add(block);
+			}
+			if(block.getCreateTime().getTime() >= mondayDate.getTime()
+					&& block.getCreateTime().getTime() <= sundayDate.getTime())
+				newBlocks.add(block);
+		}
+		
+		Map<String, List<Block>> map = new HashMap<>();
+		map.put("delayBlocks", delayBlocks);
+		map.put("completeBlocks", completeBlocks);
+		map.put("newBlocks", newBlocks);
+		
+		return map;
+	}
+
 }

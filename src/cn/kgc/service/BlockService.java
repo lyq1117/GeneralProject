@@ -77,5 +77,12 @@ public interface BlockService {
 	 * @param projectId
 	 * @return
 	 */
-	public  Map<String, List<Block>> getWeeklyBlocks(Date mondayDate, int projectId);
+	public Map<String, List<Block>> getWeeklyBlocks(Date mondayDate, int projectId);
+	
+	/**
+	 * 获取企业任务周报(本周延期任务、本周完成任务、本周新增任务)
+	 * @param mondayDate
+	 * @return
+	 */
+	public Map<String, List<Block>> getEnterpriseBlockWeekly(Date mondayDate);
 }

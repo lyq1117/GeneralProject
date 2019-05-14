@@ -147,8 +147,6 @@ $(function(){
 						var projectCreateTime = millisecond2Date(project.createTime);
 						var projectDuration = project.duration;
 						var projectStatus = project.status;
-						/*alert(projectDescription + '-' + millisecond2Date(projectCreateTime) + '-' + 
-							projectDuration + '-' + projectStatus);*/
 						$('#my_project_detail_id').val(projectId);
 						$('#my_project_detail_projectName').val(projectName);
 						$('#my_project_detail_projectDescription').val(projectDescription);
@@ -230,16 +228,7 @@ $(function(){
 						});
 					}
 				});
-				//发送ajax,获取工程小块(即任务)成员
-				/*$.ajax({
-					url:'task/getMembersOfBlock.do',
-					type:'POST',
-					data:{'blockId':blockId},
-					dataType:'json',
-					success:function(result){
-						alert(JSON.stringify(result));
-					}
-				});*/
+				//加载工程小块(即任务)成员表格
 				$('#my_block_detail_membersTable').bootstrapTable({
 					url:'task/getMembersOfBlock.do?blockId=' + blockId,
 					pagination: true,

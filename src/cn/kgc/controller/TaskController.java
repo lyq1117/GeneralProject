@@ -41,15 +41,15 @@ import cn.kgc.util.DateUtil;
 public class TaskController {
 	
 	@Resource
-	private ProjectService projectService;
+	private ProjectService projectService;//工程业务对象
 	@Resource
-	private BlockService blockService;
+	private BlockService blockService;//任务(工程小块)业务对象
 	@Resource
-	private UserProjectService userProjectService;
+	private UserProjectService userProjectService;//用户-工程关联业务对象
 	@Resource
-	private UserService userService;
+	private UserService userService;//用户业务对象
 	@Resource
-	private UserBlockService userBlockService;
+	private UserBlockService userBlockService;//用户-任务(工程小块)业务对象
 	
 	/**
 	 * 获取当前用户拥有的项目列表

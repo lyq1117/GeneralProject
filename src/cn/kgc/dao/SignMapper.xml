@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.SignMapper">
+    
+    <resultMap type="Sign" id="signMap">
+        <id property="id" column="id"/>
+        <result property="signDate" column="sign_date"/>
+        <association property="user" javaType="User">
+            <result property="username" column="username"/>
+            <result property="pwd" column="pwd"/>
+            <result property="name" column="name"/>
+            <result property="icon" column="icon"/>
+            <result property="tel" column="tel"/>
+            <result property="status" column="status"/>
+            <association property="dept" javaType="Dept">
+                <id property="id" column="did"/>
+                <result property="name" column="dname"/>
+                <result property="leader_id" column="dleaderId"/>
+                <result property="location" column="dlocation"/>
+                <result property="status" column="dstatus"/>
+            </association>
+        </association>
+    </resultMap>
+    
+    <select id="getByUserIdAndSignDate" resultMap="signMap">
+        SELECT s.*,u.*,d.id did, d.name dname, d.leader_id dleaderId, 
+        	   d.location dlocation, d.status dstatus
+        FROM sign s, user u, dept d
+        WHERE s.user_id = u.username
+        AND u.dept_id = d.id
+        AND s.user_id = #{0}
+        AND s.sign_date = #{1}
+    </select>
+    
+    <select id="getSignAccountOfDate" parameterType="Date" resultType="int">
+        SELECT count(*) count
+        FROM sign s
+        WHERE s.sign_date = #{signDate}
+    </select>
+    
+</mapper>

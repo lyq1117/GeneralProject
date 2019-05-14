@@ -1,0 +1,193 @@
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="/GeneralProject/statics/css/project_survey.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		<!-- 头部 -->
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<h4 style="margin-left: 15px;">
+					<i class="fa fa-bar-chart-o" style="color:#3c8dbc;"></i>
+					<span>企业工程概况</span>
+				</h4>
+			</div>
+		</div>
+		
+		<!-- 仪表统计 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="project_survey_title">
+	  	  	  	  	  	  企业工程统计
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			<div class="row" style="margin-top: 15px;">
+				<div class="col-md-6" style="border-right: solid 1px rgb(231,231,231);">
+					<div class="row">
+					
+						<div class="col-md-6" style="text-align: center;">
+			                <input id="project_survey_completePercentage" readonly="readonly" type="text" class="knob" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" value="1" data-width="120" data-height="120" data-fgColor="#00c0ef">
+			                <div class="knob-label">
+			                	<span style="border:solid 1px #00c0ef; 
+			                			color:#00c0ef;border-radius: 3px;">
+			                		完成度
+			                	</span>
+			                </div>
+			  	  	  	</div>
+			  	  	  	
+			  	  	  	<div class="col-md-6" style="text-align: center;">
+			                <input id="project_survey_delayPercentage" readonly="readonly" type="text" class="knob" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" value="30" data-width="120" data-height="120" data-fgColor="#f56954">
+			                <div class="knob-label">
+			               		<span style="border:solid 1px #f56954; 
+			                			color:#f56954;border-radius: 3px;">
+			               			延期率
+			               		</span>
+			                </div>
+	 	  	  	  	  	</div>
+			  	  	  	
+			  	  	  	
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					
+					<!-- 待完成 -->
+  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+  	  	  	  	  	  <div class="row">
+  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">待完成</span>
+  	  	  	  	  	  </div>
+  	  	  	  	  	  <div class="row" style="height:100px;">
+  	  	  	  	  	  	  <h1 id="project_survey_notCompleteCount" style="color:rgb(110,110,110)">9</h1>
+  	  	  	  	  	  </div>
+  	  	  	  	  </div>
+  	  	  	  	  <!-- 延期 -->
+  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+  	  	  	  	  	  <div class="row">
+  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">延期</span>
+  	  	  	  	  	  </div>
+  	  	  	  	  	  <div class="row" style="height:100px;">
+  	  	  	  	  	  	  <h1 id="project_survey_delayCount" style="color:#f56954">0</h1>
+  	  	  	  	  	  </div>
+  	  	  	  	  </div>
+  	  	  	  	  <!-- 已完成 -->
+  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+  	  	  	  	  	  <div class="row">
+  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">已完成</span>
+  	  	  	  	  	  </div>
+  	  	  	  	  	  <div class="row" style="height:100px;">
+  	  	  	  	  	  	  <h1 id="project_survey_completeCount" style="color:#00a65a">1</h1>
+  	  	  	  	  	  </div>
+  	  	  	  	  </div>
+  	  	  	  	  <!-- 任务总数 -->
+  	  	  	  	  <div class="col-md-3" style="text-align: center;">
+  	  	  	  	  	  <div class="row">
+  	  	  	  	  	  	  <span style="color:rgb(160,160,160);">工程总数</span>
+  	  	  	  	  	  </div>
+  	  	  	  	  	  <div class="row" style="height:100px;">
+  	  	  	  	  	  	  <h1 id="project_survey_totalCount" style="color:rgb(110,110,110)">10</h1>
+  	  	  	  	  	  </div>
+  	  	  	  	  </div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<!-- 企业每日新增任务和完成任务趋势 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="project_survey_title">
+	  	  	  	  	  	  企业每日新增工程和完成工程趋势
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			<div class="row" style="margin-top: 15px;">
+				<div class="col-md-12">
+					<div class="row">
+					
+	 	  	  			<div class="col-md-12">
+	 	  	  			  	<div class="chart" id="project_survey_line-chart" style="height: 300px;"></div>
+	 	  	  			</div>
+			  	  	  	
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+<script>
+$(function(){
+	
+	/* jQueryKnob */
+    $(".knob").knob({
+      /*change : function (value) {
+       //console.log("change : " + value);
+       },
+       release : function (value) {
+       console.log("release : " + value);
+       },
+       cancel : function () {
+       console.log("cancel : " + this.value);
+       },*/
+      draw: function () {
+
+        // "tron" case
+        if (this.$.data('skin') == 'tron') {
+
+          var a = this.angle(this.cv)  // Angle
+              , sa = this.startAngle          // Previous start angle
+              , sat = this.startAngle         // Start angle
+              , ea                            // Previous end angle
+              , eat = sat + a                 // End angle
+              , r = true;
+
+          this.g.lineWidth = this.lineWidth;
+
+          this.o.cursor
+          && (sat = eat - 0.3)
+          && (eat = eat + 0.3);
+
+          if (this.o.displayPrevious) {
+            ea = this.startAngle + this.angle(this.value);
+            this.o.cursor
+            && (sa = ea - 0.3)
+            && (ea = ea + 0.3);
+            this.g.beginPath();
+            this.g.strokeStyle = this.previousColor;
+            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+            this.g.stroke();
+          }
+
+          this.g.beginPath();
+          this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+          this.g.stroke();
+
+          this.g.lineWidth = 2;
+          this.g.beginPath();
+          this.g.strokeStyle = this.o.fgColor;
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+          this.g.stroke();
+
+          return false;
+        }
+      }
+    });
+    /* END JQUERY KNOB */
+	
+});
+</script>
+
+<script type="text/javascript" src="/GeneralProject/statics/js/project_survey.js" charset="UTF-8"></script>

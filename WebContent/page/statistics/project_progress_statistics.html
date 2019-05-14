@@ -1,0 +1,75 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/project_progress_statistics.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<h4 style="margin-left: 15px;">
+					<i class="fa fa-bar-chart-o" style="color:#3c8dbc;"></i>
+					<span>项目进度统计</span>
+				</h4>
+			</div>
+		</div>
+		
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="project_progress_statistics_title">
+	  	  	  	  	  	  项目进度统计
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12" style="padding:15px;">
+					<table id="project_progress_statistics_table"  data-toggle="table" class="table"
+						style="border:solid 1px rgb(230,230,230);">
+						<thead style="background:#d2d6de;">
+			                <tr>
+			                  <th data-field="projectName" style="width: 100px">项目</th>
+			                  <th data-field="createTime">创建时间</th>
+			                  <th data-field="endTime">预计结束</th>
+			                  <th data-field="leader">负责人</th>
+			                  <th data-field="status">提示</th>
+			                  <th data-field="notComplete">待完成</th>
+			                  <th data-field="complete">已完成</th>
+			                  <th data-field="duration">预计工期</th>
+			                  <th data-field="projectProgress">项目进度</th>
+			                </tr>
+		              	</thead>
+		              	<tbody>
+		              		<!-- <tr>
+		              			<td>1</td>
+		              			<td>2</td>
+		              			<td>3</td>
+		              			<td>54</td>
+		              			<td>5</td>
+		              			<td>1</td>
+		              			<td>
+		              				<div class="progress progress-sm active">
+						                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 52.566%"></div>
+						            </div>
+								</td>
+		              			<td><small class="label label-danger">2 mins</small></td>
+		              			<td><span class="badge bg-green">3</span></td>
+		              		</tr> -->
+		              	</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 显示leader全名的提示框 -->
+<div id="project_progress_statistics_floatWin" style="position:fixed;background:rgba(130,130,130,0.4);
+          							display:none;border-radius: 5px; padding:5px;
+          							color:white;">
+              
+</div>
+
+<script type="text/javascript" src="/GeneralProject/statics/js/project_progress_statistics.js" charset="UTF-8"></script>

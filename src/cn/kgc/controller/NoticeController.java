@@ -22,6 +22,11 @@ public class NoticeController {
 	@Resource
 	private ProjectNoticeService projectNoticeService;
 	
+	/**
+	 * 获取项目的公告集合
+	 * @param projectId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getProjectNotices.do",method=RequestMethod.POST)
 	public String getProjectNotices(@RequestParam int projectId) {

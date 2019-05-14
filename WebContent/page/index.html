@@ -246,23 +246,37 @@ desired effect
         
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-tv"></i> <span>任务</span>
+        	<a href="#"><i class="fa fa-line-chart"></i> <span>统计分析</span>
+	            <span class="pull-right-container">
+	                <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+          	</a>
+          	<ul class="treeview-menu">
+          		<li><a href="javascript:void(0)" id="index_projectSurvey"><i class="fa fa-bar-chart-o"></i>企业工程概况</a></li>
+          		<li><a href="javascript:void(0)" id="index_enterpriceBlockWeekly"><i class="fa fa-bar-chart-o"></i>企业任务周报</a></li>
+          		<li><a href="javascript:void(0)" id="index_projectProgressStatistics"><i class="fa fa-bar-chart-o"></i>工程进度统计</a></li>
+          		<li><a href="javascript:void(0)" id="index_memberSignStatistics"><i class="fa fa-bar-chart-o"></i>员工出勤统计</a></li>
+          	</ul>
+          	
+        </li>
+        
+        <li class="treeview">
+          <a href="#"><i class="fa fa-tasks"></i> <span>工作台</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
-              </span>
+            </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:void(0)" id="index_myProject"><i class="glyphicon glyphicon-briefcase"></i>我的项目</a></li>
-            <li><a href="javascript:void(0)" id="index_myTask"><i class="fa fa-comments"></i>我的任务</a></li>
-            <li><a href="javascript:void(0)"><i class="glyphicon glyphicon-edit"></i>统计分析</a></li>
-            <li><a href="javascript:void(0)" id="index_gante"><i class="glyphicon glyphicon-align-left"></i>甘特图</a></li>
+            <li><a href="javascript:void(0)" id="index_myProject"><i class="glyphicon glyphicon-briefcase"></i>我的工程</a></li>
+            <li><a href="javascript:void(0)" id="index_myTask"><i class="glyphicon glyphicon-list-alt"></i>我的任务</a></li>
+            <!-- <li><a href="javascript:void(0)" id="index_gante"><i class="glyphicon glyphicon-align-left"></i>甘特图</a></li> -->
           </ul>
         </li>
         
         <li><a href="javascript:void(0)" id="index_myMessage"><i class="fa fa-comments"></i> <span>消息</span></a></li>
         
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>网盘</span>
+          <a href="#"><i class="fa fa-save"></i> <span>网盘</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -273,7 +287,7 @@ desired effect
           </ul>
         </li>
         
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>日历</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -283,10 +297,10 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
             <li><a href="#">Link in level 2</a></li>
           </ul>
-        </li>
+        </li> -->
         
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>应用</span>
+          <a href="#"><i class="fa fa-legal"></i> <span>应用</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -295,26 +309,32 @@ desired effect
             <li><a href="#">审批</a></li>
             <li><a href="#">考勤</a></li>
             <li><a href="#">公告</a></li>
-            <li><a href="#">门户</a></li>
           </ul>
         </li>
         
-        <li><a href="#"><i class="fa fa-link"></i> <span>通讯录</span></a></li>
-        
-        <li><a href="#"><i class="fa fa-link"></i> <span>后台系统</span></a></li>
+        <li class="treeview">
+        	<a href="#"><i class="glyphicon glyphicon-bookmark"></i> <span>门户</span>
+	            <span class="pull-right-container">
+	                <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+          	</a>
+          	<ul class="treeview-menu">
+          		<li><a href="#"><i class="glyphicon glyphicon-th-large"></i> <span>个人门户</span></a></li>
+          		<li><a href="#"><i class="glyphicon glyphicon-th"></i> <span>企业门户</span></a></li>
+          	</ul>
+        </li>
         
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+        	<a href="#"><i class="fa fa-database"></i> <span>后台系统</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
+        	<ul class="treeview-menu">
+        		<li><a href="#"><i class="fa fa-link"></i> <span>用户管理</span></a></li>
+        		<li><a href="#"><i class="fa fa-asterisk"></i> <span>系统管理</span></a></li>
+        	</ul>
         </li>
-        
         
       </ul>
       <!-- /.sidebar-menu -->
@@ -337,49 +357,51 @@ desired effect
     </section> -->
 
     <!-- Main content -->
-    <section id="index_main_content" style="height:570px;padding:0px;" class="content">
+    <section id="index_main_content" style="padding:0px;" class="content">
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        
-        <div class="box">
-           
-            <div class="box-body no-padding">
-              <div class="row">
-                <div class="col-md-9 col-sm-8">
-                  <div class="pad">
-                    <!-- Map will be created here -->
-                    <div id="index_world-map-markers" style="height: 325px;"></div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-4">
-                  <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                      <h5 class="description-header">8390</h5>
-                      <span class="description-text">Visits</span>
-                    </div>
-                    <div class="description-block margin-bottom">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">30%</h5>
-                      <span class="description-text">Referrals</span>
-                    </div>
-                    <div class="description-block">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">70%</h5>
-                      <span class="description-text">Organic</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div id="floatWin" style="position:fixed;background:rgba(130,130,130,0.4);width:200px;
+        <div class="row" style="_height:570px;min-height: 570px;">
+        	<div class="box">
+	            <div class="box-body no-padding">
+	              <div class="row">
+	                <div class="col-md-9 col-sm-8">
+	                  <div class="pad">
+	                    <!-- Map will be created here -->
+	                    <div id="index_world-map-markers" style="height: 325px;"></div>
+	                  </div>
+	                </div>
+	                <div class="col-md-3 col-sm-4">
+	                  <div class="pad box-pane-right bg-green" style="min-height: 280px">
+	                    <div class="description-block margin-bottom">
+	                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
+	                      <h5 class="description-header">8390</h5>
+	                      <span class="description-text">Visits</span>
+	                    </div>
+	                    <div class="description-block margin-bottom">
+	                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+	                      <h5 class="description-header">30%</h5>
+	                      <span class="description-text">Referrals</span>
+	                    </div>
+	                    <div class="description-block">
+	                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
+	                      <h5 class="description-header">70%</h5>
+	                      <span class="description-text">Organic</span>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	        </div>
+	          
+            <div id="floatWin" style="position:fixed;background:rgba(130,130,130,0.4);width:200px;
           							display:none;border-radius: 5px; padding:5px;
           							color:white;">
               
-          </div>
+            </div>
+        </div>
+        
+        
         
         
     </section>
@@ -510,6 +532,8 @@ desired effect
 <!-- Morris.js charts -->
 <script src="/GeneralProject/statics/AdminLTE/raphael/raphael.min.js"></script>
 <script src="/GeneralProject/statics/AdminLTE/morris.js/morris.min.js"></script>
+<!-- ChartJS -->
+<script src="/GeneralProject/statics/AdminLTE/chart.js/Chart.js"></script>
 
 <!-- 自己写的js -->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=yEGKdZqCGsdSB4gOnjeL9mfYnZNtn8Ls"></script>

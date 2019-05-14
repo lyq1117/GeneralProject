@@ -302,6 +302,7 @@ $(function(){
 		}
 	});
 	
+	//根据开始日期和工期，获取结束日期
 	function getEndDate(createTime, duration){
 		var createTimeD = new Date(createTime);
 		var millSecondOfDay = 24*60*60*1000;//一天的毫秒数

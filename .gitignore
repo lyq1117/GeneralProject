@@ -3,3 +3,4 @@
 .project
 /bin
 /WebContent/statics/AdminLTE/moment/package-lock.json
+/build/

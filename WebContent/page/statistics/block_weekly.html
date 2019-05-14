@@ -1,0 +1,169 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/block_weekly.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<h4 style="margin-left: 15px;">
+					<i class="fa fa-bar-chart-o" style="color:#3c8dbc;"></i>
+					<span>企业任务周报</span>
+				</h4>
+			</div>
+		</div>
+		
+		<!-- 延期任务、已完成任务、新增任务 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			  <div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="block_weekly_title">
+	  	  	  	  	  	  企业任务周报
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			  </div>
+			
+			
+ 	  	  	  <div class="row" style="margin-top: 15px;">
+ 	  	  	  	  <!-- 延期任务 -->
+ 	  	  	  	  <div class="col-md-4">
+				          <!-- small box -->
+				          <div class="small-box bg-red">
+				            <div class="inner">
+				              <h3 id="block_weekly_delayBlocksCount">0</h3>
+				
+				              <p>延期任务</p>
+				            </div>
+				            <div class="icon">
+				              <i class="fa fa-clock-o"></i>
+				            </div>
+				            <span class="small-box-footer" style="height:20px;"></span>
+				          </div>
+ 	  	  	  	  </div>
+ 	  	  	  	  
+ 	  	  	  	  <!-- 已完成任务 -->
+ 	  	  	  	  <div class="col-md-4">
+			          <!-- small box -->
+			          <div class="small-box bg-green">
+			            <div class="inner">
+			              <h3 id="block_weekly_completeBlocksCount">0</h3>
+			
+			              <p>完成任务</p>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-check-square-o"></i>
+			            </div>
+			            <span class="small-box-footer" style="height:20px;"></span>
+			          </div>
+			      </div>
+			      
+			      <!-- 新增任务 -->
+			      <div class="col-md-4">
+			          <!-- small box -->
+			          <div class="small-box bg-yellow">
+			            <div class="inner">
+			              <h3 id="block_weekly_newBlocksCount">0</h3>
+			
+			              <p>新增任务</p>
+			            </div>
+			            <div class="icon">
+			              <i class="fa fa-plus-circle"></i>
+			            </div>
+			            <span class="small-box-footer" style="height:20px;"></span>
+			          </div>
+			      </div>
+ 	  	  	  	  
+ 	  	  	  </div>
+			
+							
+		</div>
+		
+		<!-- 企业新增任务列表 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="block_weekly_title">
+	  	  	  	  	  	  新增任务列表
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			
+			<div class="row" style="margin-top: 15px;padding:15px;">
+	  	  	  	  <ul class="todo-list" id="block_weekly_newToDoList">
+	  	  	  	  	  <!--  <li>
+	                  <span class="handle">
+	                        <i class="fa fa-rocket"></i>
+	                  </span>
+	                  <span class="text">Design a nice theme</span>
+	                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+	              </li>  -->
+	  	  	  	  </ul>
+	  	  	</div>
+		</div>
+		
+		<!-- 延期任务列表 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="block_weekly_title">
+	  	  	  	  	  	  延期任务列表
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			
+			<div class="row" style="margin-top: 15px;padding:15px;">
+	  	  	  	  <ul class="todo-list" id="block_weekly_delayToDoList">
+	  	  	  	  	  <!--  <li>
+	                  <span class="handle">
+	                        <i class="fa fa-rocket"></i>
+	                  </span>
+	                  <span class="text">Design a nice theme</span>
+	                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+	              </li>  -->
+	  	  	  	  </ul>
+	  	  	</div>
+		</div>
+		
+		<!-- 完成任务列表 -->
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="block_weekly_title">
+	  	  	  	  	  	  完成任务列表
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			
+			<div class="row" style="margin-top: 15px;padding:15px;">
+	  	  	  	  <ul class="todo-list" id="block_weekly_completeToDoList">
+	  	  	  	  	  <!--  <li>
+	                  <span class="handle">
+	                        <i class="fa fa-rocket"></i>
+	                  </span>
+	                  <span class="text">Design a nice theme</span>
+	                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+	              </li>  -->
+	  	  	  	  </ul>
+	  	  	</div>
+		</div>
+	
+	
+	</div>
+</div>
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/block_weekly.js"></script>

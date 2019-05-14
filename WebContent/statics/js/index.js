@@ -28,14 +28,36 @@ $(document).ready(function(){
 	$("#index_myProject").bind("click",function(){
 		$("#index_main_content").load("/GeneralProject/page/task/my_project.html");
 		$("#index_main_content").css('padding','0px');
-		//$('#index_header_tip').html('<i class="fa fa-suitcase"></i>&nbsp;我的项目');
-		//$('#index_main_header').hide();
 	});
 	
-	//记载消息界面
+	//加载消息界面
 	$('#index_myMessage').bind('click', function(){
 		$("#index_main_content").load("/GeneralProject/page/message/my_message.html");
 		$("#index_main_content").css('padding','');
+	});
+	
+	//加载企业工程概况
+	$('#index_projectSurvey').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/statistics/project_survey.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载企业任务周报
+	$('#index_enterpriceBlockWeekly').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/statistics/block_weekly.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载工程进度统计
+	$('#index_projectProgressStatistics').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/statistics/project_progress_statistics.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载员工出勤统计
+	$('#index_memberSignStatistics').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/statistics/member_sign_statistics.html");
+		$("#index_main_content").css('padding','0px');
 	});
 	
 	

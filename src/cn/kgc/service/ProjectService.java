@@ -1,6 +1,8 @@
 package cn.kgc.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cn.kgc.pojo.Project;
 import cn.kgc.pojo.User;
@@ -53,5 +55,24 @@ public interface ProjectService {
 	 * @return
 	 */
 	public List<Project> getAllProjects();
+	
+	/**
+	 * 获取企业工程概况(包括 待完成工程、延期工程、已完成工程)
+	 * @return
+	 */
+	public Map<String, List<Project>> getProjectStatisticsSurvey();
+	
+	/**
+	 * 获取本周企业每日新增工程和完成工程
+	 * @param mondayDate
+	 * @return
+	 */
+	public List<Map<String, String>> getEnterpriseNewAndCompleteProject(Date mondayDate);
+	
+	/**
+	 * 获取企业工程进度统计表格的数据
+	 * @return
+	 */
+	public List<Map<String, String>> getProjectProgressStatistics();
 
 }

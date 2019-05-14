@@ -1,0 +1,102 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/member_sign_statistics.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		
+		<!-- 头部 -->
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<h4 style="margin-left: 15px;">
+					<i class="fa fa-bar-chart-o" style="color:#3c8dbc;"></i>
+					<span>成员出勤统计</span>
+				</h4>
+			</div>
+		</div>
+		
+		<div class="row" style="padding:0px 15px;">
+			<div class="col-md-5">
+				<div class="row" style="width:100%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;">
+					<div class="row">
+						<div class="col-md-12">
+			  	  	  	  	  <span class="member_sign_statistics_title">
+			  	  	  	  	  	  员工出勤次数统计
+			  	  	  	  	  </span>
+			  	  	  	</div>
+					</div>
+					
+					<div class="row" style="margin-top: 15px;">
+						<div class="col-md-12">
+							<table id="member_sign_statistics_table"  data-toggle="table" class="table"
+								style="border:solid 1px rgb(230,230,230);">
+								<thead style="background:#d2d6de;">
+									<tr>
+										<th data-field="name">员工</th>
+										<th data-field="weekCount">周签到次数</th>
+										<th data-field="monthCount">月签到次数</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="col-md-7">
+				<div class="row" style="width:100%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;">
+							
+					<div class="row">
+						<div class="col-md-12">
+			  	  	  	  	  <span class="member_sign_statistics_title">
+			  	  	  	  	  	  周出勤人数和缺勤人数统计
+			  	  	  	  	  </span>
+			  	  	  	</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-8">
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-2">
+									<div style="width:15px;height:15px;background:#00a65a"></div>
+								</div>
+								<div class="col-md-10">
+									出勤人数
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<div style="width:15px;height:15px;background:rgba(210, 214, 222, 1)"></div>
+								</div>
+								<div class="col-md-10">
+									缺勤人数
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row" style="margin-top: 15px;">
+						<div class="col-md-12">
+							<div class="chart">
+				                <canvas id="barChart" style="height:230px"></canvas>
+				            </div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<script type="text/javascript" src="/GeneralProject/statics/js/member_sign_statistics.js" charset="UTF-8"></script>

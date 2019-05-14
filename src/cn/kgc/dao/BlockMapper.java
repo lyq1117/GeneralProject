@@ -55,5 +55,11 @@ public interface BlockMapper {
 	 * @return
 	 */
 	public int getIncrement();
+	
+	/**
+	 * 获取所有任务
+	 * @return
+	 */
+	public List<Block> getAll();
 
 }
