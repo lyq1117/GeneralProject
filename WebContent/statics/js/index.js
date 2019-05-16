@@ -21,7 +21,6 @@ $(document).ready(function(){
 	$("#index_gante").bind("click",function(){
 		$("#index_main_content").load("task/my_gante.html");
 		$("#index_main_content").css('padding','0px');
-		$('#index_header_tip').text('甘特图');
 	});
 	
 	//加载项目界面
@@ -57,6 +56,18 @@ $(document).ready(function(){
 	//加载员工出勤统计
 	$('#index_memberSignStatistics').bind('click', function(){
 		$("#index_main_content").load("/GeneralProject/page/statistics/member_sign_statistics.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载企业网盘
+	$('#index_enterpriseDisk').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/disk/enterprise_disk.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载个人网盘
+	$('#index_personalDisk').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/disk/personal_disk.html");
 		$("#index_main_content").css('padding','0px');
 	});
 	

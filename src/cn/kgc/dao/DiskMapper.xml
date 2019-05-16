@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.DiskMapper">
+    
+    <resultMap type="Disk" id="diskMap">
+        <id property="id" column="diid"/>
+        <result property="path" column="dipath"/>
+        <result property="name" column="diname"/>
+        <result property="size" column="disize"/>
+        <result property="uploadDate" column="diuploadDate"/>
+        <association property="user" javaType="User"><!-- 上传人 -->
+            <id property="username" column="uusername"/>
+            <result property="pwd" column="upwd"/>
+            <result property="name" column="uname"/>
+            <result property="icon" column="uicon"/>
+            <result property="tel" column="utel"/>
+            <result property="status" column="ustatus"/>
+            <association property="dept" javaType="Dept"><!-- 上传人所属部门 -->
+                <id property="id" column="deid"/>
+                <result property="name" column="dename"/>
+                <result property="leader_id" column="deleaderId"/>
+                <result property="location" column="delocation"/>
+                <result property="status" column="destatus"/>
+            </association>
+        </association>
+    </resultMap>
+    
+    <select id="getByPath" parameterType="String" resultMap="diskMap">
+        SELECT di.id diid,di.path dipath, di.name diname, di.size disize, u.username uusername,
+        	   u.pwd upwd, u.name uname, u.icon uicon, u.tel utel, u.status ustatus,
+        	   de.id deid, de.name dename, de.leader_id deleaderId, de.location delocation,
+        	   de.status destatus, di.upload_date diuploadDate
+        FROM disk di, user u, dept de
+        WHERE di.user_id = u.username
+        AND de.id = u.dept_id
+        AND di.path = #{path}
+    </select>
+    
+    <select id="getById" parameterType="int" resultMap="diskMap">
+        SELECT di.id diid,di.path dipath, di.name diname, di.size disize, u.username uusername,
+        	   u.pwd upwd, u.name uname, u.icon uicon, u.tel utel, u.status ustatus,
+        	   de.id deid, de.name dename, de.leader_id deleaderId, de.location delocation,
+        	   de.status destatus, di.upload_date diuploadDate
+        FROM disk di, user u, dept de
+        WHERE di.user_id = u.username
+        AND de.id = u.dept_id
+        AND di.id = #{id}
+    </select>
+    
+    <insert id="add" parameterType="Disk">
+        INSERT INTO disk(path,
+        				 name,
+        				 size,
+        				 user_id,
+        				 upload_date)
+        VALUES(#{path},
+        	   #{name},
+        	   #{size},
+        	   #{user.username},
+        	   #{uploadDate})
+    </insert>
+    
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM disk
+        WHERE id = #{id}
+    </delete>
+    
+    <delete id="deleteByPath" parameterType="String">
+        DELETE FROM disk
+        WHERE path = #{path}
+    </delete>
+    
+</mapper>

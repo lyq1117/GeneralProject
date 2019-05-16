@@ -1,0 +1,69 @@
+<meta charset="UTF-8">
+<style>
+#personal_disk_table{
+	border:none;
+}
+#personal_disk_table>thead>tr>th{
+	border:none;
+}
+#personal_disk_table>tbody>tr>td{
+	border:none;
+} 
+#personal_disk_table>tbody>tr{
+	border-bottom:solid 1px rgb(232,232,232);
+}
+</style>
+<div class="row" style="_height:570px;min-height: 570px;">
+	
+	<div class="col-md-12">
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-8" style="margin-left: 15px;">
+						<h4 >
+							<i class="fa fa-suitcase" style="color:#3c8dbc;"></i>
+							<span style="color:rgb(120,120,120)" id="personal_disk_breadcrumb">个人网盘</span>
+						</h4>
+					</div>
+					<div class="col-md-3" style="margin-top:7px;">
+						<div class="col-md-6"></div>
+						<div class="col-md-6">
+							<form method="POST" id="personal_disk_uploadForm" enctype="multipart/form-data">
+								<input type="hidden" name="hidePath" id="personal_disk_hidePath"/>
+								<input id="personal_disk_uploadBtn1" name="files" type="file" style="display:none;"/>
+								<button type="button" id="personal_disk_uploadBtn2" class="btn btn-block btn-primary btn-sm">上传文件</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-1">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" style="width:97%; 
+							_height: 500px;
+							min-height: 500px;
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+			<div class="col-md-12">
+				<table class="table" id="personal_disk_table" style="color: rgb(120,120,120); width: 100%;">
+					<thead>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+							
+		</div>
+		
+		
+	</div>
+	
+
+</div>
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/personal_disk.js"></script>
