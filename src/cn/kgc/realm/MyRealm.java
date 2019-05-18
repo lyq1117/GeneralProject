@@ -11,8 +11,10 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.junit.Test;
 
 import cn.kgc.pojo.User;
+import cn.kgc.service.ProjectService;
 import cn.kgc.service.UserService;
 import cn.kgc.service.UserServiceImpl;
 import sun.security.krb5.RealmException;
@@ -21,6 +23,8 @@ public class MyRealm extends AuthorizingRealm{
 
 	@Resource
 	private UserService userService;
+	@Resource
+	private ProjectService projectService;
 	
 	//授权
 	@Override
@@ -36,7 +40,6 @@ public class MyRealm extends AuthorizingRealm{
 		System.out.println("认证++++++");
 		UsernamePasswordToken uToken = (UsernamePasswordToken) token;
 		User user = new User();
-		System.out.println("......" + uToken.getUsername());
 		try {
 			user = userService.getUserByUsername(uToken.getUsername());
 		} catch (Exception e) {

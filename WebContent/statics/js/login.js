@@ -9,8 +9,9 @@ $(function(){
 			success:function(result){
 				if(result.result=="true")
 					window.location.href="/GeneralProject/page/index.html";
-				else
+				else{
 					alert("用户名或密码错误");
+				}
 			}
 		});
 	});

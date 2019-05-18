@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<approvals>
+    <approval name="招聘审批">
+        <item>招聘职位</item>
+        <item>招聘人数</item>
+        <item>工资标准</item>
+        <item>职责要求</item>
+        <item>到岗日期</item>
+    </approval>
+    <approval name="辞职审批">
+        <item>申请人</item>
+        <item>辞职原因</item>
+        <item>辞职时间</item>
+    </approval>
+</approvals>

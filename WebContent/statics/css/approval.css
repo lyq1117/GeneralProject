@@ -1,0 +1,29 @@
+.approval-left-bar-item{
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	color:rgb(130,130,130);
+}
+.approval-left-bar-item:hover{
+	box-shadow:0px 0px  10px 2px #e6e6e6;
+	cursor: pointer;
+}
+.approval-left-bar-item-active{
+	background:#deeefe;
+	color:#3c8dbc;
+	border-right:solid 3px rgb(102,121,255);
+	box-shadow:0px 0px  10px 2px #e6e6e6;
+}
+.approval_title{
+	border-left: solid #3c8dbc;
+    padding-left: 10px;
+    color: rgb(120,120,120);
+}
+.approval-modal{
+	padding: 15px 25px;
+	color: rgb(130,130,130);
+}
+.approval-modal:hover{
+	box-shadow:0px 0px  10px 5px #aaa;
+	cursor: pointer;
+}

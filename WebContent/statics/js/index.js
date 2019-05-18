@@ -71,6 +71,18 @@ $(document).ready(function(){
 		$("#index_main_content").css('padding','0px');
 	});
 	
+	//加载审批页面
+	$('#index_approval').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/application/approval.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载公告页面
+	$('#index_notice').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/application/notice.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
 	
 	//发送ajax获取公司所有项目
 	$.ajax({

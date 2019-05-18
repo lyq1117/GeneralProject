@@ -1,0 +1,13 @@
+.notice_tab_bar{
+	color: rgb(120,120,120);
+}
+.notice_tab_bar:hover{
+	cursor: pointer;
+}
+.notice_tab_bar_active{
+	font-weight: bold;
+	color: #3c8dbc;
+}
+table th{
+	color: rgb(120,120,120);
+}

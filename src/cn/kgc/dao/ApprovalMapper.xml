@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.ApprovalMapper">
+    
+    <insert id="add" parameterType="Approval">
+        INSERT INTO approval(id, 
+        					 type,
+        					 title,
+        					 content,
+        					 submit_user_id,
+        					 submit_date,
+        					 approval_user_id,
+        					 status)
+        VALUES(#{id},
+        	   #{type},
+        	   #{title},
+        	   #{content},
+        	   #{submitUserId},
+        	   #{submitDate},
+        	   #{approvalUserId},
+        	   #{status})
+    </insert>
+    
+    <select id="getByApprovalUserId" parameterType="String" resultType="Approval">
+        SELECT a.id id, a.type type, a.title title, a.content content, a.submit_user_id
+        	   submitUserId, a.submit_date submitDate, a.approval_user_id approvalUserId,
+        	   a.approval_date approvalDate, a.status status
+        FROM approval a
+        WHERE a.approval_user_id = #{approvalUserId}
+    </select>
+    
+    <select id="getById" parameterType="String" resultType="Approval">
+        SELECT a.id id, a.type type, a.title title, a.content content, a.submit_user_id
+        	   submitUserId, a.submit_date submitDate, a.approval_user_id approvalUserId,
+        	   a.approval_date approvalDate, a.status status
+        FROM approval a
+        WHERE a.id = #{approvalId}
+    </select>
+    
+    <update id="updateStatus">
+        UPDATE approval
+        SET approval_date = #{1}, status = #{2}
+        WHERE id = #{0}
+    </update>
+    
+    <select id="getBySubmitUserId" parameterType="String" resultType="Approval">
+        SELECT a.id id, a.type type, a.title title, a.content content, a.submit_user_id
+        	   submitUserId, a.submit_date submitDate, a.approval_user_id approvalUserId,
+        	   a.approval_date approvalDate, a.status status
+        FROM approval a
+        WHERE a.submit_user_id = #{submitUserId}
+    </select>
+    
+</mapper>

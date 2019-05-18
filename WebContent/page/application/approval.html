@@ -1,0 +1,405 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/approval.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" style="margin-left: 15px; margin-top: 5px;">
+						<h4>
+							<i class="fa fa-edit" style="color:#3c8dbc;"></i>
+							<span>审批</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<!-- 发起审批、我申请的、我审批的 -->
+			<div class="col-md-3" style="background:white; 
+								  height:570px;
+								  border-right: solid 2px rgb(210,210,210)">
+				<div class="row approval-left-bar-item approval-left-bar-item-active" target="#approval_fqspPanel">发起审批</div>
+				<div class="row approval-left-bar-item" target="#approval_wsqdPanel">我申请的</div>
+				<div class="row approval-left-bar-item" target="#approval_wspdPanel" style="border-bottom: solid 1px rgb(245,245,245)">我审批的</div>
+			</div>
+			
+			<!-- 右边切换不同面板 -->
+			<div class="col-md-9" style="height:570px;
+										 overflow-y: scroll;">
+				
+				<!-- 发起审批面板 -->
+				<div class="row" id="approval_fqspPanel">
+					<div class="col-md-12">
+						<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="approval_title">
+					  	  	  	  	  	  人事审批
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="padding:40px;" id="approval_renshiModals">
+								<!-- <div class="col-md-3 approval-modal">
+									<img src="/GeneralProject/statics/image/approval/renshi.png">
+									<a href="javascript:void(0)">招聘审批</a>
+								</div> -->
+							</div>
+							
+						</div>
+						
+						<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="approval_title">
+					  	  	  	  	  	  财务审批
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="padding:40px;" id="approval_caiwuModals">
+								<!-- <div class="col-md-3 approval-modal">
+									<img src="/GeneralProject/statics/image/approval/chaiwu.png">
+									报销审批
+								</div> -->
+							</div>
+							
+						</div>
+						
+						<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="approval_title">
+					  	  	  	  	  	  行政审批
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="padding:40px;" id="approval_xingzhengModals">
+								<!-- <div class="col-md-3 approval-modal">
+									<img src="/GeneralProject/statics/image/approval/xingzheng.png">
+									物品领用
+								</div> -->
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<!-- 我申请的面板 -->
+				<div class="row" style="display:none;height:570px;overflow-y: scroll;" id="approval_wsqdPanel">
+					<div class="col-md-12">
+						<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="approval_title">
+					  	  	  	  	  	  我申请的
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="padding: 15px;">
+								<table class="table" id="approval_wsqdPanel_table" style="color:rgb(120,120,120);">
+									<!-- <thead>
+										<tr>
+											<th>审批编号</th>
+											<th>类型</th>
+											<th>申请人</th>
+											<th>申请事件</th>
+											<th>状态</th>
+										</tr>
+									</thead> -->
+								</table>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+				<!-- 我审批的面板 -->
+				<div class="row" style="display:none;height:570px;overflow-y: scroll;" id="approval_wspdPanel">
+					<div class="col-md-12">
+						<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+							
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="approval_title">
+					  	  	  	  	  	  我审批的
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="padding: 15px;">
+								<table class="table" id="approval_wspdPanel_table" style="color:rgb(120,120,120);">
+									<!-- <thead>
+										<tr>
+											<th>审批编号</th>
+											<th>类型</th>
+											<th>申请人</th>
+											<th>申请事件</th>
+											<th>状态</th>
+										</tr>
+									</thead> -->
+								</table>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<!-- 填写审批内容窗口 -->
+<div class="modal modal-default fade" id="approval_modal">
+  <div class="modal-dialog" style="width:50%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" id="approval_modal_title">审批标题</h5>
+        <input type="hidden" id="approval_modal_modalType"/>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%;" id="approval_modal_body">
+	      	  <!-- <div class="form-group">
+	             <label for="inputEmail3" class="col-sm-2 control-label">招聘职位</label>
+	
+	             <div class="col-sm-10">
+	               <input type="text" class="form-control" placeholder="招聘职位">
+	             </div>
+	          </div> -->
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	<button type="button" id="approval_mocal_confirmBtn" class="btn btn-default pull-right" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- 查看我审批的内容的窗口 -->
+<div class="modal modal-default fade" id="approval_detailModal_wspd">
+  <div class="modal-dialog" style="width:65%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="approval_detailModal_wspd_title">审批标题</h5>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-2" style="height:30px;line-height: 30px; text-align: right:">
+		      	  	<i class="fa fa-clock-o" style="font-size: 18px;"></i>
+	      	  		当前状态
+	      	  	</div>
+	      	  	<div class="col-md-6">
+	      	  		<img id="approval_detailModal_wspd_markPic" src="/GeneralProject/statics/image/approval/dsp.png"/>
+	      	  	</div>
+	      	  	<div class="col-md-2">
+	      	  		<button type="button" id="approval_detailModal_wspd_confirmBtn" class="btn btn-block btn-success">同意</button>
+	      	  	</div>
+	      	  	<div class="col-md-2">
+	      	  		<button type="button" id="approval_detailModal_wspd_rejectBtn" class="btn btn-block btn-danger">拒绝</button>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top: 25px;">
+	      	  	<div class="col-md-3">
+	      	  		<i class="fa fa-user" style="font-size: 18px;"></i>
+	      	  		申请人
+	      	  	</div>
+	      	  	<div class="col-md-9" style="text-align: right;">
+	      	  		审批编号:<span id="approval_detailModal_wspd_id">1561548948948</span>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top:10px;">
+	      	  	<div class="col-md-12">
+	      	  		<table class="table" style="text-align: center">
+	      	  			<thead style="background:rgb(225,225,225);">
+	      	  				<tr>
+		      	  				<th style="text-align: center;">用户名</th>
+		      	  				<th style="text-align: center;">姓名</th>
+		      	  				<th style="text-align: center;">部门</th>
+		      	  				<th style="text-align: center;">申请时间</th>
+	      	  				</tr>
+	      	  			</thead>
+	      	  			<tbody>
+	      	  				<tr>
+	      	  					<td id="approval_detailModal_wspd_submitUserId">1</td>
+	      	  					<td id="approval_detailModal_wspd_submitUserName">2</td>
+	      	  					<td id="approval_detailModal_wspd_submitUserDeptName">3</td>
+	      	  					<td id="approval_detailModal_wspd_submitDate">4</td>
+	      	  				</tr>
+	      	  			</tbody>
+	      	  		</table>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top:10px;">
+	      	  	<div class="col-md-12">
+	      	  		<i class="fa fa-book"></i>
+	      	  		审批详情
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-12">
+	      	  		<table class="table">
+	      	  			<tr>
+	      	  				<td style="background:rgb(225,225,225);
+	      	  						   text-align: center;">
+	      	  						   审批内容
+	      	  				</td>
+	      	  				<td style="text-align: left;" id="approval_detailModal_wspd_content">dfjieowajgepoiajgiopwe</td>
+	      	  			</tr>
+	      	  		</table>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- 查看我申请的审批的内容 -->
+<div class="modal modal-default fade" id="approval_detailModal_wsqd">
+  <div class="modal-dialog" style="width:65%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="approval_detailModal_wsqd_title">审批标题</h5>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-2" style="height:30px;line-height: 30px; text-align: right:">
+		      	  	<i class="fa fa-clock-o" style="font-size: 18px;"></i>
+	      	  		当前状态
+	      	  	</div>
+	      	  	<div class="col-md-6">
+	      	  		<img id="approval_detailModal_wsqd_markPic" src="/GeneralProject/statics/image/approval/dsp.png"/>
+	      	  	</div>
+	      	  	<div class="col-md-2">
+	      	  	</div>
+	      	  	<div class="col-md-2">
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top: 25px;">
+	      	  	<div class="col-md-3">
+	      	  		<i class="fa fa-user" style="font-size: 18px;"></i>
+	      	  		申请人
+	      	  	</div>
+	      	  	<div class="col-md-9" style="text-align: right;">
+	      	  		审批编号:<span id="approval_detailModal_wsqd_id">1561548948948</span>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top:10px;">
+	      	  	<div class="col-md-12">
+	      	  		<table class="table" style="text-align: center">
+	      	  			<thead style="background:rgb(225,225,225);">
+	      	  				<tr>
+		      	  				<th style="text-align: center;">用户名</th>
+		      	  				<th style="text-align: center;">姓名</th>
+		      	  				<th style="text-align: center;">部门</th>
+		      	  				<th style="text-align: center;">申请时间</th>
+	      	  				</tr>
+	      	  			</thead>
+	      	  			<tbody>
+	      	  				<tr>
+	      	  					<td id="approval_detailModal_wsqd_submitUserId">1</td>
+	      	  					<td id="approval_detailModal_wsqd_submitUserName">2</td>
+	      	  					<td id="approval_detailModal_wsqd_submitUserDeptName">3</td>
+	      	  					<td id="approval_detailModal_wsqd_submitDate">4</td>
+	      	  				</tr>
+	      	  			</tbody>
+	      	  		</table>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top: 10px;">
+	      	  	<div class="col-md-12">
+	      	  		<i class="fa fa-book"></i>
+	      	  		审批详情
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top: 10px;">
+	      	  	<div class="col-md-12">
+	      	  		<table class="table">
+	      	  			<tr>
+	      	  				<td style="background:rgb(225,225,225);
+	      	  						   text-align: center;">
+	      	  						   审批内容
+	      	  				</td>
+	      	  				<td style="text-align: left;" id="approval_detailModal_wsqd_content">dfjieowajgepoiajgiopwe</td>
+	      	  			</tr>
+	      	  		</table>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/approval.js"></script>

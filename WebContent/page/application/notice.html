@@ -1,0 +1,213 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/notice.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12" style="margin-left: 15px; margin-top: 5px;">
+						<h4>
+							<i class="fa fa-bullhorn" style="color:#3c8dbc;"></i>
+							<span>企业公告</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="row">
+					<div class="col-md-12" style="margin-top:5px;">
+						<button type="submit" class="btn btn-primary" id="notice_submitBtn">
+							发布公告
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="row" style="background:white;
+										width:97%;
+										_height:500px;
+										min-height:500px;
+										margin: 15px auto;
+										padding:15px;
+										border-radius: 3px;">
+					<div class="row">
+						<!-- 根据标题搜索框 -->
+						<div class="col-md-6">
+			  	  	  	  	  <div class="input-group input-group-sm" style="width: 150px;">
+				                  <input type="text" name="table_search" class="form-control" placeholder="输入标题搜索">
+				
+				                  <div class="input-group-btn">
+				                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+				                  </div>
+				              </div>
+			  	  	  	</div>
+			  	  	  	
+			  	  	  	<div class="col-md-6" style="text-align: right;">
+			  	  	  		<span class="notice_tab_bar notice_tab_bar_active" target="#notice_allNoticePanel">全部公告</span>
+			  	  	  		&nbsp;&nbsp;&nbsp;
+			  	  	  		<span class="notice_tab_bar" target="#notice_myNoticePanel">我发布的</span>
+			  	  	  	</div>
+					</div>
+					
+					<!-- 表格面板 有两个面板：全部公告、我发送的 -->
+					<div class="row" style="margin-top: 15px;">
+						
+						<div class="col-md-12">
+							<!-- 全部公告表格 -->
+							<div class="row" id="notice_allNoticePanel" style="padding: 15px;">
+								<table class="table" id="notice_allNoticeTable">
+									<!-- <thead>
+										<tr>
+											<th>标题</th>
+											<th>发布人</th>
+											<th>发布时间</th>
+											<th>状态</th>
+										</tr>
+									</thead> -->
+								</table>
+							</div>
+							<!-- 我发布的公告表格 -->
+							<div class="row" id="notice_myNoticePanel" style="padding: 15px;
+																			display:none;">
+								<table class="table" id="notice_myNoticeTable">
+									<!-- <thead>
+										<tr>
+											<th>标题2</th>
+											<th>发布人2</th>
+											<th>发布时间2</th>
+											<th>状态2</th>
+										</tr>
+									</thead> -->
+								</table>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+
+<!-- 发布公告的模态窗口-->
+<div class="modal modal-default fade" id="notice_submit_modalWin">
+  <div class="modal-dialog" style="width:65%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">发布公告</h5>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="">
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-6">
+	      	  		<div class="form-group">
+		                  <label for="inputEmail3" class="col-sm-4 control-label">公告标题</label>
+		
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" id="notice_submit_modalWin_title" placeholder="公告标题">
+		                  </div>
+	                </div>
+	      	  	</div>
+	      	  </div>
+	      	  <!-- 文本编辑框 -->
+	      	  <div class="row" style="margin-top: 5px;">
+	      	  	<div class="col-md-12">
+	      	  		<form>
+		                <textarea id="notice_submit_modalWin_textArea" rows="10" cols="80">
+                    	</textarea>
+		            </form>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top:10px;">
+	      	  	<div class="col-md-2" style="text-align: right;">
+	      	  		状态：
+	      	  	</div>
+	      	  	<div class="col-md-10">
+	      	  		<input type="radio" name="notice_submit_modalWin_status" id="" value="1" checked>紧急
+	      	  		&nbsp;&nbsp;
+	      	  		<input type="radio" name="notice_submit_modalWin_status" id="" value="2">一般
+	      	  	</div>
+	      	  </div>
+	      	  
+	      </div>
+      </form>
+      <div class="modal-footer">
+	      	<button type="submit" class="btn btn-primary" id="notice_submit_modalWin_submitBtn">
+				发布
+			</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- 查看公告的模态窗口-->
+<div class="modal modal-default fade" id="notice_look_modalWin">
+  <div class="modal-dialog" style="width:65%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">发布公告</h5>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="">
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-6">
+	      	  		<div class="form-group">
+		                  <label for="inputEmail3" class="col-sm-4 control-label">公告标题</label>
+		
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" id="notice_look_modalWin_title" placeholder="公告标题">
+		                  </div>
+	                </div>
+	      	  	</div>
+	      	  </div>
+	      	  <!-- 文本编辑框 -->
+	      	  <div class="row" style="margin-top: 5px;">
+	      	  	<div class="col-md-12">
+	      	  		<form>
+		                <textarea id="notice_look_modalWin_textArea" rows="10" cols="80">
+                    	</textarea>
+		            </form>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row" style="margin-top:10px;">
+	      	  	<div class="col-md-2" style="text-align: right;">
+	      	  		状态：
+	      	  	</div>
+	      	  	<div class="col-md-10">
+	      	  		<small id="notice_look_modalWin_jinji" class="label label-danger">紧急</small>
+	      	  		<small id="notice_look_modalWin_yiban" class="label label-warning">一般</small>
+	      	  	</div>
+	      	  </div>
+	      	  
+	      </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/notice.js"></script>

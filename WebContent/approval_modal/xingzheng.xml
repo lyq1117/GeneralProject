@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<approvals>
+    <approval name="物品领用">
+        <item>物品名称</item>
+        <item>领取时间</item>
+        <item>领取人</item>
+    </approval>
+</approvals>

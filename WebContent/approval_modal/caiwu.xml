@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<approvals>
+    <approval name="报销">
+        <item>报销项目</item>
+        <item>报销详情</item>
+        <item>报销金额</item>
+        <item>报销时间</item>
+    </approval>
+</approvals>

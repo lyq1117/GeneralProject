@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.NoticeMapper">
+    
+    <select id="getAll" resultType="Notice">
+        SELECT id id, title title, content content, submit_date submitDate,
+        	   submit_user_id submitUserId, status status
+        FROM notice
+    </select>
+    
+    <insert id="add" parameterType="Notice">
+        INSERT INTO notice(title,
+        				   content,
+        				   submit_date,
+        				   submit_user_id,
+        				   status)
+        VALUES(#{title},
+        	   #{content},
+        	   #{submitDate},
+        	   #{submitUserId},
+        	   #{status})
+    </insert>
+    
+    <select id="getById" parameterType="int" resultType="Notice">
+        SELECT id id, title title, content content, submit_date submitDate,
+        	   submit_user_id submitUserId, status status
+        FROM notice
+        WHERE id = #{id}
+    </select>
+    
+    <select id="getBySubmitUserId" parameterType="String" resultType="Notice">
+        SELECT id id, title title, content content, submit_date submitDate,
+        	   submit_user_id submitUserId, status status
+        FROM notice
+        WHERE submit_user_id = #{submitUserId}
+    </select>
+        
+</mapper>
