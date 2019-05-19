@@ -1,0 +1,232 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/personal_door.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+		
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" style="margin-left: 15px; margin-top: 5px;">
+						<h4>
+							<i class="glyphicon glyphicon-th-large" style="color:#3c8dbc;"></i>
+							<span>个人门户</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 1 -->
+		<div class="row" style="width:100%;
+								margin: 15px auto;">
+			<div class="col-md-6">
+				<div class="row" style="width: 100%; 
+										background:white;
+										margin: 0 auto;
+										padding:15px;">
+										
+					<div class="row">
+						<div class="col-md-12">
+			  	  	  	  	  <span class="personal_door_title">
+			  	  	  	  	  	  成员名片
+			  	  	  	  	  </span>
+			  	  	  	</div>
+					</div>
+					
+					<div class="row" style="height: 200px;
+											padding: 15px;">
+						<!-- 成员头像 -->
+						<div class="col-md-5" style="border-right: solid 1px rgb(216,216,216);">
+							<div class="row" style="text-align: center;">
+								<img id="personal_door_icon" width="100" height="100"
+									 src="" 
+									 class="img-circle" alt="User Image">
+							</div>
+							<div class="row" id="personal_door_name" 
+											style="text-align: center;
+													font-size: 18px;
+													font-weight: bold;
+													margin-top:15px;">
+								易建联
+							</div>
+							<div class="row" id="personal_door_username"
+										 style="text-align: center;
+													font-size: 14px;
+													color: rgb(194,194,194);
+													margin-top:15px;">
+								Yi1985
+							</div>
+						</div>
+						<!-- 成员详细信息 -->
+						<div class="col-md-7" style="padding:15px;">
+							<div class="row" style="margin-top:10px;">
+								<div class="col-md-4" style="text-align: center;">
+									部门
+								</div>
+								<div class="col-md-4" id="personal_door_deptName">
+									实施部
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+							<div class="row" style="margin-top:10px;">
+								<div class="col-md-4" style="text-align: center;">
+									电话
+								</div>
+								<div class="col-md-4" id="personal_door_tel">
+									15648948989
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row" style="width: 100%;
+										background:white;
+										margin: 0 auto;
+										padding:15px;">
+					<div class="row">
+						<div class="col-md-12">
+			  	  	  	  	  <span class="personal_door_title">
+			  	  	  	  	  	  我的审批
+			  	  	  	  	  </span>
+			  	  	  	</div>
+					</div>
+					
+					<div class="row" style="height: 200px;
+											padding: 15px;">
+						<table id="personal_door_myApprovalsTable" class="table">
+							<!-- <thead>
+								<th>审批编号</th>
+								<th>标题</th>
+								<th>状态</th>
+							</thead> -->
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- 1 -->
+		
+		<!-- 2 -->
+		<div class="row" style="width:100%;
+								margin: 15px auto;">
+			<div class="col-md-6">
+				<div class="row">
+				
+					<div class="col-md-6">
+						<div class="row" style="width: 100%;
+												background:white;
+												margin: 0 auto;
+												padding:15px;">
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="personal_door_title">
+					  	  	  	  	  	  我的待办
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="height: 200px;
+													padding: 15px;">
+								<div class="row personal_door_hoverCursor"
+										id="personal_door_waitMeApproval" style="padding:10px;
+														width:95%;
+														margin: 0 auto;
+														border-bottom: solid 1px rgb(235,235,235)">
+									<div class="col-md-6">
+										<i class="fa fa-edit" style="color:#00a65a;"></i> 审批
+									</div>
+									<div class="col-md-6" style="color:rgb(194,194,194);">
+										待我审批
+									</div>
+									
+								</div>
+								
+								<div class="row personal_door_hoverCursor"
+											id="personal_door_waitMeSign" style="padding:10px;
+														width:95%;
+														margin: 0 auto;
+														border-bottom: solid 1px rgb(235,235,235)">
+									<div class="col-md-6">
+										<i class="fa fa-thumb-tack" 
+												style="color:#ff851b;"></i>&nbsp;&nbsp;考勤
+									</div>
+									<div class="col-md-6" style="color:rgb(194,194,194);">
+										待我签到
+									</div>
+									
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="row" style="width: 100%;
+												background:white;
+												margin: 0 auto;
+												padding:15px;">
+							<div class="row">
+								<div class="col-md-12">
+					  	  	  	  	  <span class="personal_door_title">
+					  	  	  	  	  	  我的公告
+					  	  	  	  	  </span>
+					  	  	  	</div>
+							</div>
+							
+							<div class="row" style="height: 200px;
+													padding: 15px;" id="personal_door_myNotices">
+								<!-- <div class="row personal_door_hoverCursor" style="padding:10px;
+														width:95%;
+														margin: 0 auto;
+														border-bottom: solid 1px rgb(235,235,235)">
+									<div class="col-md-6" style="color:rgb(194,194,194);">
+										标题
+									</div>
+									<div class="col-md-6">
+										待我签到
+									</div>
+								</div> -->
+								
+							</div>
+							
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<div class="row" style="width: 100%;
+										background:white;
+										margin: 0 auto;
+										padding:15px;">
+					<div class="row">
+						<div class="col-md-12">
+			  	  	  	  	  <span class="personal_door_title">
+			  	  	  	  	  	  今日任务
+			  	  	  	  	  </span>
+			  	  	  	</div>
+					</div>
+					
+					<div class="row" style="height: 200px;
+											padding: 15px;">
+						<table id="personal_door_todayBlocksTable" class="table">
+							
+						</table>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		<!-- 2 -->
+		
+	</div>
+</div>
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/personal_door.js"></script>

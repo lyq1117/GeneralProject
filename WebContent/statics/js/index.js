@@ -83,6 +83,18 @@ $(document).ready(function(){
 		$("#index_main_content").css('padding','0px');
 	});
 	
+	//加载个人门户页面
+	$('#index_personal_door').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/door/personal_door.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载公司门户页面
+	$('#index_enterprise_door').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/door/enterprise_door.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
 	
 	//发送ajax获取公司所有项目
 	$.ajax({

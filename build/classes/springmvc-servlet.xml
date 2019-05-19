@@ -55,6 +55,7 @@
     <!-- 访问静态资源 -->
     <mvc:resources location="/statics/" mapping="/statics/**"></mvc:resources>
     <mvc:resources location="/page/" mapping="/page/**"></mvc:resources>
+    <mvc:resources location="/upload/" mapping="/upload/**"></mvc:resources>
     
     
     <!-- 配置拦截器 -->
