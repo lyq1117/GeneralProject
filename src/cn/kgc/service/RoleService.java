@@ -1,5 +1,7 @@
 package cn.kgc.service;
 
+import java.util.List;
+
 import cn.kgc.pojo.Role;
 
 public interface RoleService {
@@ -10,5 +12,11 @@ public interface RoleService {
 	 * @return
 	 */
 	public Role getRoleByRoleId(String roleId);
+	
+	/**
+	 * 获取所有角色
+	 * @return
+	 */
+	public List<Role> getAllRoles();
 
 }

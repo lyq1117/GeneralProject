@@ -10,4 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE id = #{roleId}
     </select>
     
+    <select id="getAll" resultType="Role">
+        SELECT *
+        FROM role
+    </select>
+    
 </mapper>

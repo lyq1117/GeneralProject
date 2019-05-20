@@ -37,8 +37,8 @@
 	
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="loginUrl" value="/page/login.html"></property>
+		<property name="unauthorizedUrl" value="/page/unauthorized.html"></property>
 		<property name="successUrl" value="/main"></property>
-		<property name="unauthorizedUrl" value="/page/unauthorized"></property>
 		<property name="securityManager" ref="securityManager"></property>
 		<!-- 配置规则 -->
 		<property name="filterChainDefinitions">
@@ -53,6 +53,5 @@
 				/** = authc
 			</value>
 		</property>
-		
 	</bean>
 </beans>

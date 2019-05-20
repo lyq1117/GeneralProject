@@ -16,4 +16,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE role_id = 'R-101'
     </select>
     
+    <delete id="deleteByUserIdAndRoleId">
+        DELETE FROM user_role
+        WHERE user_id = #{0}
+        AND role_id = #{1}
+    </delete>
+    
+    <delete id="deleteByUserId">
+        DELETE FROM user_role
+        WHERE user_id = #{userId}
+    </delete>
+    
+    <insert id="add">
+        INSERT INTO user_role(user_id,
+        					  role_id)
+        VALUES(#{userId},
+        	   #{roleId})
+    </insert>
+    
+    
 </mapper>

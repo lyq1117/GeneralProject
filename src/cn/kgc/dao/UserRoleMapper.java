@@ -19,4 +19,25 @@ public interface UserRoleMapper {
 	 */
 	public UserRole getManagerId();
 	
+	/**
+	 * 根据用户id和角色id删除用户-角色关联
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 */
+	public int deleteByUserIdAndRoleId(String userId, String roleId);
+	
+	/**
+	 * 根据用户id删除用户-角色关联
+	 * @param userId
+	 * @return
+	 */
+	public int deleteByUserId(String userId);
+	
+	/**
+	 * 添加用户-角色关联
+	 * @param userRole
+	 * @return
+	 */
+	public int add(UserRole userRole);
 }

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,7 @@ public class DoorController {
 	@Resource
 	private UserBlockService userBlockService;//用户-任务关联业务对象
 	
+	@RequiresPermissions("door:getUserInfo")
 	@ResponseBody
 	@RequestMapping(value="/getUserInfo.do",
 					method=RequestMethod.POST)

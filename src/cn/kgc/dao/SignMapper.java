@@ -21,4 +21,11 @@ public interface SignMapper {
 	 */
 	public int getSignAccountOfDate(Date signDate);
 	
+	/**
+	 * 添加签到信息
+	 * @param sign
+	 * @return
+	 */
+	public int add(Sign sign);
+	
 }

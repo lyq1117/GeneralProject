@@ -379,6 +379,10 @@ public class ApplicationController {
 		return JSON.toJSONString(notice);
 	}
 	
+	/**
+	 * 获取我发布的公告表格数据
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getMyNoticeTable.do")
 	public String getMyNoticeTable() {

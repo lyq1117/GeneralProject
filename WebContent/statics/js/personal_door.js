@@ -13,6 +13,11 @@ $(function(){
 			$('#personal_door_username').text(result.username);//成员用户名
 			$('#personal_door_deptName').text(result.dept.name);//部门名字
 			$('#personal_door_tel').text(result.tel);//成员电话
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

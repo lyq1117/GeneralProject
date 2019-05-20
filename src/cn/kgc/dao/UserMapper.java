@@ -43,4 +43,30 @@ public interface UserMapper {
 	 */
 	public List<User> getAll();
 
+	/**
+	 * 更改用户密码
+	 * @param userId
+	 * @param pwd
+	 * @return
+	 */
+	public int updatePwd(String userId, String pwd);
+	
+	/**
+	 * 更改用户真实姓名、图片地址、电话
+	 * @param userId
+	 * @param name
+	 * @param icon
+	 * @param tel
+	 * @return
+	 */
+	public int updateNameIconTel(String userId, String name, String icon, String tel);
+	
+	/**
+	 * 更改用户状态
+	 * @param userId
+	 * @param status 0-可用 1-禁用
+	 * @return
+	 */
+	public int updateStatus(String userId, int status);
+	
 }

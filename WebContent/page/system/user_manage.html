@@ -1,0 +1,224 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/GeneralProject/statics/css/user_manage.css"/>
+<div class="row" style="_height:570px;min-height: 570px;">
+	<div class="col-md-12">
+	
+		<div class="row" style="height: 45px; background:white;">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-12" style="margin-left: 15px; margin-top: 5px;">
+						<h4>
+							<i class="fa fa-bar-chart-o" style="color:#3c8dbc;"></i>
+							<span>用户管理</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" style="width:97%; 
+							background:white;
+							margin: 15px auto;
+							padding: 15px;
+							border-radius: 3px;">
+			<div class="row">
+				<div class="col-md-12">
+	  	  	  	  	  <span class="user_manage_title">
+	  	  	  	  	  	  用户列表
+	  	  	  	  	  </span>
+	  	  	  	</div>
+			</div>
+			
+			<div class="row" style="_height: 500px;
+									min-height: 500px;
+									padding:15px;">
+				<table id="user_manage_table" class="table">
+					<thead style="background:#d2d6de;">
+					</thead>
+				</table>
+			</div>
+		
+		</div>
+		
+	
+	</div>
+</div>
+
+
+<!-- 分配角色窗口 -->
+<div class="modal modal-default fade" id="user_manage_giveRolesWin">
+  <div class="modal-dialog" style="width:35%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">分配角色</h5>
+        		<input type="hidden" id="user_manage_giveRolesWin_userId"/>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  	<div class="col-md-6" style="text-align: center;
+	      	  								 font-size: 25;
+	      	  								 font-weight: bold;">
+	      	  		行政角色<font style="color:red">(必选)</font>
+	      	  	</div>
+	      	  	<div class="col-md-6" style="text-align: center;
+	      	  								 font-size: 25;
+	      	  								 font-weight: bold;">
+	      	  		工程角色
+	      	  	</div>
+	      	  </div>
+	      	  
+	      	  <div class="row">
+	      	  		<div class="col-md-6" style="text-align: center"
+	      	  						id="user_manage_giveRolesWin_aRoles">
+	      	  			<div class="row">
+			      	  		<div class="radio">
+			                    <label>
+			                      <input type="radio" name="aRole" value="R-101">
+			                      	总经理
+			                    </label>
+			                </div>
+	      	  			</div>
+	      	  			<div class="row">
+			      	  		<div class="radio">
+			                    <label>
+			                      <input type="radio" name="aRole" value="R-105">
+			                      	部长
+			                    </label>
+			                </div>
+	      	  			</div>
+	      	  			<div class="row">
+			      	  		<div class="radio">
+			                    <label>
+			                      <input type="radio" name="aRole" value="R-103">
+			                      	员工
+			                    </label>
+			                </div>
+	      	  			</div>
+		      	  	</div>
+		      	  	<div class="col-md-6" style="text-align: center;"
+		      	  				id="user_manage_giveRolesWin_bRoles">
+		      	  		<!-- <div class="row">
+		      	  			<div class="checkbox">
+			                    <label>
+			                      <input type="checkbox" value="">
+			                      	123
+			                    </label>
+			                </div>
+		      	  		</div> -->
+		      	  	</div>
+	      	  </div>
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	  <button type="button" id="user_manage_giveRolesWin_confirmBtn" class="btn btn-default pull-right" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!-- 编辑用户资料窗口 -->
+<div class="modal modal-default fade" id="user_manage_editWin">
+  <div class="modal-dialog" style="width:35%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">编辑信息</h5>
+        		<input type="hidden" id="user_manage_giveRolesWin_userId"/>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  		
+	      	  		<div class="form-group">
+	                  <label class="col-sm-3 control-label">用户名</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="user_manage_editWin_userId" 
+	                    			disabled="disabled" placeholder="用户名">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">真实姓名</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="user_manage_editWin_userName" 
+	                    			placeholder="真实姓名">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">原密码</label>
+	                  <div class="col-sm-9">
+	                    <input type="password" class="form-control" 
+	                    			id="user_manage_editWin_oldPwd" 
+	                    			placeholder="修改密码必填项">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">新密码</label>
+	                  <div class="col-sm-9">
+	                    <input type="password" class="form-control" 
+	                    			id="user_manage_editWin_newPwd" 
+	                    			placeholder="修改密码必填项">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">确认新密码</label>
+	                  <div class="col-sm-9">
+	                    <input type="password" class="form-control" 
+	                    			id="user_manage_editWin_newPwd2" 
+	                    			placeholder="修改密码必填项">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">
+	                  		头像地址
+	                  </label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="user_manage_editWin_icon" 
+	                    			placeholder="头像地址">
+	                  </div>
+	                  <span class="help-block"><font>(个人网盘地址：/GeneralProject/personal_file/用户名/)</font></span>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">电话</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="user_manage_editWin_tel" 
+	                    			placeholder="电话">
+	                  </div>
+	                </div>
+	      	  		
+	      	  </div>
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	  <button type="button" id="user_manage_editWin_saveBtn" class="btn btn-default pull-right" data-dismiss="modal">保存</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/user_manage.js"></script>

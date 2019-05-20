@@ -39,5 +39,38 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> getUsers();
+	
+	/**
+	 * 修改用户密码
+	 * @param userId
+	 * @param oldPwd
+	 * @param newPwd
+	 * @param newPwd2
+	 * @return
+	 */
+	public int changeUserPwd(String userId, String oldPwd, String newPwd);
+	
+	/**
+	 * 修改用户真实姓名、图片地址、电话
+	 * @param name
+	 * @param icon
+	 * @param tel
+	 * @return
+	 */
+	public int changeNameIconTel(String userId, String name, String icon, String tel);
+	
+	/**
+	 * 禁用用户
+	 * @param userId
+	 * @return
+	 */
+	public int banUser(String userId);
+	
+	/**
+	 * 启用用户
+	 * @param userId
+	 * @return
+	 */
+	public int openUser(String userId);
 
 }

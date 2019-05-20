@@ -38,6 +38,7 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/page/"></property>
         <property name="suffix" value=".html"></property>
+        <property name="contentType" value="text/html"/>
     </bean>
     
     <!-- 配置多视图解析器 -->
@@ -73,7 +74,9 @@
         <property name="exceptionMappings">
             <props>
                 <!-- error是异常的逻辑视图 -->
-                <prop key="cn.kgc.exception.UserControllerException">error</prop>
+                <!-- <prop key="cn.kgc.exception.UserControllerException">error</prop> -->
+                <prop key="org.apache.shiro.authz.UnauthorizedException">unauthorized</prop>
+                <prop key="org.apache.shiro.authz.AuthorizationException">unauthorized</prop>
             </props>
         </property>
     </bean>

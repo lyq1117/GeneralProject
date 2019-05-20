@@ -1,5 +1,7 @@
 package cn.kgc.dao;
 
+import java.util.List;
+
 import cn.kgc.pojo.Role;
 
 public interface RoleMapper {
@@ -10,5 +12,11 @@ public interface RoleMapper {
 	 * @return
 	 */
 	public Role getById(String roleId);
+	
+	/**
+	 * 获取所有角色
+	 * @return
+	 */
+	public List<Role> getAll();
 
 }

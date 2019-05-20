@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.dao.MenuMapper">
+    
+    <select id="getMenusByParentId" parameterType="int" resultType="Menu">
+        
+        SELECT id id, name name, url url, icon icon, parent_id parentId,
+        	   permission permission, mark mark
+        FROM menu
+        WHERE parent_id = #{parentId}
+        AND permission IS NULL
+        
+    </select>
+    
+    <select id="getById" parameterType="int" resultType="Menu">
+        SELECT id id, name name, url url, icon icon, parent_id parentId,
+        	   permission permission, mark mark
+        FROM menu
+        WHERE id = #{id}
+    </select>
+    
+    <select id="getRootMenu" parameterType="int" resultType="Menu">
+        SELECT id id, name name, url url, icon icon, parent_id parentId,
+        	   permission permission, mark mark
+        FROM menu
+        WHERE id = #{id}
+        AND permission IS NULL
+    </select>
+    
+    <select id="getLinkMenu" parameterType="int" resultType="Menu">
+        SELECT id id, name name, url url, icon icon, parent_id parentId,
+        	   permission permission, mark mark
+        FROM menu
+        WHERE id = #{id}
+        AND permission IS NOT NULL
+    </select>
+    
+</mapper>

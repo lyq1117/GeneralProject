@@ -272,4 +272,9 @@ public class BlockServiceImpl implements BlockService {
 		return map;
 	}
 
+	@Override
+	public List<Block> getAllBlocks() {
+		return blockMapper.getAll();
+	}
+
 }

@@ -1,6 +1,7 @@
 package cn.kgc.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import cn.kgc.dao.SignMapper;
@@ -110,6 +112,32 @@ public class SignServiceImpl implements SignService {
 		
 		
 		return result;
+	}
+
+	@Override
+	public boolean isSigned(String userId, Date signDate) {
+		Calendar todayC = Calendar.getInstance();
+		todayC.setTime(signDate);
+		Calendar cal = Calendar.getInstance();
+		cal.set(todayC.get(Calendar.YEAR), todayC.get(Calendar.MONTH),
+						todayC.get(Calendar.DATE), 0, 0, 0);
+		System.out.println("*****************11111" + cal.getTime());
+		Sign sign = signMapper.getByUserIdAndSignDate(userId, DateUtil.getDate(DateUtil.getStr(cal.getTime())));
+		System.out.println(userId+"---sign.............." + sign + "****" + DateUtil.getDate("2019-05-19"));
+		if(sign == null) {//如果没查到亲到信息，返回false
+			return false;
+		}
+		else {
+			return true;//查到签到信息，返回true
+		}
+	}
+
+	@Override
+	public int userSign(User user) {
+		Sign sign = new Sign();
+		sign.setUser(user);
+		sign.setSignDate(new Date());
+		return signMapper.add(sign);
 	}
 
 }

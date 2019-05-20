@@ -11,9 +11,39 @@ $(document).ready(function(){
 		}
 	});
 	
+	/**
+	 * 获取左边菜单栏
+	 */
+	$.ajax({
+		url:'getLeftMenu.do',
+		type:'POST',
+		dataType:'json',
+		success:function(result){
+			//alert(JSON.stringify(result));
+			//遍历
+			$.each(result, function(i, n){
+				var html = '';
+				html += '<li class="treeview"><a href="#"><i class="'+n.root.icon+'"></i> <span>'+n.root.name+'</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">';
+				//遍历根菜单的子菜单
+				$.each(n.children, function(ii, nn){
+					html += '<li><a href="javascript:void(0)" class="index_leftMenuBar_item" url="'+nn.url+'" id="index_personal_door"><i class="'+nn.icon+'"></i> <span>'+nn.name+'</span></a></li>';
+				});
+				html += '</ul></li>';
+				//将没一级菜单添加到左边菜单栏
+				$('#index_leftMenuBar').append(html);
+			});
+			
+			//点击事件
+			$('.index_leftMenuBar_item').bind('click', function(){
+				$("#index_main_content").load($(this).attr('url'));
+				$("#index_main_content").css('padding','0px');
+			});
+		}
+	});
+	
 	//加载我的任务界面
 	$("#index_myTask").bind("click",function(){
-		$("#index_main_content").load("task/my_task.html");
+		$("#index_main_content").load("/GeneralProject/page/task/my_task.html");
 		$("#index_main_content").css('padding','0px');
 	});
 	
@@ -92,6 +122,24 @@ $(document).ready(function(){
 	//加载公司门户页面
 	$('#index_enterprise_door').bind('click', function(){
 		$("#index_main_content").load("/GeneralProject/page/door/enterprise_door.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载用户管理界面
+	$('#index_userManage').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/system/user_manage.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载角色管理界面
+	$('#index_roleManage').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/system/role_manage.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	//加载部门管理界面
+	$('#index_deptManage').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/system/dept_manage.html");
 		$("#index_main_content").css('padding','0px');
 	});
 	
@@ -263,6 +311,99 @@ $(document).ready(function(){
 			   + '-' + (date.getDate()>9 ? date.getDate() : '0' + date.getDate() );
 	}
 	
+	/**
+	 * 获取工程总数和任务总数和员工数
+	 */
+	$.ajax({
+		url:'getIndexTitleData.do',
+		type:'POST',
+		dataType:'json',
+		success:function(result){
+			//alert(JSON.stringify(result));
+			$('#index_title_projectCount').text(result.projectCount);//工程数
+			$('#index_title_userCount').text(result.userCount);//用户数
+			$('#index_title_blockCount').text(result.blockCount);//任务数
+		}
+	});
+	
+	/**
+	 * 签到按钮
+	 */
+	$('#index_signBtn').bind('click', function(){
+		$.ajax({
+			url:'userSign.do',
+			type:'POST',
+			dataType:'json',
+			success:function(result){
+				//alert(result.result);
+				if(result.result == "true"){
+					alert('签到成功!');
+					$('#index_signBtn').addClass('index_signBtn_disActive');
+					$('#index_signBtn').unbind();
+				}
+				else{
+					alert('签到失败!');
+				}
+			}
+		});
+	});
+	
+	/**
+	 * 查询当前用户今日是否签过到
+	 */
+	$.ajax({
+		url:'isUserSigned.do',
+		type:'POST',
+		dataType:'json',
+		success:function(result){
+			if(result.result == false){//没签过到
+				$('#index_signBtn').removeClass('index_signBtn_disActive');
+				
+			}
+			else{//签过到
+				$('#index_signBtn').addClass('index_signBtn_disActive');
+				$('#index_signBtn').unbind();
+			}
+		}
+	});
+	
+	var now = new Date();//今天的日期
+	var toDayDateStr = dateFormat(now);//格式化后的本周一日期 格式为yyyy-MM-dd
+	$('#index_todayDateStr').text(toDayDateStr);//签到按钮上的日期显示
+	//获取本周周一的日期
+	/**
+	 * 日期格式化成 yyyy-MM-dd
+	 */
+	function dateFormat(date){
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;
+		var d = date.getDate();
+		return year + '-' + (month>9?month:('0'+month)) + '-' + (d>9?d:('0'+d));
+	}
+	
+	/**
+	 * 用户下弹菜单的个人门户按钮
+	 */
+	$('#index_userDropdown_perDoorBtn').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/door/personal_door.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	/**
+	 * 用户下弹菜单的企业门户按钮
+	 */
+	$('#index_userDropdown_entDoorBtn').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/door/enterprise_door.html");
+		$("#index_main_content").css('padding','0px');
+	});
+	
+	/**
+	 * 用户下弹菜单的及时通信按钮
+	 */
+	$('#index_userDropdown_messageBtn').bind('click', function(){
+		$("#index_main_content").load("/GeneralProject/page/message/my_message.html");
+		$("#index_main_content").css('padding','');
+	});
 });	
 	
 	

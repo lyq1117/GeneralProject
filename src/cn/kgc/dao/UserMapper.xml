@@ -73,4 +73,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        	WHERE u.dept_id = d.id
     </select>
     
+    <update id="updatePwd">
+        UPDATE user
+        SET pwd = #{1}
+        WHERE username = #{0}
+    </update>
+    
+    <update id="updateNameIconTel">
+        UPDATE user
+        SET name = #{1}, icon = #{2}, tel = #{3}
+        WHERE username = #{0}
+    </update>
+    
+    <update id="updateStatus">
+        UPDATE user
+        SET status = #{1}
+        WHERE username = #{0}
+    </update>
+    
 </mapper>

@@ -1,5 +1,7 @@
 package cn.kgc.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role getRoleByRoleId(String roleId) {
 		return roleMapper.getById(roleId);
+	}
+
+	@Override
+	public List<Role> getAllRoles() {
+		return roleMapper.getAll();
 	}
 
 }

@@ -18,5 +18,20 @@ public interface UserRoleService {
 	 * @return
 	 */
 	public UserRole getManagerId();
+	
+	/**
+	 * 根据用户id删除用户-角色关联
+	 * @param userId
+	 * @return
+	 */
+	public int deleteUserRoleByUserId(String userId);
+	
+	/**
+	 * 添加用户-角色关联
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 */
+	public int addUserRole(String userId, String roleId);
 
 }

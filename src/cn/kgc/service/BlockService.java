@@ -85,4 +85,10 @@ public interface BlockService {
 	 * @return
 	 */
 	public Map<String, List<Block>> getEnterpriseBlockWeekly(Date mondayDate);
+	
+	/**
+	 * 获取所有任务
+	 * @return
+	 */
+	public List<Block> getAllBlocks();
 }

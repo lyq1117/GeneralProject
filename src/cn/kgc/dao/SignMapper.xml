@@ -40,4 +40,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE s.sign_date = #{signDate}
     </select>
     
+    <insert id="add" parameterType="Sign">
+        INSERT INTO sign(user_id,
+        				 sign_date)
+        VALUES(#{user.username},
+        	   #{signDate})
+    </insert>
+    
 </mapper>
