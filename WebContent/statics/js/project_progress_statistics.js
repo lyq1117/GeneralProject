@@ -19,6 +19,11 @@ $(function(){
 			$('.project_progress_statistics_leader').bind('mouseout', function(){
 				$('#project_progress_statistics_floatWin').hide();
 			});
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

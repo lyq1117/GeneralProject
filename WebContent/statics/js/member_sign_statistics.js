@@ -33,6 +33,9 @@ $(function(){
 		return year + '-' + (month>9?month:('0'+month)) + '-' + (d>9?d:('0'+d));
 	}
 	
+	/**
+	 * 获取员工出勤统计表格
+	 */
 	$('#member_sign_statistics_table').bootstrapTable({
 		url:'statistics/getMemberSignStatistics.do?mondayDate='+mondayOfWeekF+'&firstDateOfMonth='+firstDateF+'&daysOfMonth='+daysOfMonth,
 		pagination: true,
@@ -42,6 +45,11 @@ $(function(){
 		pageSize: 10,
 		onLoadSuccess:function(){
 			
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -97,6 +105,11 @@ $(function(){
 			
 			
 			
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

@@ -39,5 +39,12 @@ public interface MenuService {
 	 * @return
 	 */
 	public Menu getLinkMenuById(int menuId);
+	
+	/**
+	 * 根据父菜单id获取连接菜单
+	 * @param parentId
+	 * @return
+	 */
+	public List<Menu> getLinkMenusByParentId(int parentId);
 
 }

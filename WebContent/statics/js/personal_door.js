@@ -38,7 +38,12 @@ $(function(){
 		}],
 		pagination:true,
 		pageSize:2,
-		sidePagination:'client'
+		sidePagination:'client',
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
+		}
 	});
 	
 	//待我审批点击事件
@@ -65,6 +70,11 @@ $(function(){
 				var html = '<div class="row personal_door_hoverCursor" style="padding:10px;width:95%;margin: 0 auto;border-bottom: solid 1px rgb(235,235,235)"><div class="col-md-9" style="color:rgb(194,194,194);">'+n.title+'</div><div class="col-md-3">'+n.status+'</div></div>';
 				$('#personal_door_myNotices').append(html);
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -85,7 +95,12 @@ $(function(){
 		}],
 		pagination:true,
 		pageSize:2,
-		sidePagination:'client'
+		sidePagination:'client',
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
+		}
 	});
 	
 });

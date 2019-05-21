@@ -12,4 +12,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
     </select>
     
+    <select id="getByRoleIdAndMenuId" resultType="RoleMenu">
+        
+        SELECT role_id roleId, menu_id menuId
+        FROM role_menu
+        WHERE role_id = #{0}
+        AND menu_id = #{1}
+        
+    </select>
+    
+    <insert id="add" parameterType="RoleMenu">
+        
+        INSERT INTO role_menu(role_id, menu_id)
+        VALUES(#{roleId},#{menuId})
+        
+    </insert>
+    
+    <delete id="delete">
+        DELETE FROM role_menu
+        WHERE role_id = #{roleId}
+        AND menu_id = #{menuId}
+    </delete>
+    
 </mapper>

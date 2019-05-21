@@ -24,6 +24,11 @@ $(function(){
 			$('#project_survey_delayCount').text(delay.length);
 			$('#project_survey_completeCount').text(complete.length);
 			$('#project_survey_totalCount').text(allCount);
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -67,6 +72,11 @@ $(function(){
 		      hideHover: 'auto'
 		    });
 			
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

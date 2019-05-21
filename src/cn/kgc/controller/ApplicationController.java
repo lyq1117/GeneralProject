@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,7 @@ public class ApplicationController {
 	 * @param request
 	 * @return
 	 */
+	@RequiresPermissions("application:getRenshiApprovalModal")
 	@ResponseBody
 	@RequestMapping(value="/getRenshiApprovalModal.do", method=RequestMethod.POST)
 	public String getRenshiApprovalModal(HttpServletRequest request) {
@@ -74,6 +76,7 @@ public class ApplicationController {
 	 * @param request
 	 * @return
 	 */
+	@RequiresPermissions("application:getCaiwuApprovalModal")
 	@ResponseBody
 	@RequestMapping(value="/getCaiwuApprovalModal.do", method=RequestMethod.POST)
 	public String getCaiwuApprovalModal(HttpServletRequest request) {
@@ -89,6 +92,7 @@ public class ApplicationController {
 	 * @param request
 	 * @return
 	 */
+	@RequiresPermissions("application:getXingzhengApprovalModal")
 	@ResponseBody
 	@RequestMapping(value="/getXingzhengApprovalModal.do", method=RequestMethod.POST)
 	public String getXingzhengApprovalModal(HttpServletRequest request) {
@@ -105,6 +109,7 @@ public class ApplicationController {
 	 * @param type
 	 * @return
 	 */
+	@RequiresPermissions("application:addApproval")
 	@ResponseBody
 	@RequestMapping(value="/addApproval.do",
 					method=RequestMethod.POST)
@@ -164,6 +169,7 @@ public class ApplicationController {
 	 * 获取我审批的表格数据
 	 * @return
 	 */
+	@RequiresPermissions("application:getWspdTable")
 	@ResponseBody
 	@RequestMapping(value="/getWspdTable.do")
 	public String getWspdTable() {
@@ -209,6 +215,7 @@ public class ApplicationController {
 	 * @param approvalId
 	 * @return
 	 */
+	@RequiresPermissions("application:getApprovalById")
 	@ResponseBody
 	@RequestMapping(value="/getApprovalById.do",
 					method=RequestMethod.POST)
@@ -233,6 +240,7 @@ public class ApplicationController {
 	 * @param approvalId
 	 * @return
 	 */
+	@RequiresPermissions("application:changeApprovalStatus")
 	@ResponseBody
 	@RequestMapping(value="/changeApprovalStatus.do",
 					method=RequestMethod.POST)
@@ -265,6 +273,7 @@ public class ApplicationController {
 	 * 获取我申请的表格数据
 	 * @return
 	 */
+	@RequiresPermissions("application:getWsqdTable")
 	@ResponseBody
 	@RequestMapping(value="/getWsqdTable.do")
 	public String getWsqdTable() {

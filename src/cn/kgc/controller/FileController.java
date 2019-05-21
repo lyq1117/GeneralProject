@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
@@ -212,6 +213,7 @@ public class FileController {
 	 * 获取企业网盘的根目录
 	 * @return
 	 */
+	@RequiresPermissions("file:getEnterpriseRoot")
 	@ResponseBody
 	@RequestMapping(value="/getEnterpriseRoot.do",
 					method=RequestMethod.POST)
@@ -236,6 +238,13 @@ public class FileController {
 		return JSON.toJSONString(map);
 	}
 	
+	/**
+	 * 新建文件夹目录
+	 * @param dicNamePath
+	 * @param dicName
+	 * @return
+	 */
+	@RequiresPermissions("file:newDictionary")
 	@ResponseBody
 	@RequestMapping(value="/newDictionary.do",
 					method=RequestMethod.POST)
@@ -272,6 +281,7 @@ public class FileController {
 	 * @param request
 	 * @return
 	 */
+	@RequiresPermissions("file:getFiles")
 	@ResponseBody
 	@RequestMapping(value="/getFiles.do",
 					method=RequestMethod.GET)
@@ -379,6 +389,7 @@ public class FileController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("file:upload")
 	@ResponseBody
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
     public String upload(@RequestParam("files") MultipartFile[] file, 
@@ -428,6 +439,7 @@ public class FileController {
 	 * @param fileId
 	 * @return
 	 */
+	@RequiresPermissions("file:delete")
 	@ResponseBody
 	@RequestMapping(value="/delete.do",
 					method=RequestMethod.POST)
@@ -473,6 +485,12 @@ public class FileController {
 	    return dirFile.delete();
 	}
 	
+	/**
+	 * 获取个人网盘根目录
+	 * @param request
+	 * @return
+	 */
+	@RequiresPermissions("file:getPersonalRoot")
 	@ResponseBody
 	@RequestMapping(value="/getPersonalRoot.do",method=RequestMethod.POST)
 	public String getPersonalRoot(HttpServletRequest request) {

@@ -33,5 +33,12 @@ public interface MenuMapper {
 	 * @return
 	 */
 	public Menu getLinkMenu(int menuId);
+	
+	/**
+	 * 根据父亲id获取链接菜单
+	 * @param parentId
+	 * @return
+	 */
+	public List<Menu> getLinkMenusByParentId(int parentId);
 
 }

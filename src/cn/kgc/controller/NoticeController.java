@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,7 @@ public class NoticeController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("notice:getProjectNotices")
 	@ResponseBody
 	@RequestMapping(value="/getProjectNotices.do",method=RequestMethod.POST)
 	public String getProjectNotices(@RequestParam int projectId) {

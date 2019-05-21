@@ -37,4 +37,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND permission IS NOT NULL
     </select>
     
+    <select id="getLinkMenusByParentId" parameterType="int" resultType="Menu">
+        
+        SELECT id id, name name, url url, icon icon, parent_id parentId,
+        	   permission permission, mark mark
+        FROM menu
+        WHERE parent_id = #{parentId}
+        AND permission IS NOT NULL
+        
+    </select>
+    
 </mapper>

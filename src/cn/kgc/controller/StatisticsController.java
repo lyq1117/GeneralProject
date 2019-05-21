@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,7 @@ public class StatisticsController {
 	 * 获取企业工程概况(包括 待完成工程、延期工程、已完成工程、工程总数)
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getProjectSurvey")
 	@ResponseBody
 	@RequestMapping(value="/getProjectSurvey.do", method=RequestMethod.POST)
 	public String getProjectSurvey() {
@@ -51,6 +53,7 @@ public class StatisticsController {
 	 * @param mondayDate
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getEnterpriseNewAndCompleteProject")
 	@ResponseBody
 	@RequestMapping(value="/getEnterpriseNewAndCompleteProject.do",
 					method=RequestMethod.POST)
@@ -66,6 +69,7 @@ public class StatisticsController {
 	 * @param mondayDate
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getEnterpriseBlockWeekly")
 	@ResponseBody
 	@RequestMapping(value="/getEnterpriseBlockWeekly.do",
 					method=RequestMethod.POST)
@@ -79,6 +83,7 @@ public class StatisticsController {
 	 * 获取工程进度统计表格数据
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getProjectProgressStatistics")
 	@ResponseBody
 	@RequestMapping(value="/getProjectProgressStatistics.do",
 					method=RequestMethod.GET)
@@ -94,6 +99,7 @@ public class StatisticsController {
 	 * @param daysOfMonth
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getMemberSignStatistics")
 	@ResponseBody
 	@RequestMapping(value="/getMemberSignStatistics.do",
 					method=RequestMethod.GET)
@@ -113,6 +119,7 @@ public class StatisticsController {
 	 * @param mondayDate
 	 * @return
 	 */
+	@RequiresPermissions("statistics:getWeeklyAttendanceAndNot")
 	@ResponseBody
 	@RequestMapping(value="/getWeeklyAttendanceAndNot.do",
 					method=RequestMethod.POST)

@@ -40,4 +40,9 @@ public class MenuServiceImpl implements MenuService {
 		return menuMapper.getLinkMenu(menuId);
 	}
 
+	@Override
+	public List<Menu> getLinkMenusByParentId(int parentId) {
+		return menuMapper.getLinkMenusByParentId(parentId);
+	}
+
 }

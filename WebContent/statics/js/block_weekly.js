@@ -66,6 +66,11 @@ $(function(){
 				var html = '<li><span class="handle"><i class="fa fa-rocket"></i></span><span class="text">'+n.description+'</span><small class="label label-warning"><i class="fa fa-clock-o"></i>'+millisecond2Date(n.createTime)+' 创建</small></li>';
 				$('#block_weekly_newToDoList').append(html);
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

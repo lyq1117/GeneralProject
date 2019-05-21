@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ public class TaskController {
 	 * 获取当前用户拥有的项目列表
 	 * @return
 	 */
+	@RequiresPermissions("task:getMyProjectList")
 	@ResponseBody
 	@RequestMapping(value="/getMyProjectList.do", method=RequestMethod.POST)
 	public String getMyProject() {
@@ -82,6 +84,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:getUsersByBlockId")
 	@ResponseBody
 	@RequestMapping(value="/getUsersByBlockId.do", method=RequestMethod.POST)
 	public String getUsersByBlockId(@RequestParam int blockId) {
@@ -96,6 +99,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:updateBlockLeader")
 	@ResponseBody
 	@RequestMapping(value="/updateBlockLeader.do", method=RequestMethod.POST)
 	public String updateBlockLeader(@RequestParam String username,
@@ -114,6 +118,7 @@ public class TaskController {
 	 * @param duration
 	 * @return
 	 */
+	@RequiresPermissions("task:addProject")
 	@ResponseBody
 	@RequestMapping(value="/addProject.do")
 	public String addProject(@RequestParam String projectName,
@@ -154,6 +159,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getProjectById")
 	@ResponseBody
 	@RequestMapping(value="/getProjectById.do")
 	public String getProjectById(@RequestParam int projectId) {
@@ -175,6 +181,7 @@ public class TaskController {
 	 * @param projectStatus
 	 * @return
 	 */
+	@RequiresPermissions("task:updateProject")
 	@ResponseBody
 	@RequestMapping(value="/updateProject.do",method=RequestMethod.POST)
 	public String updateProject(@RequestParam int projectId,
@@ -205,6 +212,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getMembersOfProject")
 	@ResponseBody
 	@RequestMapping(value="/getMembersOfProject.do",method=RequestMethod.GET)
 	public String getMembersOfProject(@RequestParam int projectId) {
@@ -235,6 +243,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getMembersNotInProject")
 	@ResponseBody
 	@RequestMapping(value="/getMembersNotInProject.do")
 	public String getMembersNotInProject(@RequestParam int projectId) {
@@ -249,6 +258,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:addUserProject")
 	@ResponseBody
 	@RequestMapping(value="/addUserProject.do")
 	public String addUserProject(@RequestParam String username,
@@ -271,6 +281,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:deleteUserProject")
 	@ResponseBody
 	@RequestMapping(value="/deleteUserProject.do")
 	public String deleteUserProject(@RequestParam String username,
@@ -292,6 +303,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:getBlockById")
 	@ResponseBody
 	@RequestMapping(value="/getBlockById.do")
 	public String getBlockById(@RequestParam int blockId) {
@@ -299,6 +311,16 @@ public class TaskController {
 		return JSON.toJSONString(block);
 	}
 	
+	/**
+	 * 更新任务信息
+	 * @param blockId
+	 * @param description
+	 * @param createTime
+	 * @param duration
+	 * @param status
+	 * @return
+	 */
+	@RequiresPermissions("task:updateBlock")
 	@ResponseBody
 	@RequestMapping(value="/updateBlock.do")
 	public String updateBlock(@RequestParam int blockId,
@@ -326,6 +348,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:getMembersOfBlock")
 	@ResponseBody
 	@RequestMapping(value="/getMembersOfBlock.do")
 	public String getMembersOfBlock(@RequestParam int blockId) {
@@ -355,6 +378,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getMembersNotInBlcokInProject")
 	@ResponseBody
 	@RequestMapping(value="/getMembersNotInBlcokInProject.do")
 	public String getMembersNotInBlcokInProject(@RequestParam int blockId,
@@ -369,6 +393,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:addUserBlock")
 	@ResponseBody
 	@RequestMapping(value="/addUserBlock.do")
 	public String addUserBlock(@RequestParam String username,
@@ -389,6 +414,7 @@ public class TaskController {
 	 * @param blockId
 	 * @return
 	 */
+	@RequiresPermissions("task:deleteUserBlock")
 	@ResponseBody
 	@RequestMapping(value="/deleteUserBlock.do")
 	public String deleteUserBlock(@RequestParam String username,
@@ -412,6 +438,7 @@ public class TaskController {
 	 * @param status
 	 * @return
 	 */
+	@RequiresPermissions("task:addBlock")
 	@ResponseBody
 	@RequestMapping(value="/addBlock.do")
 	public String addBlock(@RequestParam int projectId,
@@ -487,6 +514,7 @@ public class TaskController {
 	 * @param projectId 工程id
 	 * @return
 	 */
+	@RequiresPermissions("task:getBlocksRemainOfWeek")
 	@ResponseBody
 	@RequestMapping(value="/getBlocksRemainOfWeek.do", method=RequestMethod.POST)
 	public String getBlocksRemainOfWeek(@RequestParam String mondayDate,
@@ -508,6 +536,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getCompleteOrNotCountBlocksOfProject")
 	@ResponseBody
 	@RequestMapping(value="/getCompleteOrNotCountBlocksOfProject.do", method=RequestMethod.POST)
 	public String getCompleteOrNotCountOfProject(@RequestParam int projectId) {
@@ -521,6 +550,7 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
+	@RequiresPermissions("task:getWeeklyBlocks")
 	@ResponseBody
 	@RequestMapping(value="/getWeeklyBlocks.do", method=RequestMethod.POST)
 	public String getWeeklyBlocks(@RequestParam String mondayDate,

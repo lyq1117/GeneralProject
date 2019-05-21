@@ -61,6 +61,7 @@ public class DoorController {
 	 * 获取我的审批表格数据
 	 * @return
 	 */
+	@RequiresPermissions("door:getMyApprovalTable")
 	@ResponseBody
 	@RequestMapping(value="/getMyApprovalTable.do")
 	public String getMyApprovalTable() {
@@ -92,6 +93,7 @@ public class DoorController {
 	 * 获取我的公告集合
 	 * @return
 	 */
+	@RequiresPermissions("door:getMyNotices")
 	@ResponseBody
 	@RequestMapping(value="/getMyNotices.do",
 					method=RequestMethod.POST)
@@ -125,6 +127,7 @@ public class DoorController {
 	 * 获取今日任务表格数据
 	 * @return
 	 */
+	@RequiresPermissions("door:getTodayBlocksTable")
 	@ResponseBody
 	@RequestMapping(value="/getTodayBlocksTable.do")
 	public String getTodayBlocksTable() {
