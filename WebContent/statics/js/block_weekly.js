@@ -66,7 +66,6 @@ $(function(){
 			});
 			//本周企业新增任务插入ToDoList
 			$.each(newBlocks, function(i, n){
-				alert(JSON.stringify(n));
 				var html = '<li><span class="handle"><i class="fa fa-rocket"></i></span><span class="text">'+n.description+'</span><small class="label label-warning"><i class="fa fa-clock-o"></i>'+millisecond2Date(n.createTime)+' 创建</small></li>';
 				$('#block_weekly_newToDoList').append(html);
 			});

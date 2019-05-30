@@ -57,7 +57,7 @@ public interface UserService {
 	 * @param tel
 	 * @return
 	 */
-	public int changeNameIconTel(String userId, String name, String icon, String tel);
+	public int changeNameIconTelDeptId(String userId, String name, String icon, String tel, int deptId);
 	
 	/**
 	 * 禁用用户
@@ -79,5 +79,12 @@ public interface UserService {
 	 * @return
 	 */
 	public int addUser(User user);
+	
+	/**
+	 * 获取部门成员
+	 * @param deptId
+	 * @return
+	 */
+	public List<User> getDeptMembers(int deptId);
 
 }

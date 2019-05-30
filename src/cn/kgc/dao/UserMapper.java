@@ -59,7 +59,7 @@ public interface UserMapper {
 	 * @param tel
 	 * @return
 	 */
-	public int updateNameIconTel(String userId, String name, String icon, String tel);
+	public int updateNameIconTelDeptId(String userId, String name, String icon, String tel, int deptId);
 	
 	/**
 	 * 更改用户状态
@@ -75,5 +75,12 @@ public interface UserMapper {
 	 * @return
 	 */
 	public int add(User user);
+	
+	/**
+	 * 通过部门id获取用户集合
+	 * @param deptId
+	 * @return
+	 */
+	public List<User> getByDeptId(int deptId);
 	
 }

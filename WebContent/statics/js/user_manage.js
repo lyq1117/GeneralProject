@@ -128,6 +128,26 @@ $(function(){
 				$('#user_manage_editWin_newPwd').val('');
 				$('#user_manage_editWin_newPwd2').val('');
 				
+				//查询部门列表
+				$.ajax({
+					url:'system/getDeptList.do',
+					type:'POST',
+					dataType:'json',
+					success:function(result){
+						//清空多选框
+						$('#user_manage_editWin_deptSelect').html('');
+						$.each(result, function(i, n){
+							var html = '<option value="'+n.id+'">'+n.name+'</option>';
+							$('#user_manage_editWin_deptSelect').append(html);
+						});
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
+					}
+				});
+				
 				//根据用户名获取用户信息
 				$.ajax({
 					url:'system/getUserInfo.do',
@@ -143,6 +163,8 @@ $(function(){
 						$('#user_manage_editWin_icon').val(result.icon);
 						//电话赋值到文本框
 						$('#user_manage_editWin_tel').val(result.tel);
+						//部门赋值
+						$('#user_manage_editWin_deptSelect').val(result.dept.id);
 					},
 					error:function(){
 						//没有权限
@@ -226,6 +248,7 @@ $(function(){
 		var icon = $('#user_manage_editWin_icon').val();//头像地址
 		var tel = $('#user_manage_editWin_tel').val();//电话
 		var userId = $('#user_manage_editWin_userId').val();//用户名
+		var deptId = $('#user_manage_editWin_deptSelect').val();//部门id
 		
 		var isChangePwdFlag = false;//默认是不改密码的
 		if(oldPwd == '' && newPwd == '' && newPwd2 == ''){
@@ -256,7 +279,8 @@ $(function(){
 				  'newPwd' : newPwd,
 				  'name' : name,
 				  'icon' : icon,
-				  'tel' : tel},
+				  'tel' : tel,
+				  'deptId' : deptId},
 			dataType:'json',
 			success:function(result){
 				alert(result.result);
@@ -329,6 +353,7 @@ $(function(){
 			type:'POST',
 			dataType:'json',
 			success:function(result){
+				$('#user_manage_addWin_deptSelect').html('');
 				$.each(result, function(i, n){
 					var html = '<option value="'+n.id+'">'+n.name+'</option>';
 					$('#user_manage_addWin_deptSelect').append(html);

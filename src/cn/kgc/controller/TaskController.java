@@ -334,6 +334,14 @@ public class TaskController {
 		block.setCreateTime(DateUtil.getDate(createTime));
 		block.setDuration(duration);
 		block.setStatus(status);
+		//如果设置任务为废弃或正常结束，那么要更新任务的实际工期
+		if(status == 1 || status == 2) {
+			//通过id获取任务
+			Block bDataBase = blockService.getBlockById(blockId);
+			Date today = DateUtil.getDate(DateUtil.getStr(new Date()));
+			long days = (today.getTime()-bDataBase.getCreateTime().getTime())/(24*60*60*1000);
+			block.setRealDuration((int)days);
+		}
 		int result = blockService.updateBlock(block);
 		Map<String, String> map = new HashMap<>();
 		if(result == 1)

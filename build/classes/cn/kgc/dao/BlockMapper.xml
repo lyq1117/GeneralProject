@@ -62,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SET description = #{description},
         	create_time = #{createTime},
         	duration = #{duration},
+        	real_duration = #{realDuration},
         	status = #{status}
         WHERE id = #{id}
     </update>
@@ -87,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="getIncrement" resultType="int">
-        SELECT MAX(id)
+        SELECT COUNT(*)
         FROM block
     </select>
     

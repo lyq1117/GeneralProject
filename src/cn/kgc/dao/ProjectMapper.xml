@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="getIncrement" resultType="int">
-        SELECT max(id) as id 
+        SELECT COUNT(*) as id 
         FROM project
     </select>
     
@@ -87,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	   utel, u.status ustatus
         FROM project p, user u
         WHERE p.id = #{projectId}
+        AND p.leader_id = u.username
     </select>
     
     <update id="update" parameterType="Project">

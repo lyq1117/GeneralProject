@@ -134,6 +134,16 @@ public class SystemController {
 		//重新添加用户的角色关联
 		for (String roleId : roles) {
 			System.out.println("-------" + roleId + "---------");
+			//如果重新赋予的角色中有普通员工的角色，那么把该用户的部长和总经办部长的职位全撤了
+			//如果重新赋予的角色中有普通员工的角色，那么把该用户作为总经办的部长的职位撤销了
+			if(roleId.equals("R-103")) {
+				deptService.cancelDeptLeaderId(userId);
+				deptService.cancelManagerDeptLeaderId(userId);
+			}
+			//如果重新赋予的角色中有部长的角色，那么把该用户作为总经办的部长的职位撤销了
+			if(roleId.equals("R-105")) {
+				deptService.cancelManagerDeptLeaderId(userId);
+			}
 			userRoleService.addUserRole(userId, roleId);
 		}
 		Map<String, String> map = new HashMap<>();
@@ -176,7 +186,8 @@ public class SystemController {
 							   @RequestParam String newPwd,
 							   @RequestParam String name,
 							   @RequestParam String icon,
-							   @RequestParam String tel) {
+							   @RequestParam String tel,
+							   @RequestParam int deptId) {
 		
 		//System.out.println(isChangePwdFlag + "-" + oldPwd + "-" + newPwd + "-" + newPwd2 + '-' + name + '-' + icon + "-" + tel);
 		//如果有附带改密码操作
@@ -184,19 +195,22 @@ public class SystemController {
 		if(isChangePwdFlag == true) {
 			int isChanged = userService.changeUserPwd(userId, oldPwd, newPwd);
 			if(isChanged == 0) {//改密码成功
-				//修改信息
-				int isChanged2 = userService.changeNameIconTel(userId, name, icon, tel);
+				//修改信息,同时要将此用户作为过那个部门的部长id撤销
+				deptService.cancelDeptLeaderId(userId);
+				int isChanged2 = userService.changeNameIconTelDeptId(userId, name, icon, tel, deptId);
 				map.put("result", "修改成功!");
 			}else {
 				map.put("result", "修改失败!");
 			}
 		}else {//没有附带改密码的操作
-			int isChanged2 =  userService.changeNameIconTel(userId, name, icon, tel);
+			//修改信息,同时要将此用户作为过那个部门的部长id撤销
+			deptService.cancelDeptLeaderId(userId);
+			int isChanged2 =  userService.changeNameIconTelDeptId(userId, name, icon, tel, deptId);
 			if(isChanged2 == 1) {
 				map.put("result", "修改成功!");
 			}
 			else {
-				map.put("result", "修改失败3!");
+				map.put("result", "修改失败!");
 			}
 		}
 		return JSON.toJSONString(map);
@@ -417,6 +431,192 @@ public class SystemController {
 	public String getDeptList() {
 		List<Dept> depts = deptService.getAllDept();
 		return JSONArray.toJSONString(depts);
+	}
+	
+	/**
+	 * 表格形式获取部门列表
+	 * @return
+	 */
+	@RequiresPermissions(value="system:getDeptListTable")
+	@ResponseBody
+	@RequestMapping(value="/getDeptListTable.do")
+	public String getDeptListTable() {
+		//初始化结果集
+		List<Map<String, Object>> result = new ArrayList<>();
+		//获取所有部门
+		List<Dept> depts = deptService.getAllDept();
+		for (Dept dept : depts) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", dept.getId());
+			map.put("name", dept.getName());
+			map.put("location", dept.getLocation());
+			if(dept.getLeader_id() == null || "".equals(dept.getLeader_id())) {
+				map.put("leader", "");
+			}
+			else {
+				User leader = userService.getUserByUsername(dept.getLeader_id());
+				map.put("leader", leader.getUsername() + "-" + leader.getName());
+			}
+			if(dept.getStatus() == 0) {
+				map.put("status", "<small class=\"label label-success\">可用</small>");
+			}
+			else {
+				map.put("status", "<small class=\"label label-danger\">不可用</small>");
+			}
+			map.put("option", "<a href=\"javascript:void(0)\" deptId=\""+dept.getId()+"\" class=\"dept_manage_edit\"><i class=\"fa fa-edit\"></i></a>  <a href=\"javascript:void(0)\" deptId=\""+dept.getId()+"\" class=\"dept_manage_open\"><i class=\"fa fa-check\"></i></a>  <a href=\"javascript:void(0)\" deptId=\""+dept.getId()+"\" class=\"dept_manage_close\"><i class=\"fa fa-close\"></i></a>");
+			
+			result.add(map);
+		}
+		return JSONArray.toJSONString(result);
+	}
+	
+	/**
+	 * 通过id获取部门信息
+	 * @param deptId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:getDeptById")
+	@ResponseBody
+	@RequestMapping(value="/getDeptById.do",
+					method=RequestMethod.POST)
+	public String getDeptById(@RequestParam int deptId) {
+		Dept dept = deptService.getDeptById(deptId);
+		return JSON.toJSONString(dept);
+	}
+	
+	/**
+	 * 获取部门成员集合
+	 * @param deptId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:getDeptMembersOwnDeptLeaderRoleOrManagerRole")
+	@ResponseBody
+	@RequestMapping(value="/getDeptMembersOwnDeptLeaderRoleOrManagerRole.do",
+					method=RequestMethod.POST)
+	public String getDeptMembersOwnDeptLeaderRoleOrManagerRole(@RequestParam int deptId) {
+		List<User> members = userService.getDeptMembers(deptId);
+		List<User> result = new ArrayList<>();//初始化的结果集
+		for (User user : members) {
+			List<UserRole> userRoles = userRoleService.getUserRoleByUserId(user.getUsername());
+			//当用户拥有角色
+			if(userRoles.size() != 0 && userRoles != null) {
+				for (UserRole userRole : userRoles) {
+					//若是部长
+					if(userRole.getRoleId().equals("R-105")) {
+						result.add(user);
+					}
+					//若是总经理
+					if(userRole.getRoleId().equals("R-101")) {
+						result.add(user);
+					}
+				}
+			}
+			
+		}
+		return JSONArray.toJSONString(result);
+	}
+	
+	/**
+	 * 修改部门信息
+	 * @param deptId
+	 * @param deptName
+	 * @param location
+	 * @param leaderId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:saveDeptInfo")
+	@ResponseBody
+	@RequestMapping(value="/saveDeptInfo.do",
+					method=RequestMethod.POST)
+	public String saveDeptInfo(@RequestParam int deptId,
+							   @RequestParam String deptName,
+							   @RequestParam String location,
+							   @RequestParam String leaderId) {
+		//封装部门对象
+		Dept dept = new Dept();
+		dept.setId(deptId);
+		dept.setName(deptName);
+		dept.setLocation(location);
+		dept.setLeader_id(leaderId);
+		//保存部门信息
+		int count = deptService.saveDeptInfo(dept);
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "修改部门信息成功！");
+		}
+		else {
+			map.put("result", "修改部门信息失败！");
+		}
+		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 改变部门状态 （用于启用部门和禁用部门）
+	 * @param status
+	 * @param deptId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:changeDeptStatus")
+	@ResponseBody
+	@RequestMapping(value="/changeDeptStatus.do",
+					method=RequestMethod.POST)
+	public String changeDeptStatus(@RequestParam int status,
+								   @RequestParam int deptId) {
+		int count = deptService.changeDeptStatus(deptId, status);
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			if(status == 0)
+				map.put("result", "启用部门成功！");
+			else
+				map.put("result", "禁用部门成功");
+		}
+		else {
+			if(status == 0)
+				map.put("result", "启用部门失败！");
+			else
+				map.put("result", "禁用部门失败！");
+		}
+		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 获取所有用户
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getAllUsers.do",
+					method=RequestMethod.POST)
+	public String getAllUsers() {
+		List<User> allUsers = userService.getUsers();
+		return JSONArray.toJSONString(allUsers);
+	}
+	
+	/**
+	 * 新增部门
+	 * @param deptName
+	 * @param location
+	 * @param leaderId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:addDept")
+	@ResponseBody
+	@RequestMapping(value="/addDept.do",
+					method=RequestMethod.POST)
+	public String addDept(@RequestParam String deptName,
+						  @RequestParam String location) {
+		Dept dept = new Dept();
+		dept.setLocation(location);
+		dept.setName(deptName);
+		dept.setStatus(0);
+		int count = deptService.addDept(dept);
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "新增部门成功！");
+		}
+		else {
+			map.put("result", "新增部门失败！");
+		}
+		return JSON.toJSONString(map);
 	}
 	
 }

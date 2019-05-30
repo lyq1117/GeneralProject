@@ -3,3 +3,9 @@
     padding-left: 10px;
     color: rgb(120,120,120);
 }
+#dept_manage_table thead th{
+	text-align: center;
+}
+#dept_manage_table{
+	text-align: center;
+}

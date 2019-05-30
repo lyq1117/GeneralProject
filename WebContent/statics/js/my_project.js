@@ -254,6 +254,18 @@ $(function(){
 						$('#my_block_detail_duration').val(result.duration);
 						$('#my_block_detail_status').val(result.status);
 						$('#my_block_detail_leader').val(result.leader.username + '-' + result.leader.name);
+						
+						//当任务状态为1--废弃  或者2--正常结束完成  所有信息不可以更改。
+						if(result.status == 2 || result.status == 1){
+							$('#my_block_detail_blockDescription').prop('disabled', true);
+							$('#my_block_detail_createTime').prop('disabled', true);
+							$('#my_block_detail_duration').prop('disabled', true)
+							$('#my_block_detail_status').prop('disabled', true);
+							$('#my_block_detail_leader').prop('disabled', true);
+							$('#my_block_detail_save').hide();
+							$('#my_block_detail_addMember').hide();
+						}
+						
 						var projectId = result.projectId;
 						//发送ajax，通过工程id查询工程信息
 						$.ajax({

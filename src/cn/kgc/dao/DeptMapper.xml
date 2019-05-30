@@ -21,4 +21,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM dept
     </select>
     
+    <update id="save" parameterType="Dept">
+        UPDATE dept
+        SET name = #{name},
+        	leader_id = #{leader_id},
+        	location = #{location}
+        WHERE id = #{id}
+    </update>
+    
+    <update id="changeStatus">
+        UPDATE dept
+        SET status = #{1}
+        WHERE id = #{0}
+    </update>
+    
+    <insert id="add">
+        INSERT INTO dept(name,
+        				 location,
+        				 status)
+        VALUES(#{name},
+        	   #{location},
+        	   #{status})
+    </insert>
+    
+    <update id="cancelDeptLeaderId" parameterType="String">
+        
+        UPDATE dept
+        SET leader_id = NULL
+        WHERE leader_id = #{userId}
+        
+    </update>
+    
+    <update id="cancelManagerDeptLeaderId" parameterType="String">
+        
+        UPDATE dept
+        SET leader_id = NULL
+        WHERE leader_id = #{userId}
+        AND id = 4
+        
+    </update>
+    
 </mapper>

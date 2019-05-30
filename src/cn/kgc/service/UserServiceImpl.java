@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int changeNameIconTel(String userId, String name, String icon, String tel) {
-		return userMapper.updateNameIconTel(userId, name, icon, tel);
+	public int changeNameIconTelDeptId(String userId, String name, String icon, String tel, int deptId) {
+		return userMapper.updateNameIconTelDeptId(userId, name, icon, tel, deptId);
 	}
 
 	@Override
@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int addUser(User user) {
 		return userMapper.add(user);
+	}
+
+	@Override
+	public List<User> getDeptMembers(int deptId) {
+		return userMapper.getByDeptId(deptId);
 	}
 	
 	

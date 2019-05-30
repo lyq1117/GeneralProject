@@ -79,9 +79,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE username = #{0}
     </update>
     
-    <update id="updateNameIconTel">
+    <update id="updateNameIconTelDeptId">
         UPDATE user
-        SET name = #{1}, icon = #{2}, tel = #{3}
+        SET name = #{1}, icon = #{2}, tel = #{3}, dept_id = #{4}
         WHERE username = #{0}
     </update>
     
@@ -107,5 +107,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	   #{status},
         	   #{dept.id})
     </insert>
+    
+    <select id="getByDeptId" parameterType="int" resultMap="getUser">
+        SELECT u.*, d.id did, d.name dname, d.leader_id dleaderid, d.location dlocation,
+        	   d.status dstatus
+       	FROM user u, dept d
+       	WHERE u.dept_id = d.id
+       	AND u.dept_id = #{deptId}
+    </select>
     
 </mapper>

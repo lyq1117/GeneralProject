@@ -17,6 +17,8 @@
 		</div>
 		
 		<div class="row" style="width:97%; 
+							_height:500px;
+							min-height:500px;
 							background:white;
 							margin: 15px auto;
 							padding: 15px;
@@ -26,20 +28,23 @@
 	  	  	  	  	  <span class="dept_manage_title">
 	  	  	  	  	  	  部门列表
 	  	  	  	  	  </span>
+	  	  	  	  	  <div class="pull-right">
+	  	  	  	  	  	<a href="javascript:void(0)"
+	  	  	  	  	  			 style="color:green;"
+	  	  	  	  	  			 id="dept_manage_addBtn">
+		  	  	  	  	  	<i class="fa fa-plus"></i>
+	  	  	  	  	  	</a>
+	  	  	  	  	  </div>
 	  	  	  	</div>
 			</div>
 			
 			<div class="row" style="padding: 20px;">
 			
-				<div class="col-md-2">
-					<select class="form-control" id="dept_manage_deptSelect">
-	                    
-	                </select>
+				<div class="col-md-12">
+					<table class="table" id="dept_manage_table">
+					</table>
 				</div>
 				
-				<div class="col-md-10">
-					
-				</div>
 				
 			</div>
 		
@@ -48,5 +53,107 @@
 	
 	</div>
 </div>
+
+
+<!-- 编辑部门信息窗口 -->
+<div class="modal modal-default fade" id="dept_manage_editWin">
+  <div class="modal-dialog" style="width:35%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">编辑部门信息</h5>
+        		<input type="hidden" id="dept_manage_editWin_id"/>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  		
+	      	  		<div class="form-group">
+	                  <label class="col-sm-3 control-label">部门名称</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="dept_manage_editWin_name" 
+	                    			placeholder="部门">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">办公地点</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="dept_manage_editWin_location" 
+	                    			placeholder="办公地点">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">部长</label>
+	                  <div class="col-sm-9">
+	                    <select id="dept_manage_editWin_leaderSelect">
+	                    
+	                    </select>
+	                  </div>
+	                </div>
+	      	  		
+	      	  </div>
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	  <button type="button" id="dept_manage_editWin_saveBtn" class="btn btn-default pull-right" data-dismiss="modal">修改</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 添加部门窗口 -->
+<div class="modal modal-default fade" id="dept_manage_addWin">
+  <div class="modal-dialog" style="width:35%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" style="color:rgb(120,120,120)" 
+        		id="">添加部门</h5>
+        		<input type="hidden" id="dept_manage_editWin_id"/>
+      </div>
+      <form class="form-horizontal">
+      	  <div class="modal-body" style="padding:5px 10%; color:rgb(120,120,120)" id="approval_detailModal_body">
+	      	  
+	      	  <div class="row">
+	      	  		
+	      	  		<div class="form-group">
+	                  <label class="col-sm-3 control-label">部门名称</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="dept_manage_addWin_name" 
+	                    			placeholder="部门">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="col-sm-3 control-label">办公地点</label>
+	                  <div class="col-sm-9">
+	                    <input type="text" class="form-control" 
+	                    			id="dept_manage_addWin_location" 
+	                    			placeholder="办公地点">
+	                  </div>
+	                </div>
+	                
+	      	  </div>
+	      </div>
+      </form>
+      <div class="modal-footer">
+      	  <button type="button" id="dept_manage_addWin_saveBtn" class="btn btn-default pull-right" data-dismiss="modal">新增</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript" charset="UTF-8" src="/GeneralProject/statics/js/dept_manage.js"></script>
