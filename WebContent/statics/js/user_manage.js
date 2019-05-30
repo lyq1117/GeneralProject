@@ -18,6 +18,11 @@ $(function(){
 					$('#user_manage_giveRolesWin_bRoles').append(html);
 				}
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -99,6 +104,11 @@ $(function(){
 							}
 							
 						});
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				
@@ -133,6 +143,11 @@ $(function(){
 						$('#user_manage_editWin_icon').val(result.icon);
 						//电话赋值到文本框
 						$('#user_manage_editWin_tel').val(result.tel);
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				//显示编辑信息窗口
@@ -155,6 +170,11 @@ $(function(){
 						alert(result.result);
 						//刷新表格
 						$('#user_manage_table').bootstrapTable('refresh');
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 			});
@@ -175,6 +195,11 @@ $(function(){
 						alert(result.result);
 						//刷新表格
 						$('#user_manage_table').bootstrapTable('refresh');
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				})
 				
@@ -182,6 +207,11 @@ $(function(){
 			
 			
 			
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -232,6 +262,11 @@ $(function(){
 				alert(result.result);
 				//刷新表格
 				$('#user_manage_table').bootstrapTable('refresh');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		
@@ -272,10 +307,88 @@ $(function(){
 			dataType:'json',
 			success:function(result){
 				alert(result.result);
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		
 	});
 	
+	
+	/**
+	 * 打开添加用户窗口按钮
+	 */
+	$('#user_manager_addUserBtn').bind('click', function(){
+		$('#user_manage_addWin').modal('show');
+		//查询部门列表
+		$.ajax({
+			url:'system/getDeptList.do',
+			type:'POST',
+			dataType:'json',
+			success:function(result){
+				$.each(result, function(i, n){
+					var html = '<option value="'+n.id+'">'+n.name+'</option>';
+					$('#user_manage_addWin_deptSelect').append(html);
+				});
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
+			}
+		});
+	});
+	
+	/**
+	 * 添加用户按钮
+	 */
+	$('#user_manage_addWin_addBtn').bind('click', function(){
+		var userId = $('#user_manage_addWin_userId').val();
+		var name = $('#user_manage_addWin_userName').val();
+		var pwd = $('#user_manage_addWin_pwd').val();
+		var pwd2 = $('#user_manage_addWin_pwd2').val();
+		var icon = $('#user_manage_addWin_icon').val();
+		var tel = $('#user_manage_addWin_tel').val();
+		var deptId = $('#user_manage_addWin_deptSelect').val();
+		if(pwd != pwd2){
+			alert('输入的两次密码不相同！');
+			return ;
+		}
+		if(userId == '' ||
+		   name == '' ||
+		   pwd == '' ||
+		   pwd2 == '' ||
+		   icon == '' ||
+		   tel == ''){
+			alert('信息不能为空');
+			return ;
+		}
+		//发送ajax请求保存用户信息
+		$.ajax({
+			url:'system/addUser.do',
+			type:'POST',
+			data:{'userId' : userId,
+				  'name'   : name,
+				  'pwd'    : pwd,
+				  'pwd2'   : pwd2,
+				  'icon'   : icon,
+				  'tel'    : tel,
+				  'deptId' : deptId},
+			dataType:'json',
+			success:function(result){
+				alert(result.result);
+				//刷新表格
+				$('#user_manage_table').bootstrapTable('refresh');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
+			}
+		});
+	});
 	
 });

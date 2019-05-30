@@ -77,14 +77,21 @@ public class LoginController {
 		} catch (Exception e) {
 			System.out.println("用户名或者密码错误");
 			Map<String, String> map = new HashMap<>();
-			map.put("result", "false");
+			map.put("result", "用户名或者密码错误");
 			Object object = JSON.toJSON(map);
 			return object.toString();
 		}
 		Map<String, String> map = new HashMap<>();
+		User user = (User)subject.getPrincipal();
+		//若账户被禁用
+		if(user.getStatus() == 1) {
+			System.out.println("账户被禁用了！！！！！！！！");
+			map.put("result", "该账户已被禁用！请联系管理员！");
+			return JSON.toJSONString(map);
+		}
+		//账户密码正确且账户未被禁用
 		map.put("result", "true");
 		Object object = JSON.toJSON(map);
-		User user = (User)subject.getPrincipal();
 		return object.toString();
 	}
 	

@@ -10,6 +10,11 @@ $(function(){
 		dataType:'json',
 		success:function(result){
 			$('#personal_disk_hidePath').val(result.root);
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -54,9 +59,19 @@ $(function(){
 						alert(result.result);
 						//刷新表格
 						$('#personal_disk_table').bootstrapTable('refresh');
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 			});
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -78,6 +93,11 @@ $(function(){
 				alert(result.result);
 				//刷新表格
 				$('#personal_disk_table').bootstrapTable('refresh');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});

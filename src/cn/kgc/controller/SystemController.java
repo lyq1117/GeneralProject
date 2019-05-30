@@ -21,16 +21,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import cn.kgc.pojo.Dept;
 import cn.kgc.pojo.Menu;
 import cn.kgc.pojo.Role;
 import cn.kgc.pojo.RoleMenu;
 import cn.kgc.pojo.User;
 import cn.kgc.pojo.UserRole;
+import cn.kgc.service.DeptService;
 import cn.kgc.service.MenuService;
 import cn.kgc.service.RoleMenuService;
 import cn.kgc.service.RoleService;
 import cn.kgc.service.UserRoleService;
 import cn.kgc.service.UserService;
+import cn.kgc.util.ShiroUtil;
 
 @Controller
 @RequestMapping(value="/page/system")
@@ -46,6 +49,8 @@ public class SystemController {
 	private RoleMenuService roleMenuService;//角色-菜单业务对象
 	@Resource
 	private MenuService menuService;//菜单业务对象
+	@Resource
+	private DeptService deptService;//部门业务对象
 	
 	/**
 	 * 获取用户管理的表格数据
@@ -355,6 +360,63 @@ public class SystemController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", true);
 		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 新增用户
+	 * @param userId
+	 * @param name
+	 * @param pwd
+	 * @param pwd2
+	 * @param icon
+	 * @param tel
+	 * @param deptId
+	 * @return
+	 */
+	@RequiresPermissions(value="system:addUser")
+	@ResponseBody
+	@RequestMapping(value="/addUser.do",
+					method=RequestMethod.POST)
+	public String addUser(@RequestParam String userId,
+						  @RequestParam String name,
+						  @RequestParam String pwd,
+						  @RequestParam String pwd2,
+						  @RequestParam String icon,
+						  @RequestParam String tel,
+						  @RequestParam int deptId) {
+		//md5加密用户输入的密码
+		String md5Pwd = ShiroUtil.md5(pwd, userId);
+		User user = new User();
+		user.setUsername(userId);
+		user.setName(name);
+		user.setPwd(md5Pwd);
+		user.setIcon(icon);
+		user.setTel(tel);
+		user.setStatus(0);
+		Dept dept = deptService.getDeptById(deptId);
+		user.setDept(dept);
+		int count = userService.addUser(user);
+		Map<String, String> map = new HashMap<>();
+		if(count == 1) {
+			map.put("result", "添加用户成功！");
+		}
+		else {
+			map.put("result", "添加用户失败！");
+		}
+		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 获取部门列表
+	 * @return
+	 */
+	@RequiresPermissions(value="system:getDeptList")
+	@ResponseBody
+	@RequestMapping(value="/getDeptList.do",
+					method=RequestMethod.POST)
+	public String getDeptList() {
+		List<Dept> depts = deptService.getAllDept();
+		return JSONArray.toJSONString(depts);
 	}
 	
 }

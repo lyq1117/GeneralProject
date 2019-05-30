@@ -16,4 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE leader_id=#{leaderId}
     </select>
     
+    <select id="getAll" resultType="Dept">
+        SELECT *
+        FROM dept
+    </select>
+    
 </mapper>

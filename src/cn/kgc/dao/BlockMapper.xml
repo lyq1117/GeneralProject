@@ -100,4 +100,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE  b.leader_id = u.username
     </select>
 	    
+    <select id="getByLeaderId" resultMap="blockList" parameterType="String">
+        SELECT b.id bid, b.description bdescription, b.create_time bcreateTime, b.duration 
+        	   bduration, b.real_duration brealDuration, b.status bstatus, b.project_id bprojectId,
+        	   u.username uusername, u.pwd upwd, u.name uname, u.icon uicon, u.tel utel,
+        	   u.status ustatus
+        FROM block b, user u
+        WHERE b.leader_id = u.username
+        AND b.leader_id = #{leaderId}
+    </select>
+    
 </mapper>

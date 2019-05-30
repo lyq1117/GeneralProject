@@ -69,4 +69,11 @@ public interface UserMapper {
 	 */
 	public int updateStatus(String userId, int status);
 	
+	/**
+	 * 添加用户信息
+	 * @param user
+	 * @return
+	 */
+	public int add(User user);
+	
 }

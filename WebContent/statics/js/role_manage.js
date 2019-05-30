@@ -50,6 +50,11 @@ $(function(){
 								//刷新表格
 								$('#role_manage_table').bootstrapTable('refresh');
 							}
+						},
+						error:function(){
+							//没有权限
+							$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+							$("#index_main_content").css('padding','');
 						}
 					});
 					
@@ -69,6 +74,11 @@ $(function(){
 								//刷新表格
 								$('#role_manage_table').bootstrapTable('refresh');
 							}
+						},
+						error:function(){
+							//没有权限
+							$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+							$("#index_main_content").css('padding','');
 						}
 					});
 				}
@@ -99,6 +109,11 @@ $(function(){
 								//刷新表格
 								$('#role_manage_table').bootstrapTable('refresh');
 							}
+						},
+						error:function(){
+							//没有权限
+							$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+							$("#index_main_content").css('padding','');
 						}
 					});
 					
@@ -119,6 +134,11 @@ $(function(){
 								//刷新表格
 								$('#role_manage_table').bootstrapTable('refresh');
 							}
+						},
+						error:function(){
+							//没有权限
+							$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+							$("#index_main_content").css('padding','');
 						}
 					});
 					
@@ -127,6 +147,11 @@ $(function(){
 				}
 			});
 			
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

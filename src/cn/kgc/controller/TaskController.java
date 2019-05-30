@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
@@ -159,7 +160,8 @@ public class TaskController {
 	 * @param projectId
 	 * @return
 	 */
-	@RequiresPermissions("task:getProjectById")
+	@RequiresPermissions(value= {"task:getProjectById","index:getMapProjectInfo"},
+						 logical = Logical.OR)
 	@ResponseBody
 	@RequestMapping(value="/getProjectById.do")
 	public String getProjectById(@RequestParam int projectId) {
@@ -216,10 +218,8 @@ public class TaskController {
 	@ResponseBody
 	@RequestMapping(value="/getMembersOfProject.do",method=RequestMethod.GET)
 	public String getMembersOfProject(@RequestParam int projectId) {
-		
 		Project project = projectService.getProjectById(projectId);
-		
-		//成员结合
+		//成员集合
 		List<User> members = projectService.getMembersOfProject(projectId);
 		List<Map<String, String>> list = new ArrayList<>();
 		for (User user : members) {
@@ -475,6 +475,7 @@ public class TaskController {
 	 * 获取当前用户的任务集合
 	 * @return
 	 */
+	@RequiresPermissions(value="task:getBlocksOfUser")
 	@ResponseBody
 	@RequestMapping(value="/getBlocksOfUser.do")
 	public String getBlocksOfUser() {
@@ -557,6 +558,35 @@ public class TaskController {
 								  @RequestParam int projectId) {
 		Map<String, List<Block>> map = blockService.getWeeklyBlocks(DateUtil.getDate(mondayDate), projectId);
 		return JSON.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
+	}
+	
+	/**
+	 * 获取当前用户所负责的任务列表
+	 * @return
+	 */
+	@RequiresPermissions(value="task:getBlocksTableByLeaderId")
+	@ResponseBody
+	@RequestMapping(value="/getBlocksTableByLeaderId.do")
+	public String getBlocksTableByLeaderId() {
+		//获取当前用户
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getPrincipal();
+		//根据负责人id获取任务集合
+		List<Block> blocks = blockService.getBlocksByLeaderId(user.getUsername());
+		//封装bootstrapTable表格数据
+		List<Map<String, Object>> result = new ArrayList<>();
+		for (Block block : blocks) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", block.getId());
+			map.put("description", block.getDescription());
+			map.put("createTime", DateUtil.getStr(block.getCreateTime()));
+			map.put("duration", block.getDuration());
+			Project project = projectService.getProjectById(block.getProjectId());
+			map.put("project", project.getId() + "-" + project.getName());
+			map.put("leader", block.getLeader().getUsername() + "-" + block.getLeader().getName());
+			result.add(map);
+		}
+		return JSONArray.toJSONString(result);
 	}
 	
 }

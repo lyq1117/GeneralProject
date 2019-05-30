@@ -8,6 +8,7 @@ $(document).ready(function(){
 			$("#index_user_tip").text(result.name);
 			$('#index_user_img').attr('src', result.icon);
 			$('#index_user_img_big').attr('src', result.icon);
+			$('#index_user_idAndName').html(result.name+'<small>' + result.username + '</small>');
 		}
 	});
 	

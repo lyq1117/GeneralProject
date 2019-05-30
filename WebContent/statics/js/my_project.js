@@ -17,6 +17,11 @@ $(function(){
 		dataType:'json',
 		success:function(result){
 			addProject(result);
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -67,9 +72,19 @@ $(function(){
 									//重新载入主界面的content
 									$('#index_main_content').load('/GeneralProject/page/task/my_project.html');
 								},400);
+							},
+							error:function(){
+								//没有权限
+								$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+								$("#index_main_content").css('padding','');
 							}
 						});
 					});
+				},
+				error:function(){
+					//没有权限
+					$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+					$("#index_main_content").css('padding','');
 				}
 			});
 			
@@ -123,6 +138,11 @@ $(function(){
 							//关闭窗口
 							$('#my_project_view_addBlock').modal('hide');
 						}
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 			});
@@ -155,6 +175,21 @@ $(function(){
 						$('#my_project_detail_status').val(projectStatus);
 						var projectLeader = project.user;
 						$('#my_project_detail_leader').val(projectLeader.username + '-' + projectLeader.name);
+						
+						//当工程项目状态为1--废弃  获取2--正常结束完成  所有信息不可以更改。
+						if(projectStatus == 2 || projectStatus == 1){
+							$('#my_project_detail_projectName').prop('disabled', true);
+							$('#my_project_detail_projectDescription').prop('disabled', true);
+							$('#my_project_detail_duration').prop('disabled', true)
+							$('#my_project_detail_status').prop('disabled', true);
+							$('#my_project_detail_addMember').hide();
+							$('#my_project_detail_save').hide();
+						}
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				
@@ -189,6 +224,11 @@ $(function(){
 								}
 							});
 						});
+					},
+					onLoadError:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				
@@ -226,6 +266,11 @@ $(function(){
 								$('#my_block_detail_projectName').val(JSON.parse(result2.project).name);
 							}
 						});
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				//加载工程小块(即任务)成员表格
@@ -258,6 +303,11 @@ $(function(){
 								}
 							});
 						});
+					},
+					onLoadError:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 				
@@ -292,6 +342,11 @@ $(function(){
 			$("#my_project_view_new_name").text(result.name.substring(0,1));
 			/*$('#index_user_img').attr('src', result.icon);
 			$('#index_user_img_big').attr('src', result.icon);*/
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -434,8 +489,6 @@ $(function(){
 		var duration = createTimeStr.split(' ')[1];
 		var location = $('#my_project_view_new_project_location').val();
 		
-		
-		
 		//alert(projectName + '*' + createTime + '*' + duration);
 		if(isEmpty(projectName) || isEmpty(createTime) || isEmpty(duration) || isEmpty(location)){
 			alert("信息不能空");
@@ -446,7 +499,7 @@ $(function(){
 		var myGeo = new BMap.Geocoder();
 		myGeo.getPoint(location, function(point){      
 		    if (point) {     
-		    	
+		    	//alert(point.lng + '-' + point.lat);
 		    	//发送ajax请求，添加工程
 				$.ajax({
 					url:'task/addProject.do',
@@ -459,8 +512,13 @@ $(function(){
 						  'lat' : point.lat},
 					dataType:'text',
 					success:function(result){
-						alert(result);
+						//alert(result);
 						$('#index_main_content').load('/GeneralProject/page/task/my_project.html');
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
 					}
 				});
 		    	
@@ -513,6 +571,11 @@ $(function(){
 				});
 				
 				
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	}
@@ -545,6 +608,11 @@ $(function(){
 					alert('添加附件失败');
 					//loadProjectFiles();
 				}
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});
@@ -573,6 +641,11 @@ $(function(){
 					alert('删除附件失败');
 					//loadProjectFiles();
 				}
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});

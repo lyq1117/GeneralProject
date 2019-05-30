@@ -61,5 +61,12 @@ public interface BlockMapper {
 	 * @return
 	 */
 	public List<Block> getAll();
+	
+	/**
+	 * 通过负责人id获取任务集合
+	 * @param leaderId
+	 * @return
+	 */
+	public List<Block> getByLeaderId(String leaderId);
 
 }

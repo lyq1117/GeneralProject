@@ -91,4 +91,11 @@ public interface BlockService {
 	 * @return
 	 */
 	public List<Block> getAllBlocks();
+	
+	/**
+	 * 通过负责人id获取任务集合
+	 * @param leaderId
+	 * @return
+	 */
+	public List<Block> getBlocksByLeaderId(String leaderId);
 }

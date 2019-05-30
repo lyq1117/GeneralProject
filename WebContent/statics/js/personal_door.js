@@ -87,8 +87,8 @@ $(function(){
 			field : 'description',
 			title : '任务描述'
 		},{
-			field : '所属工程',
-			title : 'projectName'
+			field : 'projectName',
+			title : '所属工程'
 		},{
 			field : 'blockLeader',
 			title : '任务组长'

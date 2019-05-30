@@ -55,6 +55,7 @@ public class MyRealm extends AuthorizingRealm{
 		//找出该用户具有的所有角色
 		List<UserRole> userRoles = userRoleService.getUserRoleByUserId(user.getUsername());
 		for (UserRole userRole : userRoles) {
+			//System.out.println("role############ " + userRole.getRoleId());
 			//根据角色id获取 角色具有的菜单(包括菜单栏菜单和链接菜单)
 			List<RoleMenu> roleMenus = 
 					roleMenuService.getRoleMenusByRoleId(userRole.getRoleId());

@@ -21,6 +21,11 @@ $(function(){
 					alert('更新成功!');
 				else
 					alert('更新失败!');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});
@@ -70,6 +75,11 @@ $(function(){
 						}
 					});
 				});
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		$('#my_block_detail_addMember_window').modal('show');

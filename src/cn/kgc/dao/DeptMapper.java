@@ -19,5 +19,11 @@ public interface DeptMapper {
 	 * @return
 	 */
 	public List<Dept> getByleaderId(String leaderId);
+	
+	/**
+	 * 获取所有部门集合
+	 * @return
+	 */
+	public List<Dept> getAll();
 
 }

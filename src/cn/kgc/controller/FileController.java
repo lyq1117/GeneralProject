@@ -252,9 +252,7 @@ public class FileController {
 								@RequestParam String dicName) {
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();//当前操作的用户
-		
 		File file = new File(dicNamePath);
-		
 		Map<String, String> map = new HashMap<>();
 		if(!file.exists()) {
 			file.mkdir();
@@ -287,9 +285,7 @@ public class FileController {
 					method=RequestMethod.GET)
 	public String getFiles(@RequestParam String dictionaryPath,
 									 HttpServletRequest request) {
-		System.out.println("---------" + dictionaryPath);
 		List<Map<String, String>> list = new ArrayList<>();
-		
 		File file = new File(dictionaryPath);
 		File[] files = file.listFiles();
 		for (File f : files) {

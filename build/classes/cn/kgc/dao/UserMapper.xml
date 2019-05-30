@@ -91,4 +91,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE username = #{0}
     </update>
     
+    <insert id="add" parameterType="User">
+        INSERT INTO user(username,
+        				 pwd,
+        				 name,
+        				 icon,
+        				 tel,
+        				 status,
+        				 dept_id)
+        VALUES(#{username},
+        	   #{pwd},
+        	   #{name},
+        	   #{icon},
+        	   #{tel},
+        	   #{status},
+        	   #{dept.id})
+    </insert>
+    
 </mapper>

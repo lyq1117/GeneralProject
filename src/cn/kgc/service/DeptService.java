@@ -1,5 +1,7 @@
 package cn.kgc.service;
 
+import java.util.List;
+
 import cn.kgc.pojo.Dept;
 
 public interface DeptService {
@@ -10,5 +12,11 @@ public interface DeptService {
 	 * @return
 	 */
 	public Dept getDeptById(int id);
+	
+	/**
+	 * 获取所有部门集合
+	 * @return
+	 */
+	public List<Dept> getAllDept();
 
 }

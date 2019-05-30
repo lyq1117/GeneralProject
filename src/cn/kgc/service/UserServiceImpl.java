@@ -69,6 +69,11 @@ public class UserServiceImpl implements UserService {
 	public int openUser(String userId) {
 		return userMapper.updateStatus(userId, 0);//启用用户  即状态改为0
 	}
+
+	@Override
+	public int addUser(User user) {
+		return userMapper.add(user);
+	}
 	
 	
 

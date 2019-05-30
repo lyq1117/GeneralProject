@@ -32,6 +32,11 @@ $(function(){
 					alert('修改成功!');
 				else
 					alert('修改失败!');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});
@@ -82,9 +87,19 @@ $(function(){
 								//关闭通讯录窗口
 								$('#my_project_detail_addMember_window').modal('hide');
 							}
+						},
+						error:function(){
+							//没有权限
+							$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+							$("#index_main_content").css('padding','');
 						}
 					});
 				});
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		//打开通讯录窗口
@@ -204,6 +219,11 @@ $(function(){
 		    
 		  
 		    
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -262,6 +282,11 @@ $(function(){
 		      ]*/,
 		      hideHover: 'auto'
 		    });
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -299,6 +324,11 @@ $(function(){
 				var html = '<li><span class="handle"><i class="fa fa-clock-o"></i></span><span class="text">'+n.description+'</span><small class="label label-danger"><i class="fa fa-clock-o"></i> '+millisecond2Date(endTime.getTime())+'截止</small></li>';
 				$('#my_project_detail_weekly_delayToDoList').append(html);
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -329,6 +359,11 @@ $(function(){
 				var html = '<div class="col-md-12"><ul class="timeline"><li class="time-label"><span class="bg-red"><i class="fa fa-bullhorn"></i>'+n.title+'</span></li><li><i class="fa fa-comments bg-yellow"></i><div class="timeline-item"><span class="time"><i class="fa fa-clock-o"></i> '+millisecond2Date(n.time)+'</span><h3 class="timeline-header"><a href="#">'+n.user.name+'</a> '+n.user.username+'</h3><div class="timeline-body">'+n.content+'</div></div></li></ul></div>';
 				$('#my_project_detail_notice_panel_list').append(html);
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

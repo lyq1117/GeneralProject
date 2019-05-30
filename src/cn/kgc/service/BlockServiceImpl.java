@@ -277,4 +277,9 @@ public class BlockServiceImpl implements BlockService {
 		return blockMapper.getAll();
 	}
 
+	@Override
+	public List<Block> getBlocksByLeaderId(String leaderId) {
+		return blockMapper.getByLeaderId(leaderId);
+	}
+
 }

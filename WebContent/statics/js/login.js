@@ -10,7 +10,7 @@ $(function(){
 				if(result.result=="true")
 					window.location.href="/GeneralProject/page/index.html";
 				else{
-					alert("用户名或密码错误");
+					alert(result.result);
 				}
 			}
 		});

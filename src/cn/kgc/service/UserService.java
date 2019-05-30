@@ -72,5 +72,12 @@ public interface UserService {
 	 * @return
 	 */
 	public int openUser(String userId);
+	
+	/**
+	 * 添加用户信息
+	 * @param user
+	 * @return
+	 */
+	public int addUser(User user);
 
 }

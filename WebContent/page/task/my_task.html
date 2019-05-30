@@ -301,7 +301,12 @@ $(function () {
 		  	  			   	  success: function(result2){
 		  	  			   		  var project = JSON.parse(result2.project)
 		  	  			   		  $('#my_task_block_info_window_whichProject').val(project.id + '-' + project.name);
-		  	  			   	  }
+		  	  			   	  },
+		  	  				error:function(){
+			  	  				//没有权限
+			  	  				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			  	  				$("#index_main_content").css('padding','');
+		  	  				  }
 		  	  			  }); 
 		  	  			  $('#my_task_block_info_window_description').val(result.description);
 		  	  			  $('#my_task_block_info_window_leader').val(result.leader.username + '-' + result.leader.name);
@@ -315,8 +320,14 @@ $(function () {
 		  	  			  else if(result.status == 2)
 		  	  				  status = '正常结束';
 		  	  			  $('#my_task_block_info_window_status').val(status);
-		  	  		  }
+		  	  		  },
+		  			error:function(){
+		  				//没有权限
+		  				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+		  				$("#index_main_content").css('padding','');
+		  			}
 		  	  	  });
+		  	  	 
 		  	  },
 		  	  eventMouseover:function(event, jsEvent, view){
 		  		//alert('hover...' + view);  
@@ -352,7 +363,12 @@ $(function () {
 		    })
     		
     		
-    	}
+    	},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
+		}
     });
     
     
@@ -403,6 +419,7 @@ $(function () {
 	}
     
   });
+  
 	
   
 </script>
