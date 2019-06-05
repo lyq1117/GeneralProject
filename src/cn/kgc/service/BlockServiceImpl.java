@@ -282,4 +282,9 @@ public class BlockServiceImpl implements BlockService {
 		return blockMapper.getByLeaderId(leaderId);
 	}
 
+	@Override
+	public int ownBlocksCount(String userId) {
+		return blockMapper.getByLeaderId(userId).size();
+	}
+
 }

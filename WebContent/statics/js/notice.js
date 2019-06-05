@@ -60,6 +60,11 @@ $(function(){
 				$('#notice_allNoticeTable').bootstrapTable('refresh');
 				//刷新我发送的公告表格
 				$('#notice_myNoticeTable').bootstrapTable('refresh');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});
@@ -90,6 +95,11 @@ $(function(){
 		onLoadSuccess:function(){
 			
 		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
+		},
 		onClickRow: function(row, $element, field){
 			var id = row.id;
 			/**
@@ -110,6 +120,11 @@ $(function(){
 						$('#notice_look_modalWin_jinji').hide();
 						$('#notice_look_modalWin_yiban').show();
 					}
+				},
+				error:function(){
+					//没有权限
+					$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+					$("#index_main_content").css('padding','');
 				}
 			});
 			
@@ -144,6 +159,11 @@ $(function(){
 		onLoadSuccess:function(){
 			
 		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
+		},
 		onClickRow:function(row, $element, field){
 			var id = row.id;
 			/**
@@ -164,6 +184,11 @@ $(function(){
 						$('#notice_look_modalWin_jinji').hide();
 						$('#notice_look_modalWin_yiban').show();
 					}
+				},
+				error:function(){
+					//没有权限
+					$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+					$("#index_main_content").css('padding','');
 				}
 			});
 			

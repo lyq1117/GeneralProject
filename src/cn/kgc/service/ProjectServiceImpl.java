@@ -269,7 +269,8 @@ public class ProjectServiceImpl implements ProjectService {
 				Date todayDate = DateUtil.getDate(todayStr);
 				long millSecondOfDay = 24*60*60*1000;//一天毫秒数
 				long realDuration = (todayDate.getTime()-project.getCreateTime().getTime()) / millSecondOfDay;//实际工期
-				double percentage = realDuration/project.getDuration();//进度百分比
+				double percentage = (double)realDuration/(double)project.getDuration();//进度百分比
+				System.out.println("er---------" + percentage + "---" + realDuration + "---" + project.getDuration());
 				if(percentage>1) {
 					map.put("status", "<small class=\"label label-danger\">延期</small>");
 				}

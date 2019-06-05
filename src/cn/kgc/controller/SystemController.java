@@ -1,5 +1,6 @@
 package cn.kgc.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -617,6 +619,44 @@ public class SystemController {
 			map.put("result", "新增部门失败！");
 		}
 		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 获取网盘中的用户头像图片
+	 * @return
+	 */
+	@RequiresPermissions(value="system:getHeadsPic")
+	@ResponseBody
+	@RequestMapping(value="/getHeadsPic.do",
+					method=RequestMethod.POST)
+	public String getHeadsPic(HttpServletRequest request) {
+		//用户头像图片服务器下的路径
+		String pathname = request.getServletContext().getRealPath("") + "upload" +
+						  File.separator + "enterprise_file" + File.separator + 
+						  "头像";
+		File file = new File(pathname);
+		//初始化结果集
+		Map<String, Object> result = new HashMap<>();
+		//如果“头像”文件夹存在
+		if(file.exists() && file.isDirectory()) {
+			File[] picFiles = file.listFiles();
+			//如果“头像”文件夹下文件为空
+			if(picFiles.length == 0) {
+				result.put("result", false);
+			}else {//“头像”文件夹下不为空
+				List<String> picList = new ArrayList<>();
+				result.put("result", true);
+				for (File picFile : picFiles) {
+					picList.add("/GeneralProject/upload/enterprise_file/头像/" + picFile.getName());
+				}
+				//头像图片结果集
+				result.put("picList", picList);
+			}
+		}
+		else {
+			result.put("result", false);
+		}
+		return JSON.toJSONString(result);
 	}
 	
 }

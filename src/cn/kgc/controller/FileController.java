@@ -297,7 +297,7 @@ public class FileController {
 				map.put("size", "");
 				map.put("uploadUser", disk.getUser().getUsername()+"-"+disk.getUser().getName());
 				map.put("uploadDate", DateUtil.getStr(disk.getUploadDate()));
-				map.put("delOption", "<a style=\"color:red;\" href=\"javascritp:void(0)\" class=\"disk_delBtn\" fileId=\""+disk.getId()+"\"><i class=\"fa fa-remove\"></i></a>");
+				map.put("delOption", "<a style=\"color:red;\" href=\"javascript:void(0)\" class=\"disk_delBtn\" fileId=\""+disk.getId()+"\"><i class=\"fa fa-remove\"></i></a>");
 				list.add(map);
 				continue;
 			}
@@ -329,7 +329,7 @@ public class FileController {
 			}
 			map.put("uploadUser", disk.getUser().getUsername() + "-" + disk.getUser().getName());
 			map.put("uploadDate", DateUtil.getStr(disk.getUploadDate()));
-			map.put("delOption", "<a style=\"color:red;\" href=\"javascritp:void(0)\" class=\"disk_delBtn\" fileId=\""+disk.getId()+"\"><i class=\"fa fa-remove\"></i></a>");
+			map.put("delOption", "<a style=\"color:red;\" href=\"javascript:void(0)\" class=\"disk_delBtn\" fileId=\""+disk.getId()+"\"><i class=\"fa fa-remove\"></i></a>");
 			list.add(map);
 		}
 		return JSONArray.toJSONString(list);

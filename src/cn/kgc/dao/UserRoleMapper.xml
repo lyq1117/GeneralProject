@@ -34,5 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	   #{roleId})
     </insert>
     
+    <select id="getByUserIdAndRoleId" resultType="UserRole">
+        SELECT user_id userId, role_id roleId
+        FROM user_role
+        WHERE user_id = #{0}
+        AND role_id = #{1}
+    </select>
     
 </mapper>

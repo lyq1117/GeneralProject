@@ -318,6 +318,7 @@ public class ApplicationController {
 	 * 获取企业公告的所有公告的表格数据
 	 * @return
 	 */
+	@RequiresPermissions(value="application:getAllNoticeTable")
 	@ResponseBody
 	@RequestMapping(value="/getAllNoticeTable.do")
 	public String getAllNoticeTable() {
@@ -347,6 +348,7 @@ public class ApplicationController {
 	 * @param status
 	 * @return
 	 */
+	@RequiresPermissions(value="application:submitNotice")
 	@ResponseBody
 	@RequestMapping(value="/submitNotice.do",
 					method=RequestMethod.POST)
@@ -380,6 +382,7 @@ public class ApplicationController {
 	 * @param id
 	 * @return
 	 */
+	@RequiresPermissions(value="application:getNoticeById")
 	@ResponseBody
 	@RequestMapping(value="/getNoticeById.do",
 					method=RequestMethod.POST)
@@ -392,6 +395,7 @@ public class ApplicationController {
 	 * 获取我发布的公告表格数据
 	 * @return
 	 */
+	@RequiresPermissions(value="application:getMyNoticeTable")
 	@ResponseBody
 	@RequestMapping(value="/getMyNoticeTable.do")
 	public String getMyNoticeTable() {

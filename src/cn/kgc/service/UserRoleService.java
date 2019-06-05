@@ -33,5 +33,21 @@ public interface UserRoleService {
 	 * @return
 	 */
 	public int addUserRole(String userId, String roleId);
+	
+	/**
+	 * 根据用户id和角色id删除用户-角色关联
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 */
+	public int deleteUserRoleByUserIdAndRoleId(String userId, String roleId);
+	
+	/**
+	 * 通过用户id和角色id获取用户角色关联
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 */
+	public List<UserRole> getUserRoleByUserIdAndRoleId(String userId, String roleId);
 
 }

@@ -12,4 +12,10 @@
         <item>辞职原因</item>
         <item>辞职时间</item>
     </approval>
+    <approval name="带薪假期">
+        <item>请假原因</item>
+        <item>时长</item>
+        <item>离开日期</item>
+        <item>回岗日期</item>
+    </approval>
 </approvals>

@@ -59,6 +59,11 @@ $(function(){
 				});
 			});
 			
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -96,6 +101,11 @@ $(function(){
 					}
 				});
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -133,6 +143,11 @@ $(function(){
 					}
 				});
 			});
+		},
+		error:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -156,7 +171,7 @@ $(function(){
 		}
 		var type = $('#approval_modal_modalType').val();//审批类型(0-人事审批，1-财务审批，3-行政审批)
 		
-		alert(type);
+		//alert(type);
 		/**
 		 * 发送ajax，保存审批信息
 		 */
@@ -173,6 +188,11 @@ $(function(){
 				$('#approval_wspdPanel_table').bootstrapTable('refresh');
 				//刷新我申请的表格
 				$('#approval_wsqdPanel_table').bootstrapTable('refresh');
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 	});
@@ -231,9 +251,19 @@ $(function(){
 					$('#approval_detailModal_wspd_submitDate').text(result.submitDate);//审批提交日期
 					$('#approval_detailModal_wspd_content').text(result.content);//审批内容
 					
+				},
+				error:function(){
+					//没有权限
+					$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+					$("#index_main_content").css('padding','');
 				}
 			});
 			$('#approval_detailModal_wspd').modal('show');//显示我审批的审批的详细内容
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	
@@ -247,6 +277,11 @@ $(function(){
 			dataType:'json',
 			success:function(result){
 				alert(result.result);
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		//刷新我审批的表格
@@ -266,6 +301,11 @@ $(function(){
 			dataType:'json',
 			success:function(result){
 				alert(result.result);
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
 			}
 		});
 		//刷新我审批的表格
@@ -319,9 +359,19 @@ $(function(){
 					$('#approval_detailModal_wsqd_submitUserDeptName').text(result.submitUser.dept.name);//提交审批人的部门名
 					$('#approval_detailModal_wsqd_submitDate').text(result.submitDate);//审批提交日期
 					$('#approval_detailModal_wsqd_content').text(result.content);//审批内容
+				},
+				error:function(){
+					//没有权限
+					$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+					$("#index_main_content").css('padding','');
 				}
 			});
 			$('#approval_detailModal_wsqd').modal('show');//点击我申请的审批信息，显示我申请的审批的详细信息窗口
+		},
+		onLoadError:function(){
+			//没有权限
+			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+			$("#index_main_content").css('padding','');
 		}
 	});
 	

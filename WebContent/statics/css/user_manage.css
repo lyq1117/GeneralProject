@@ -3,3 +3,9 @@
     padding-left: 10px;
     color: rgb(120,120,120);
 }
+.user_manage_addWin_headImg_active{
+	border: 4px solid rgb(218,218,11);
+}
+.user_manage_editWin_headImg_active{
+	border: 4px solid rgb(218,218,11);
+}

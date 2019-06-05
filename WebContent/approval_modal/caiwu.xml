@@ -6,4 +6,11 @@
         <item>报销金额</item>
         <item>报销时间</item>
     </approval>
+    <approval name="工程拨款">
+        <item>工程名</item>
+        <item>详细说明</item>
+        <item>拨款金额</item>
+        <item>预计回报率</item>
+        <item>净收益</item>
+    </approval>
 </approvals>

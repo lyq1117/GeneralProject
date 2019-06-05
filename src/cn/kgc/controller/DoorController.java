@@ -71,7 +71,10 @@ public class DoorController {
 		//获取当前用户提交的审批集合
 		List<Approval> approvals = approvalService.getApprovalsBySubmitUserId(user.getUsername());
 		List<Map<String, String>> result = new ArrayList<>();
+		int index = 0;
 		for (Approval approval : approvals) {
+			if(index > 3)
+				break;
 			Map<String, String> map = new HashMap<>();
 			map.put("id", approval.getId());
 			map.put("title", approval.getTitle());
@@ -85,6 +88,7 @@ public class DoorController {
 				map.put("status", "<small class=\"label label-danger\">已拒绝</small>");
 			}
 			result.add(map);
+			index++;
 		}
 		return JSONArray.toJSONString(result);
 	}
@@ -136,10 +140,12 @@ public class DoorController {
 		User user = (User) subject.getPrincipal();
 		
 		List<Map<String, String>> result = new ArrayList<>();//结果集
-		
+		int index = 0;
 		//获取当前用户参与的任务集合
 		List<UserBlock> userBlocks = userBlockService.getUserBlockByUserId(user.getUsername());
 		for (UserBlock userBlock : userBlocks) {
+			if(index > 3)
+				break;
 			Map<String, String> map = new HashMap<>();//表格的每一行数据
 			Block block = blockService.getBlockById(userBlock.getBlockId());
 			//任务描述
@@ -151,6 +157,7 @@ public class DoorController {
 			User leader = block.getLeader();
 			map.put("blockLeader", leader.getUsername() + "-" + leader.getName());
 			result.add(map);
+			index++;
 		}
 		return JSONArray.toJSONString(result);
 	}

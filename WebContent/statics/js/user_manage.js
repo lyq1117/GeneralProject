@@ -152,6 +152,7 @@ $(function(){
 				$.ajax({
 					url:'system/getUserInfo.do',
 					type:'POST',
+					async:false,
 					data:{'userId' : userId},
 					dataType:'json',
 					success:function(result){
@@ -174,6 +175,44 @@ $(function(){
 				});
 				//显示编辑信息窗口
 				$('#user_manage_editWin').modal('show');
+				
+				//查询企业网盘中“头像”文件下的所有图片
+				$.ajax({
+					url:'system/getHeadsPic.do',
+					type:'POST',
+					dataType:'json',
+					success:function(result){
+						//如果返回结果中有头像图片
+						if(result.result == true){
+							//清除无头像的提示语
+							$('#user_manage_editWin_headsUl').html('');
+							//列出头像图片
+							$.each(result.picList, function(i, n){
+								if($('#user_manage_editWin_icon').val() == n){
+									$('#user_manage_editWin_headsUl').append('<li><img class="user_manage_editWin_headImg user_manage_editWin_headImg_active" src="'+n+'" width="50" height="50" class="img-circle" alt="User Image"></li>');
+								}else{
+									$('#user_manage_editWin_headsUl').append('<li><img class="user_manage_editWin_headImg" src="'+n+'" width="50" height="50" class="img-circle" alt="User Image"></li>');
+								}
+							});
+							
+							//头像图片点击事件
+							$('.user_manage_editWin_headImg').bind('click', function(){
+								$.each($('.user_manage_addWin_headImg'), function(i, n){
+									$(n).removeClass('user_manage_editWin_headImg_active');
+								});
+								//选中状态
+								$(this).addClass('user_manage_editWin_headImg_active');
+								//赋值头像地址
+								$('#user_manage_editWin_icon').val($(this).attr('src'));
+							});
+						}
+					},
+					error:function(){
+						//没有权限
+						$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+						$("#index_main_content").css('padding','');
+					}
+				});
 				
 			});
 			
@@ -365,6 +404,41 @@ $(function(){
 				$("#index_main_content").css('padding','');
 			}
 		});
+		
+		//查询企业网盘中“头像”文件下的所有图片
+		$.ajax({
+			url:'system/getHeadsPic.do',
+			type:'POST',
+			dataType:'json',
+			success:function(result){
+				//如果返回结果中有头像图片
+				if(result.result == true){
+					//清除无头像的提示语
+					$('#user_manage_addWin_headsUl').html('');
+					//列出头像图片
+					$.each(result.picList, function(i, n){
+						$('#user_manage_addWin_headsUl').append('<li><img class="user_manage_addWin_headImg" src="'+n+'" width="50" height="50" class="img-circle" alt="User Image"></li>');
+					});
+					
+					//头像图片点击事件
+					$('.user_manage_addWin_headImg').bind('click', function(){
+						$.each($('.user_manage_addWin_headImg'), function(i, n){
+							$(n).removeClass('user_manage_addWin_headImg_active');
+						});
+						//选中状态
+						$(this).addClass('user_manage_addWin_headImg_active');
+						//赋值头像地址
+						$('#user_manage_addWin_icon').val($(this).attr('src'));
+					});
+				}
+			},
+			error:function(){
+				//没有权限
+				$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
+				$("#index_main_content").css('padding','');
+			}
+		});
+		
 	});
 	
 	/**
@@ -407,6 +481,13 @@ $(function(){
 				alert(result.result);
 				//刷新表格
 				$('#user_manage_table').bootstrapTable('refresh');
+				//将添加用户窗口数据置空
+				$('#user_manage_addWin_userId').val('');
+				$('#user_manage_addWin_userName').val('');
+				$('#user_manage_addWin_pwd').val('');
+				$('#user_manage_addWin_pwd2').val('');
+				$('#user_manage_addWin_icon').val('');
+				$('#user_manage_addWin_tel').val('');
 			},
 			error:function(){
 				//没有权限

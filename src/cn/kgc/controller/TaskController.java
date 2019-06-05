@@ -31,10 +31,12 @@ import cn.kgc.pojo.Project;
 import cn.kgc.pojo.User;
 import cn.kgc.pojo.UserBlock;
 import cn.kgc.pojo.UserProject;
+import cn.kgc.pojo.UserRole;
 import cn.kgc.service.BlockService;
 import cn.kgc.service.ProjectService;
 import cn.kgc.service.UserBlockService;
 import cn.kgc.service.UserProjectService;
+import cn.kgc.service.UserRoleService;
 import cn.kgc.service.UserService;
 import cn.kgc.util.DateUtil;
 
@@ -52,6 +54,8 @@ public class TaskController {
 	private UserService userService;//用户业务对象
 	@Resource
 	private UserBlockService userBlockService;//用户-任务(工程小块)业务对象
+	@Resource
+	private UserRoleService userRoleService;//用户-角色关联业务对象
 	
 	/**
 	 * 获取当前用户拥有的项目列表
@@ -105,7 +109,25 @@ public class TaskController {
 	@RequestMapping(value="/updateBlockLeader.do", method=RequestMethod.POST)
 	public String updateBlockLeader(@RequestParam String username,
 									@RequestParam int blockId) {
+		//先查询任务原来的负责人
+		Block block = blockService.getBlockById(blockId);
+		User oldLeader = block.getLeader();
+		//再查询原负责人是否只为一个任务的负责人
+		int count = blockService.ownBlocksCount(oldLeader.getUsername());
+		//如只是一个任务的负责人，撤销其任务组长的角色
+		if(count == 1) {
+			userRoleService.deleteUserRoleByUserIdAndRoleId(oldLeader.getUsername(), "R-104");
+		}
+		//如是不仅一个任务的负责人，则不撤销其任务组长角色
+		
+		//跟新任务小块的负责人
 		int result = blockService.updateBlockLeader(username, blockId);
+		//同时查询新负责人是否有任务组长的角色
+		List<UserRole> userRoles = userRoleService.getUserRoleByUserIdAndRoleId(username, "R-104");
+		//新负责人若没有任务组长角色，就给他添加任务组长角色
+		if(userRoles.size() == 0) {
+			userRoleService.addUserRole(username, "R-104");
+		}
 		if(result == 1)
 			return "true";
 		else
@@ -199,6 +221,21 @@ public class TaskController {
 		project.setCreateTime(DateUtil.getDate(projectCreateTime));
 		project.setDuration(projectDuration);
 		project.setStatus(projectStatus);
+		
+		/*//如果工程结项status==1 或者 工程废弃status==2
+		//撤销工程下所有任务组长的人物组长角色
+		if(projectStatus == 1 || projectStatus ==2) {
+			List<Block> blocks = blockService.getBlocksByProjectId(projectId);
+			for (Block block : blocks) {
+				//查看每个任务组长是否只是一个任务的任务组长
+				List<Block> blocks2 = blockService.getBlocksByLeaderId(block.getLeader().getUsername());
+				//如果该任务组长只是一个任务的任务组长，那么删除这个任务组长的人物组长角色
+				if(blocks2.size() == 1) {
+					userRoleService.deleteUserRoleByUserIdAndRoleId(block.getLeader().getUsername(), "R-104");
+				}
+			}
+		}*/
+		
 		//更新工程信息业务
 		int result = projectService.updateProject(project);
 		Map<String, String> map = new HashMap<>();
@@ -454,10 +491,12 @@ public class TaskController {
 						   @RequestParam String createTime,
 						   @RequestParam int duration,
 						   @RequestParam int status) {
+		//获取当前任务id自增到了几
 		int idIncrement = blockService.getIncrement();
+		//获取当前操作的用户
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
-		
+		//初始化任务
 		Block block = new Block();
 		block.setId(idIncrement + 1);
 		block.setDescription(description);
@@ -466,8 +505,15 @@ public class TaskController {
 		block.setStatus(status);
 		block.setProjectId(projectId);
 		block.setLeader(user);
+		//设置任务负责人为当前用户时，先查询当前用户是否有任务组长角色，
+		List<UserRole> userRoles = userRoleService.getUserRoleByUserIdAndRoleId(user.getUsername(), "R-104");
+		//若当前用户没有任务组长角色，给当前用户添加任务组长的角色
+		if(userRoles.size() == 0) {
+			userRoleService.addUserRole(user.getUsername(), "R-104");
+		}
 		int result = blockService.addBlock(block);
 		
+		//添加用户和任务的关联
 		UserBlock userBlock = new UserBlock(user.getUsername(), idIncrement+1);
 		int result2 = userBlockService.addUserBlock(userBlock);
 		

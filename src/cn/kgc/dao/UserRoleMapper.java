@@ -40,4 +40,12 @@ public interface UserRoleMapper {
 	 * @return
 	 */
 	public int add(UserRole userRole);
+	
+	/**
+	 * 通过用户id和角色id获取用户-角色关联
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 */
+	public List<UserRole> getByUserIdAndRoleId(String userId, String roleId);
 }

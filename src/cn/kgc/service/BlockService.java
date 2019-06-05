@@ -98,4 +98,13 @@ public interface BlockService {
 	 * @return
 	 */
 	public List<Block> getBlocksByLeaderId(String leaderId);
+	
+	/**
+	 * 获取用户管控(即为任务负责人)的任务个数
+	 * @param userId
+	 * @return
+	 */
+	public int ownBlocksCount(String userId);
+	
+	
 }

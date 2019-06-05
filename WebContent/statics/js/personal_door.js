@@ -36,9 +36,7 @@ $(function(){
 			field:'status',
 			title:'状态'
 		}],
-		pagination:true,
-		pageSize:2,
-		sidePagination:'client',
+		pagination:false,
 		onLoadError:function(){
 			//没有权限
 			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
@@ -93,9 +91,7 @@ $(function(){
 			field : 'blockLeader',
 			title : '任务组长'
 		}],
-		pagination:true,
-		pageSize:2,
-		sidePagination:'client',
+		pagination:false,
 		onLoadError:function(){
 			//没有权限
 			$("#index_main_content").load("/GeneralProject/page/unauthorized.html");
